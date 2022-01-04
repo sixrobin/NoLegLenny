@@ -59,6 +59,17 @@
 		}
 
 		/// <summary>
+		/// Destroys immediatly all transform children.
+		/// </summary>
+		public static void DestroyImmediateChildren(this Transform t)
+		{
+			for (int i = t.childCount - 1; i >= 0; --i)
+				GameObject.DestroyImmediate(t.GetChild(i).gameObject);
+
+			t.DetachChildren();
+		}
+
+		/// <summary>
 		/// Transferts all children of a transform to another parent.
 		/// </summary>
 		/// <param name="newParent">New parent transform.</param>

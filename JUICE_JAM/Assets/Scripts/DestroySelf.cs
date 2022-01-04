@@ -1,9 +1,12 @@
-using UnityEngine;
-
-public class DestroySelf : MonoBehaviour
+namespace JuiceJam
 {
-    public void Destroy()
+    using UnityEngine;
+
+    public class DestroySelf : MonoBehaviour
     {
-        Destroy(gameObject);
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }
