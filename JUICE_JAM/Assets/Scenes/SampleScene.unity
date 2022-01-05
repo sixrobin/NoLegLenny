@@ -2416,8 +2416,6 @@ MonoBehaviour:
   _tileDestroyedCenterFeedback:
   - ObjectToInstantiate: {fileID: 2741635542063217414, guid: d71b1ec7d1e4eee45b0080ffd3b7198e, type: 3}
     TileCenterOffset: {x: 0.5, y: 0.5}
-  - ObjectToInstantiate: {fileID: 5704374645281147717, guid: 732827263a034a349bc0f42add206ba4, type: 3}
-    TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
 --- !u!1001 &1384547929

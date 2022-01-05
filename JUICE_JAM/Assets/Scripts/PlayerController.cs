@@ -38,6 +38,15 @@ namespace JuiceJam
         private Vector2 _shootImpulse;
         private float _weaponPivotXOffset;
 
+        private ControllerType _lastControllerType;
+        private Vector3 _lastMousePosition;
+
+        public enum ControllerType
+        {
+            Mouse,
+            Joystick
+        }
+
         public bool CanBeDamaged => !IsDead && !IsInvulnerable;
         public bool DontDestroyDamageSource => false;
 
@@ -81,12 +90,17 @@ namespace JuiceJam
             if (joystickAimDirection.magnitude > 0.01f)
             {
                 _aimDirection = joystickAimDirection;
+                if (_lastMousePosition == Input.mousePosition)
+                    _lastControllerType = ControllerType.Joystick;
             }
             else
             {
-                Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mouseWorldPosition.z = 0f;
-                _aimDirection = (mouseWorldPosition - _weaponPivot.position).normalized;
+                if (_lastControllerType != ControllerType.Joystick || Input.mousePosition != _lastMousePosition)
+                {
+                    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    mouseWorldPosition.z = 0f;
+                    _aimDirection = (mouseWorldPosition - _weaponPivot.position).normalized;
+                }
             }
 
             _weaponPivot.transform.right = _aimDirection;
@@ -94,6 +108,8 @@ namespace JuiceJam
             _spriteRenderer.flipX = _aimDirection.x < 0f;
             _weaponSpriteRenderer.flipY = _aimDirection.x < 0f;
             _weaponPivot.transform.SetLocalPositionX(_weaponPivotXOffset * Mathf.Sign(_aimDirection.x));
+
+            _lastMousePosition = Input.mousePosition;
         }
 
         private void Shoot()
