@@ -26,6 +26,8 @@ namespace JuiceJam
         [SerializeField] private Transform _bulletSpawnPosition = null;
 
         [Header("HEALTH")]
+        [SerializeField, Min(1)] private int _maxHealth = 3;
+        [SerializeField] private RSLib.Dynamics.DynamicInt _health = null;
         [SerializeField, Min(0f)] private float _invulnerabilityWindowDuration = 1f;
 
         private Rigidbody2D _rigidbody2D;
@@ -44,10 +46,19 @@ namespace JuiceJam
             if (IsInvulnerable)
                 return;
 
-            Debug.Log("Health -= amount");
-            StartCoroutine(InvulnerabilityWindowCoroutine());
+            _health.Value -= damageData.Amount;
 
-            _playerView.PlayDamageAnimation(damageData);
+            if (_health.Value == 0)
+            {
+                Debug.Log("Death!");
+            }
+            else
+            {
+                StartCoroutine(InvulnerabilityWindowCoroutine());
+
+                _playerView.PlayDamageAnimation(damageData);
+                FreezeFrameManager.FreezeFrame(_playerView.DamageFreezeFrameDelay, _playerView.DamageFreezeFrameDuration);
+            }
         }
 
         private void CheckGround()
@@ -120,6 +131,8 @@ namespace JuiceJam
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
             _weaponPivotXOffset = _weaponPivot.transform.localPosition.x;
+
+            _health.Value = _maxHealth;
         }
 
         private void Update()

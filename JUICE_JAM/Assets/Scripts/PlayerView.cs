@@ -27,8 +27,12 @@ namespace JuiceJam
         [SerializeField, Range(0f, 1f)] private float _damageTrauma = 0.2f;
         [SerializeField] private RSLib.ImageEffects.SpriteBlink[] _spritesToBlink = null;
         [SerializeField] private int _blinksCount = 3;
+        [SerializeField, Min(0f)] private float _damageFreezeFrameDur = 0f;
+        [SerializeField, Min(0)] private int _damageFreezeFrameDelay = 0;
 
         public float ShootFreezeFrameDuration => _shootFreezeFrameDur;
+        public float DamageFreezeFrameDuration => _damageFreezeFrameDur;
+        public int DamageFreezeFrameDelay => _damageFreezeFrameDelay;
 
         public void PlayImpulseAnimation(Vector2 shootDirection)
         {
