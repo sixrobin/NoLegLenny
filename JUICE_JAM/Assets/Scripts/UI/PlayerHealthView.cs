@@ -17,5 +17,10 @@ namespace JuiceJam.UI
         {
             _playerHealth.ValueChanged += OnPlayerHealthValueChanged;
         }
+
+        private void OnDestroy()
+        {
+            _playerHealth.ValueChanged -= OnPlayerHealthValueChanged;
+        }
     }
 }

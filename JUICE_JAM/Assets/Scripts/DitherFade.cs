@@ -41,5 +41,12 @@ namespace JuiceJam
 
             callback?.Invoke();
         }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _ditherSprite.enabled = false;
+        }
     }
 }

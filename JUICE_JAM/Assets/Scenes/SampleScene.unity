@@ -4356,6 +4356,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1850581621340460622, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7294948260893095708, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4473,12 +4477,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7759300091380642059, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 519420031}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7759300091380642061, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
       propertyPath: m_Name
       value: Canvas - HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 7759300091423130805, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7759300092616297140, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4495,6 +4503,10 @@ PrefabInstance:
     - target: {fileID: 7759300092616297140, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235496972016580347, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
