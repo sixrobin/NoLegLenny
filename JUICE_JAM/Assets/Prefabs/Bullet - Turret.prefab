@@ -147,9 +147,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 25673995525451466}
   _bulletSpriteRenderer: {fileID: 25673994652088522}
   _speed: 8
+  _damage: 1
   _collisionPrefabs:
   - Layer:
       serializedVersion: 2

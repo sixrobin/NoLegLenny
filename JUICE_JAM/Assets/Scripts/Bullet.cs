@@ -28,6 +28,7 @@ namespace JuiceJam
         [SerializeField] private Rigidbody2D _rigidbody2D = null;
         [SerializeField] private SpriteRenderer _bulletSpriteRenderer = null;
         [SerializeField] private float _speed = 10f;
+        [SerializeField, Min(0)] private int _damage = 1;
 
         [Header("VFX")]
         [SerializeField] private CollisionPrefabs[] _collisionPrefabs = null;
@@ -47,6 +48,14 @@ namespace JuiceJam
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
+            {
+                damageable.TakeDamage(new DamageData()
+                {
+                    Amount = _damage
+                });
+            }
+
             BulletHit?.Invoke(new BulletHitEventArgs(transform.position, collision));
 
             for (int i = _collisionPrefabs.Length -1; i >= 0; --i)

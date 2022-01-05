@@ -3,37 +3,30 @@ namespace JuiceJam
     using UnityEngine;
     using RSLib.Extensions;
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IDamageable
     {
+        [Header("VIEW")]
+        [SerializeField] private PlayerView _playerView = null;
+
         [Header("PLAYER")]
-        [SerializeField] private float _shootImpulseForce = 8f;
-        [SerializeField] private float _fallMultiplier = 1.05f;
-        [SerializeField] private float _groundBrakePercentage = 0.9f;
-        [SerializeField] private float _xVelocityMax = 5f;
+        [SerializeField, Min(0f)] private float _shootImpulseForce = 8f;
+        [SerializeField, Min(1f)] private float _fallMultiplier = 1.05f;
+        [SerializeField, Range(0f, 1f)] private float _groundBrakePercentage = 0.9f;
+        [SerializeField, Min(0f)] private float _xVelocityMax = 5f;
         [SerializeField] private Vector2 _yVelocityMinMax = new Vector2(-3f, 10f);
         [SerializeField, Range(0f, 1f)] private float _upwardMovementKeptOnShootPercentage = 0.5f;
         [SerializeField] private LayerMask _groundMask = 0;
-        [SerializeField] private Animator _playerAnimator = null;
 
         [Header("WEAPON")]
         [SerializeField] private Transform _weaponPivot = null;
         [SerializeField] private SpriteRenderer _weaponSpriteRenderer = null;
-        [SerializeField] private Animator _weaponAnimator = null;
-        [SerializeField] private ParticleSystem[] _shootParticlesSystems = null;
-        [SerializeField] private float _shootTrauma = 0.1f;
 
         [Header("BULLET")]
         [SerializeField] private Bullet _bulletPrefab = null;
         [SerializeField] private Transform _bulletSpawnPosition = null;
 
-        [Header("VFX")]
-        [SerializeField] private float _shootFreezeFrameDur = 0f;
-        [SerializeField] private GameObject _impulsePuffPrefab = null;
-        [SerializeField] private Transform _impulsePuffPivot = null;
-        [SerializeField] private float _landSidePuffMinSpeed = 1f;
-        [SerializeField] private GameObject _landPuffPrefab = null;
-        [SerializeField] private GameObject _landSidePuffPrefab = null;
-        [SerializeField] private Transform _landPuffPivot = null;
+        [Header("HEALTH")]
+        [SerializeField, Min(0f)] private float _invulnerabilityWindowDuration = 1f;
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
@@ -42,11 +35,24 @@ namespace JuiceJam
         private Vector2 _shootImpulse;
         private float _weaponPivotXOffset;
 
-        private bool _isGrounded;
+        public bool IsGrounded { get; private set; }
+
+        public bool IsInvulnerable { get; private set; }
+
+        public void TakeDamage(DamageData damageData)
+        {
+            if (IsInvulnerable)
+                return;
+
+            Debug.Log("Health -= amount");
+            StartCoroutine(InvulnerabilityWindowCoroutine());
+
+            _playerView.PlayDamageAnimation(damageData);
+        }
 
         private void CheckGround()
         {
-            _isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, _groundMask);
+            IsGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, _groundMask);
         }
 
         private void Aim()
@@ -78,20 +84,8 @@ namespace JuiceJam
                 _shootImpulse = -_aimDirection * _shootImpulseForce;
                 SpawnBullet();
 
-                _weaponAnimator.SetTrigger("Shoot");
-                _playerAnimator.SetTrigger("Shoot");
-
-                for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
-                    _shootParticlesSystems[i].Play();
-
-                if (_isGrounded)
-                {
-                    GameObject sidePuff = Instantiate(_landSidePuffPrefab, _landPuffPivot.position, _landSidePuffPrefab.transform.rotation);
-                    sidePuff.GetComponent<SpriteRenderer>().flipX = _shootImpulse.x < 0f;
-                }
-
-                FreezeFrameManager.FreezeFrame(0, _shootFreezeFrameDur);
-                CameraShake.SetTrauma(_shootTrauma);
+                _playerView.PlayShootAnimation(_shootImpulse);
+                FreezeFrameManager.FreezeFrame(0, _playerView.ShootFreezeFrameDuration);
             }
         }
 
@@ -108,17 +102,16 @@ namespace JuiceJam
 
         private void Land()
         {
-            _playerAnimator.SetTrigger("Land");
+            _playerView.PlayLandAnimation(_rigidbody2D.velocity);
+        }
 
-            if (Mathf.Abs(_rigidbody2D.velocity.x) > _landSidePuffMinSpeed)
-            {
-                GameObject sidePuff = Instantiate(_landSidePuffPrefab, _landPuffPivot.position, _landSidePuffPrefab.transform.rotation);
-                sidePuff.GetComponent<SpriteRenderer>().flipX = _rigidbody2D.velocity.x < 0f;
-            }
-            else
-            {
-                Instantiate(_landPuffPrefab, _landPuffPivot.position, _landPuffPrefab.transform.rotation);
-            }
+        private System.Collections.IEnumerator InvulnerabilityWindowCoroutine()
+        {
+            IsInvulnerable = true;
+            
+            yield return RSLib.Yield.SharedYields.WaitForSeconds(_invulnerabilityWindowDuration);
+
+            IsInvulnerable = false;
         }
 
         private void Awake()
@@ -131,10 +124,10 @@ namespace JuiceJam
 
         private void Update()
         {
-            bool previousIsGrounded = _isGrounded;
+            bool previousIsGrounded = IsGrounded;
             CheckGround();
 
-            if (_isGrounded && _isGrounded != previousIsGrounded)
+            if (IsGrounded && IsGrounded != previousIsGrounded)
                 Land();
 
             Aim();
@@ -150,16 +143,16 @@ namespace JuiceJam
                 if (previousY > 0f)
                     _rigidbody2D.velocity += new Vector2(1f, previousY * _upwardMovementKeptOnShootPercentage);
 
-                if (_shootImpulse.y > 0f && _isGrounded)
-                    Instantiate(_impulsePuffPrefab, _impulsePuffPivot.position, _impulsePuffPrefab.transform.rotation);
+                if (_shootImpulse.y > 0f && IsGrounded)
+                    _playerView.PlayImpulseAnimation(_shootImpulse);
 
                 _shootImpulse = Vector2.zero;
             }
 
-            if (!_isGrounded && _rigidbody2D.velocity.y < 0f)
+            if (!IsGrounded && _rigidbody2D.velocity.y < 0f)
                 _rigidbody2D.velocity *= new Vector2(1f, _fallMultiplier);
 
-            if (_isGrounded)
+            if (IsGrounded)
                 _rigidbody2D.velocity *= new Vector2(_groundBrakePercentage, 1f);
 
             _rigidbody2D.velocity = new Vector2(

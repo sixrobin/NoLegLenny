@@ -35,6 +35,7 @@
 		[Header("ALPHA BLINK SETTINGS")]
 		[SerializeField] private float _alphaFadeDur = 0.08f;
 		[SerializeField] private float _transparencyDur = 0.05f;
+		[SerializeField] private float _inBetweenAlphaBlinksDur = 0.05f;
 		[SerializeField, Range(0f, 1f)] private float _targetAlpha = 0f;
 		[SerializeField] private Curve _alphaEasingCurve = Curve.InQuad;
 		[SerializeField] private bool _alphaResetIfBlinking = true;
@@ -121,11 +122,14 @@
             {
 			    Color initColor = _blinkMat.GetColor(COLOR_SHADER_PARAM);
 
-			    for (float t = 0f; t < 1f; t += (TimeScaleDependent ? Time.deltaTime : Time.unscaledDeltaTime) / _alphaFadeDur)
-			    {
-				    _blinkMat.SetColor(COLOR_SHADER_PARAM, initColor.WithA(Mathf.Lerp (1f, _targetAlpha, Easing.Ease(t, _alphaEasingCurve))));
-				    yield return null;
-			    }
+				if (_alphaFadeDur > 0f)
+                {
+					for (float t = 0f; t < 1f; t += (TimeScaleDependent ? Time.deltaTime : Time.unscaledDeltaTime) / _alphaFadeDur)
+					{
+						_blinkMat.SetColor(COLOR_SHADER_PARAM, initColor.WithA(Mathf.Lerp (1f, _targetAlpha, Easing.Ease(t, _alphaEasingCurve))));
+						yield return null;
+					}
+                }
 
 			    _blinkMat.SetColor(COLOR_SHADER_PARAM, initColor.WithA(_targetAlpha));
 
@@ -134,21 +138,26 @@
 			    else
                     yield return Yield.SharedYields.WaitForSecondsRealtime(_transparencyDur);
 
-			    for (float t = 0f; t < 1f; t += (TimeScaleDependent ? Time.deltaTime : Time.unscaledDeltaTime) / _alphaFadeDur)
-			    {
-				    _blinkMat.SetColor(COLOR_SHADER_PARAM, initColor.WithA(Mathf.Lerp(_targetAlpha, 1f, Easing.Ease(t, _alphaEasingCurve))));
-				    yield return null;
-			    }
+				if (_alphaFadeDur > 0f)
+                {
+					for (float t = 0f; t < 1f; t += (TimeScaleDependent ? Time.deltaTime : Time.unscaledDeltaTime) / _alphaFadeDur)
+					{
+						_blinkMat.SetColor(COLOR_SHADER_PARAM, initColor.WithA(Mathf.Lerp(_targetAlpha, 1f, Easing.Ease(t, _alphaEasingCurve))));
+						yield return null;
+					}
+                }
 
 			    _blinkMat.SetColor(COLOR_SHADER_PARAM, initColor.WithA(1f));
-            }
+            
+                yield return Yield.SharedYields.WaitForSeconds(_inBetweenAlphaBlinksDur);
+			}
 
             callback?.Invoke();
         }
 
         private void Awake()
 		{
-			_blinkMat = GetComponent<SpriteRenderer>().material;
+			_blinkMat = GetComponent<SpriteRenderer>().sharedMaterial;
 			_blinkMat.shader = _blinkShader;
 			_blinkMat.SetColor(BLINK_COLOR_SHADER_PARAM, _color.WithA(0));
             TimeScaleDependent = _timeScaleDependent;
