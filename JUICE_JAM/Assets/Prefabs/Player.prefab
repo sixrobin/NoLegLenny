@@ -95,7 +95,7 @@ MonoBehaviour:
   _upwardMovementKeptOnShootPercentage: 0.5
   _groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   _weaponPivot: {fileID: 8518562701960543877}
   _weaponSpriteRenderer: {fileID: 8518562701616806105}
   _weaponView: {fileID: 8518562701616806087}
@@ -5067,7 +5067,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8518562701219872787}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.67, y: 0.111, z: 0}
+  m_LocalPosition: {x: 1.462, y: 0.111, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5498,8 +5498,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 6
+      scalar: 5
+      minScalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9225,7 +9225,7 @@ ParticleSystem:
     radiusScale: 0.6
     collidesWith:
       serializedVersion: 2
-      m_Bits: 64
+      m_Bits: 832
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5

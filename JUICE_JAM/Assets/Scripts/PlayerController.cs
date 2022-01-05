@@ -39,6 +39,7 @@ namespace JuiceJam
         private float _weaponPivotXOffset;
 
         public bool CanBeDamaged => !IsDead && !IsInvulnerable;
+        public bool DontDestroyDamageSource => false;
 
         public bool IsGrounded { get; private set; }
 
@@ -109,13 +110,13 @@ namespace JuiceJam
 
         private void SpawnBullet()
         {
-            Collider2D[] nearColliders = Physics2D.OverlapCircleAll(_bulletSpawnPosition.position, 0.3f);
-            for (int i = nearColliders.Length - 1; i >= 0; --i)
-                if (nearColliders[i].gameObject.layer == LayerMask.NameToLayer("Ground"))
-                    return;
+            //Collider2D[] nearColliders = Physics2D.OverlapCircleAll(_bulletSpawnPosition.position, 0.15f);
+            //for (int i = nearColliders.Length - 1; i >= 0; --i)
+            //    if (nearColliders[i].gameObject.layer == LayerMask.NameToLayer("Ground"))
+            //        return;
 
             Bullet bullet = Instantiate(_bulletPrefab, _bulletSpawnPosition.position, Quaternion.identity);
-            bullet.Launch(_weaponPivot.right);
+            bullet.Launch(_weaponPivot.right, false);
         }
 
         private void Land()
@@ -133,7 +134,7 @@ namespace JuiceJam
             Rigidbody2D weaponRigidbody2D = droppedWeapon.gameObject.AddComponent<Rigidbody2D>();
             weaponRigidbody2D.sharedMaterial = droppedWeapon.GetComponent<Collider2D>().sharedMaterial;
             weaponRigidbody2D.AddForce(Random.insideUnitCircle.normalized * 10f, ForceMode2D.Impulse);
-            weaponRigidbody2D.AddTorque(45f);
+            weaponRigidbody2D.AddTorque(90f);
         }
 
         private System.Collections.IEnumerator InvulnerabilityWindowCoroutine()

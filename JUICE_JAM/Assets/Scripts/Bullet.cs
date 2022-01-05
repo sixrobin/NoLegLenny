@@ -35,12 +35,15 @@ namespace JuiceJam
         [SerializeField] private CollisionPrefabs[] _collisionPrefabs = null;
 
         private Vector2 _direction;
+        private bool _keepDirection;
 
         public static event System.Action<BulletHitEventArgs> BulletHit;
 
-        public void Launch(Vector3 direction)
+        public void Launch(Vector3 direction, bool keepDirection)
         {
-            _direction = direction;
+            _direction = direction.normalized;
+            _keepDirection = keepDirection;
+
             transform.right = _direction;
             _rigidbody2D.velocity = transform.right * _speed;
         }
@@ -52,24 +55,36 @@ namespace JuiceJam
 
         private void FixedUpdate()
         {
-            transform.right = _direction;
-            _rigidbody2D.velocity = transform.right * _speed;
+            if (_keepDirection)
+            {
+                transform.right = _direction;
+                _rigidbody2D.velocity = transform.right * _speed;
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
-            {
-                if (!damageable.CanBeDamaged && _goThroughIfNotDamageable)
-                    return;
-
-                damageable.TakeDamage(new DamageData()
-                {
-                    Amount = _damage
-                });
-            }
+            bool dontDestroy = false;
 
             BulletHit?.Invoke(new BulletHitEventArgs(transform.position, collision));
+
+            if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                if (damageable.CanBeDamaged)
+                {
+                    damageable.TakeDamage(new DamageData()
+                    {
+                        Amount = _damage,
+                        HitPoint = collision.contacts[0].point,
+                        HitDirection = _direction
+                    });
+                }
+
+                dontDestroy = damageable.DontDestroyDamageSource || !damageable.CanBeDamaged && _goThroughIfNotDamageable;
+            }
+
+            if (dontDestroy)
+                return;
 
             for (int i = _collisionPrefabs.Length -1; i >= 0; --i)
             {

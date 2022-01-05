@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 25673995525451468}
-  - component: {fileID: 25673995525451467}
+  - component: {fileID: 5343832627044050301}
   - component: {fileID: 25673995525451466}
   - component: {fileID: 25673995525451465}
   m_Layer: 0
@@ -119,8 +119,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &25673995525451467
-CircleCollider2D:
+--- !u!60 &5343832627044050301
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,9 +132,23 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.050707877, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.25070792
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.20365837, y: 0.24193823}
+      - {x: -0.36907452, y: 0.24099308}
+      - {x: -0.37281245, y: -0.24707085}
+      - {x: 0.20309734, y: -0.25084215}
+      - {x: 0.37663263, y: -0.0046485066}
 --- !u!50 &25673995525451466
 Rigidbody2D:
   serializedVersion: 4
@@ -149,7 +163,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 0.5
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -170,11 +184,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 25673995525451466}
   _bulletSpriteRenderer: {fileID: 25673994652088522}
-  _speed: 20
+  _speed: 25
+  _damage: 1
+  _goThroughIfNotDamageable: 1
   _collisionPrefabs:
   - Layer:
       serializedVersion: 2
-      m_Bits: 64
+      m_Bits: 576
     BulletPositionPrefabs:
     - {fileID: 7785969178593554384, guid: 55bee7fd84af6ed4181b97cb9780085c, type: 3}
     CollisionPositionPrefabs:

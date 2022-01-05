@@ -16,7 +16,7 @@ namespace JuiceJam
         public void Shoot()
         {
             Bullet bullet = Instantiate(_bulletPrefab, _bulletSpawnPosition.position, Quaternion.identity);
-            bullet.Launch(-_bulletSpawnPosition.right * transform.localScale.x);
+            bullet.Launch(-_bulletSpawnPosition.right * transform.localScale.x, true);
 
             for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
                 _shootParticlesSystems[i].Play();
