@@ -29,15 +29,19 @@ namespace JuiceJam
         [SerializeField] private SpriteRenderer _bulletSpriteRenderer = null;
         [SerializeField] private float _speed = 10f;
         [SerializeField, Min(0)] private int _damage = 1;
+        [SerializeField] private bool _goThroughIfNotDamageable = true;
 
         [Header("VFX")]
         [SerializeField] private CollisionPrefabs[] _collisionPrefabs = null;
+
+        private Vector2 _direction;
 
         public static event System.Action<BulletHitEventArgs> BulletHit;
 
         public void Launch(Vector3 direction)
         {
-            transform.right = direction;
+            _direction = direction;
+            transform.right = _direction;
             _rigidbody2D.velocity = transform.right * _speed;
         }
 
@@ -46,10 +50,19 @@ namespace JuiceJam
             _bulletSpriteRenderer.transform.right = _rigidbody2D.velocity;
         }
 
+        private void FixedUpdate()
+        {
+            transform.right = _direction;
+            _rigidbody2D.velocity = transform.right * _speed;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
             {
+                if (!damageable.CanBeDamaged && _goThroughIfNotDamageable)
+                    return;
+
                 damageable.TakeDamage(new DamageData()
                 {
                     Amount = _damage

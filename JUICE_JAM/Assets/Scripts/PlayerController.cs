@@ -20,6 +20,7 @@ namespace JuiceJam
         [Header("WEAPON")]
         [SerializeField] private Transform _weaponPivot = null;
         [SerializeField] private SpriteRenderer _weaponSpriteRenderer = null;
+        [SerializeField] private GameObject _weaponView = null;
 
         [Header("BULLET")]
         [SerializeField] private Bullet _bulletPrefab = null;
@@ -37,20 +38,26 @@ namespace JuiceJam
         private Vector2 _shootImpulse;
         private float _weaponPivotXOffset;
 
+        public bool CanBeDamaged => !IsDead && !IsInvulnerable;
+
         public bool IsGrounded { get; private set; }
 
         public bool IsInvulnerable { get; private set; }
 
+        public bool IsDead => _health.Value == 0;
+
         public void TakeDamage(DamageData damageData)
         {
-            if (IsInvulnerable)
+            if (IsInvulnerable || IsDead)
                 return;
 
             _health.Value -= damageData.Amount;
 
             if (_health.Value == 0)
             {
-                Debug.Log("Death!");
+                DropWeapon();
+                _playerView.PlayDeathAnimation();
+                FreezeFrameManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
             }
             else
             {
@@ -116,12 +123,23 @@ namespace JuiceJam
             _playerView.PlayLandAnimation(_rigidbody2D.velocity);
         }
 
+        private void DropWeapon()
+        {
+            GameObject droppedWeapon = Instantiate(_weaponView, _weaponView.transform.position, _weaponView.transform.rotation);
+            _weaponView.SetActive(false);
+
+            droppedWeapon.GetComponent<Collider2D>().enabled = true;
+
+            Rigidbody2D weaponRigidbody2D = droppedWeapon.gameObject.AddComponent<Rigidbody2D>();
+            weaponRigidbody2D.sharedMaterial = droppedWeapon.GetComponent<Collider2D>().sharedMaterial;
+            weaponRigidbody2D.AddForce(Random.insideUnitCircle.normalized * 10f, ForceMode2D.Impulse);
+            weaponRigidbody2D.AddTorque(45f);
+        }
+
         private System.Collections.IEnumerator InvulnerabilityWindowCoroutine()
         {
             IsInvulnerable = true;
-            
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_invulnerabilityWindowDuration);
-
             IsInvulnerable = false;
         }
 
@@ -139,6 +157,10 @@ namespace JuiceJam
         {
             bool previousIsGrounded = IsGrounded;
             CheckGround();
+
+            // Need to check ground to brake velocity, even in death.
+            if (IsDead)
+                return;
 
             if (IsGrounded && IsGrounded != previousIsGrounded)
                 Land();

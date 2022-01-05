@@ -22,7 +22,7 @@ namespace JuiceJam
         [SerializeField] private GameObject _landSidePuffPrefab = null;
         [SerializeField] private Transform _landPuffPivot = null;
 
-        [Header("HEALTH")]
+        [Header("DAMAGE")]
         [SerializeField] private ParticleSystem[] _damageParticlesSystems = null;
         [SerializeField, Range(0f, 1f)] private float _damageTrauma = 0.2f;
         [SerializeField] private RSLib.ImageEffects.SpriteBlink[] _spritesToBlink = null;
@@ -30,9 +30,17 @@ namespace JuiceJam
         [SerializeField, Min(0f)] private float _damageFreezeFrameDur = 0f;
         [SerializeField, Min(0)] private int _damageFreezeFrameDelay = 0;
 
+        [Header("DEATH")]
+        [SerializeField] private ParticleSystem[] _deathParticlesSystems = null;
+        [SerializeField, Range(0f, 1f)] private float _deathTrauma = 0.2f;
+        [SerializeField, Min(0f)] private float _deathFreezeFrameDur = 0f;
+        [SerializeField, Min(0)] private int _deathFreezeFrameDelay = 0;
+
         public float ShootFreezeFrameDuration => _shootFreezeFrameDur;
         public float DamageFreezeFrameDuration => _damageFreezeFrameDur;
         public int DamageFreezeFrameDelay => _damageFreezeFrameDelay;
+        public float DeathFreezeFrameDuration => _deathFreezeFrameDur;
+        public int DeathFreezeFrameDelay => _deathFreezeFrameDelay;
 
         public void PlayImpulseAnimation(Vector2 shootDirection)
         {
@@ -80,6 +88,19 @@ namespace JuiceJam
 
             for (int i = _spritesToBlink.Length - 1; i >= 0; --i)
                 _spritesToBlink[i].BlinkColor(1, PlayInvulnerabilityAnimation);
+        }
+
+        public void PlayDeathAnimation()
+        {
+            _playerAnimator.SetTrigger("Death");
+
+            CameraShake.SetTrauma(_deathTrauma);
+
+            for (int i = _deathParticlesSystems.Length - 1; i >= 0; --i)
+                _deathParticlesSystems[i].Play();
+
+            for (int i = _spritesToBlink.Length - 1; i >= 0; --i)
+                _spritesToBlink[i].BlinkColor(1);
         }
 
         public void PlayInvulnerabilityAnimation()
