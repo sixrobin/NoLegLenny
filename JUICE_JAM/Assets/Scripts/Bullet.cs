@@ -15,12 +15,14 @@ namespace JuiceJam
 
         public struct BulletHitEventArgs
         {
-            public BulletHitEventArgs(Vector3 position)
+            public BulletHitEventArgs(Vector3 position, Collision2D collision2D)
             {
                 Position = position;
+                Collision2D = collision2D;
             }
 
             public Vector3 Position;
+            public Collision2D Collision2D;
         }
 
         [SerializeField] private Rigidbody2D _rigidbody2D = null;
@@ -45,7 +47,7 @@ namespace JuiceJam
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            BulletHit?.Invoke(new BulletHitEventArgs(transform.position));
+            BulletHit?.Invoke(new BulletHitEventArgs(transform.position, collision));
 
             for (int i = _collisionPrefabs.Length -1; i >= 0; --i)
             {

@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3204318471889471715}
-  _minDistanceToMove: 4
+  _minDistanceToMove: 2.8

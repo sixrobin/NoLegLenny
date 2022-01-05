@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5586229146183592000}
   - component: {fileID: 7228593454324121892}
   m_Layer: 0
-  m_Name: Particle System - Bullet Hit Ground
+  m_Name: Particle System - Bullet HitGround Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,8 +169,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 15
-      minScalar: 8
+      scalar: 12
+      minScalar: 6
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9686275, g: 0.8941177, b: 0.46274513, a: 1}
+      maxColor: {r: 0.78823537, g: 0.14117648, b: 0.3921569, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -285,8 +285,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.2
+      scalar: 0.35
+      minScalar: 0.15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -977,8 +977,8 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 5
-        minScalar: 4
+        scalar: 3
+        minScalar: 2
         maxCurve:
           serializedVersion: 2
           m_Curve:

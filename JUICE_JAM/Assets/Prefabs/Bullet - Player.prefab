@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 25673995525451466}
   - component: {fileID: 25673995525451465}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet - Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,6 +177,13 @@ MonoBehaviour:
       m_Bits: 64
     BulletPositionPrefabs:
     - {fileID: 7785969178593554384, guid: 55bee7fd84af6ed4181b97cb9780085c, type: 3}
+    CollisionPositionPrefabs:
+    - {fileID: 1181883022838042512, guid: 6519c681efd6310439d224b1161e1196, type: 3}
+    - {fileID: 5704374645281147717, guid: 732827263a034a349bc0f42add206ba4, type: 3}
+  - Layer:
+      serializedVersion: 2
+      m_Bits: 256
+    BulletPositionPrefabs: []
     CollisionPositionPrefabs:
     - {fileID: 1181883022838042512, guid: 6519c681efd6310439d224b1161e1196, type: 3}
     - {fileID: 5704374645281147717, guid: 732827263a034a349bc0f42add206ba4, type: 3}
