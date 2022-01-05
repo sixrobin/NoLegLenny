@@ -108,5 +108,10 @@ namespace JuiceJam
             for (int j = _spritesToBlink.Length - 1; j >= 0; --j)
                 _spritesToBlink[j].BlinkAlpha(_blinksCount);
         }
+
+        private void Update()
+        {
+            _playerAnimator.SetBool("Airborne", !_playerController.IsGrounded);
+        }
     }
 }
