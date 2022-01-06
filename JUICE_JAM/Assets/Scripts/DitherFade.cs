@@ -7,6 +7,7 @@ namespace JuiceJam
     {
         [SerializeField] private Sprite[] _spritesSequence = null;
         [SerializeField] private SpriteRenderer _ditherSprite = null;
+        [SerializeField] private bool _fadeOutOnStart = false;
 
         public static void FadeIn(float duration, Curve curve, float delay = 0f, System.Action callback = null)
         {
@@ -20,9 +21,18 @@ namespace JuiceJam
 
         private System.Collections.IEnumerator FadeCoroutine(float duration, Curve curve, bool fadeIn, float delay, System.Action callback)
         {
+            if (!fadeIn)
+            {
+                _ditherSprite.sprite = _spritesSequence[0];
+                _ditherSprite.enabled = true;
+            }
+            else
+            {
+                _ditherSprite.enabled = false;
+            }
+
             yield return RSLib.Yield.SharedYields.WaitForSeconds(delay);
 
-            _ditherSprite.enabled = true;
 
             for (float t = 0f; t < 1f; t += Time.deltaTime / duration)
             {
@@ -47,6 +57,12 @@ namespace JuiceJam
             base.Awake();
 
             _ditherSprite.enabled = false;
+        }
+
+        private void Start()
+        {
+            if (_fadeOutOnStart)
+                FadeOut(0.5f, Curve.Linear, 0.5f);
         }
     }
 }

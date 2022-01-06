@@ -37,7 +37,7 @@ namespace JuiceJam
                     continue;
 
                 DestroyTile(tilePosition, damageData.HitPoint);
-                StartCoroutine(DestroyTilesAbove(tilePosition, 10));
+                StartCoroutine(DestroyTilesAbove(tilePosition, -1));
 
                 break;
             }
@@ -69,11 +69,15 @@ namespace JuiceJam
 
         private System.Collections.IEnumerator DestroyTilesAbove(Vector3Int startPosition, int count)
         {
-            for (int i = 0; i < count; ++i)
+            for (int i = 0; i < count || count == -1; ++i)
             {
                 yield return RSLib.Yield.SharedYields.WaitForSeconds(_tilesAboveDestroyRate);
 
                 Vector3Int tilePosition = startPosition + new Vector3Int(0, i + 1);
+
+                if (i == -1 && !_tilemap.HasTile(tilePosition))
+                    yield break;
+
                 DestroyTile(tilePosition, _tilemap.CellToWorld(tilePosition) + Vector3.one * 0.5f);
             }
         }

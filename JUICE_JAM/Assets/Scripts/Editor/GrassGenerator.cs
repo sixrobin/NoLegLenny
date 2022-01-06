@@ -20,9 +20,9 @@ namespace JuiceJam.Editor
         private Transform _grassParent;
         private GameObject _grass;
 
-        private float _grassChance;
-        private float _offsetMax = 0.5f;
-        private int _grassPerTileMax = 2;
+        private float _grassChance = 0.65f;
+        private float _offsetMax = 0.36f;
+        private int _grassPerTileMax = 1;
 
         public static void LaunchGenerator()
         {
