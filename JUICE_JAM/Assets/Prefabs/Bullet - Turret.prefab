@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 25673995525451466}
   _bulletSpriteRenderer: {fileID: 25673994652088522}
-  _speed: 8
+  _speed: 6.5
   _damage: 1
   _goThroughIfNotDamageable: 1
   _collisionPrefabs:

@@ -96,6 +96,12 @@
             _cloudLengthMinMax = new Vector2(min, max);
             RSLib.EditorUtilities.SceneManagerUtilities.SetCurrentSceneDirty();
         }
+
+        public void RandomizeCloudsFlip()
+        {
+            for (int i = _clouds.Length - 1; i >= 0; --i)
+                _clouds[i].flipX = RSLib.Helpers.CoinFlip();
+        }
 #endif
     }
 
@@ -107,6 +113,7 @@
         {
             DrawButton("Find Clouds in Children", Obj.FindCloudsInChildren);
             DrawButton("Compute Size Range", Obj.ComputeSizeRange);
+            DrawButton("Randomize Clouds Flip", Obj.RandomizeCloudsFlip);
         }
     }
 #endif

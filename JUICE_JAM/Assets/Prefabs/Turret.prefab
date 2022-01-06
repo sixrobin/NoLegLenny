@@ -242,7 +242,7 @@ MonoBehaviour:
   _bulletSpawnPosition: {fileID: 4955524317001344308}
   _shootParticlesSystems:
   - {fileID: 1727502417152839856}
-  _shootRate: 1
+  _shootRate: 1.5
   _initDelay: 0
 --- !u!61 &7569421008562673091
 BoxCollider2D:
