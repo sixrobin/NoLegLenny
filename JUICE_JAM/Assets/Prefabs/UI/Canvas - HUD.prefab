@@ -264,6 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collectedCoins: {fileID: 11400000, guid: 179636759b72209429ef8039beaa4f94, type: 2}
   _coinsText: {fileID: 8235496972016580347}
+  _coinImage: {fileID: 1181366179619882275}
 --- !u!1 &7759300091380642061
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7759300091423130805}
+  - component: {fileID: 1207624338768622527}
   - component: {fileID: 7759300091423130802}
   - component: {fileID: 7759300091423130803}
   m_Layer: 5
@@ -389,6 +391,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0.9999994, y: -1}
   m_SizeDelta: {x: -1.9999988, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &1207624338768622527
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7759300091423130804}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!114 &7759300091423130802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724f2388ce285a64db41bc8f77a5deef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 1207624338768622527}
   _playerHealth: {fileID: 11400000, guid: f4b97ff7ea431d54b9cc8e29a397aaa6, type: 2}
   _hearts:
   - {fileID: 7635448983842522281}

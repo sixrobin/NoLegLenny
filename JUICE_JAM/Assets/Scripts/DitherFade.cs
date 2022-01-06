@@ -9,6 +9,10 @@ namespace JuiceJam
         [SerializeField] private SpriteRenderer _ditherSprite = null;
         [SerializeField] private bool _fadeOutOnStart = false;
 
+        public delegate void FadeEventHandler(bool fadeIn);
+        public static event FadeEventHandler FadeBegan;
+        public static event FadeEventHandler FadeOver;
+
         public static void FadeIn(float duration, Curve curve, float delay = 0f, System.Action callback = null)
         {
             Instance.StartCoroutine(Instance.FadeCoroutine(duration, curve, true, delay, callback));
@@ -21,6 +25,8 @@ namespace JuiceJam
 
         private System.Collections.IEnumerator FadeCoroutine(float duration, Curve curve, bool fadeIn, float delay, System.Action callback)
         {
+            FadeBegan?.Invoke(fadeIn);
+
             if (!fadeIn)
             {
                 _ditherSprite.sprite = _spritesSequence[0];
@@ -49,6 +55,7 @@ namespace JuiceJam
             else
                 _ditherSprite.enabled = false;
 
+            FadeOver?.Invoke(fadeIn);
             callback?.Invoke();
         }
 

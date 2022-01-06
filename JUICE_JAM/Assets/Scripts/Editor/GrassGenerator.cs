@@ -32,6 +32,8 @@ namespace JuiceJam.Editor
 
         private void GenerateGrass()
         {
+            Debug.Log($"Generating grass (chance:{_grassChance}, offset max:{_offsetMax}, max per tile:{_grassPerTileMax})");
+
             foreach (Vector3Int tilePosition in _groundTilemap.cellBounds.allPositionsWithin)
             {
                 Vector3Int localPlace = new Vector3Int(tilePosition.x, tilePosition.y, tilePosition.z);

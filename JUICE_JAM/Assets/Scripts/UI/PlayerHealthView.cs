@@ -4,6 +4,7 @@ namespace JuiceJam.UI
 
     public class PlayerHealthView : MonoBehaviour
     {
+        [SerializeField] private Canvas _canvas = null;
         [SerializeField] private RSLib.Dynamics.DynamicInt _playerHealth = null;
         [SerializeField] private PlayerHealthHeartView[] _hearts = null;
 
@@ -13,14 +14,29 @@ namespace JuiceJam.UI
                 _hearts[i].Toggle(i < args.New);
         }
 
+        private void OnDitherFadeBegan(bool fadeIn)
+        {
+            _canvas.enabled = false;
+        }
+
+        private void OnDitherFadeOver(bool fadeIn)
+        {
+            if (!fadeIn)
+                _canvas.enabled = true;
+        }
+
         private void Awake()
         {
             _playerHealth.ValueChanged += OnPlayerHealthValueChanged;
+            DitherFade.FadeBegan += OnDitherFadeBegan;
+            DitherFade.FadeOver += OnDitherFadeOver;
         }
 
         private void OnDestroy()
         {
             _playerHealth.ValueChanged -= OnPlayerHealthValueChanged;
+            DitherFade.FadeBegan -= OnDitherFadeBegan;
+            DitherFade.FadeOver -= OnDitherFadeOver;
         }
     }
 }
