@@ -2,7 +2,7 @@ namespace JuiceJam
 {
     using UnityEngine;
 
-    public class Turret : MonoBehaviour
+    public class Turret : MonoBehaviour, IRespawnable
     {
         [SerializeField] private Animator _animator = null;
         [SerializeField] private Bullet _bulletPrefab = null;
@@ -12,6 +12,11 @@ namespace JuiceJam
         [SerializeField] private float _initDelay = 0f;
 
         private float _shootTimer;
+
+        public void Respawn()
+        {
+            _shootTimer = -_initDelay;
+        }
 
         public void Shoot()
         {
@@ -24,7 +29,7 @@ namespace JuiceJam
 
         private void Start()
         {
-            _shootTimer = -_initDelay;
+            Respawn();
         }
 
         private void Update()

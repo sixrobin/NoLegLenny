@@ -1,8 +1,9 @@
 namespace JuiceJam
 {
+    using RSLib.Extensions;
     using UnityEngine;
 
-    public class DestroyableTilemap : MonoBehaviour, IDamageable
+    public class DestroyableTilemap : MonoBehaviour, IDamageable, IRespawnable
     {
         [System.Serializable]
         public struct TileDestroyedFeedback
@@ -15,6 +16,8 @@ namespace JuiceJam
         [SerializeField] private TileDestroyedFeedback[] _tileDestroyedCenterFeedback = null;
         [SerializeField] private GameObject[] _tileDestroyedContactPointFeedback = null;
         [SerializeField] private float _tilesAboveDestroyRate = 0.1f;
+
+        private System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase> _destroyedTiles = new System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase>();
 
         public bool CanBeDamaged => true;
         public bool DontDestroyDamageSource => false;
@@ -43,11 +46,18 @@ namespace JuiceJam
             }
         }
 
+        public void Respawn()
+        {
+            _destroyedTiles.ForEach((k, v) => _tilemap.SetTile(k, v));
+            _destroyedTiles.Clear();
+        }
+
         private void DestroyTile(Vector3Int tilePosition, Vector3 hitPosition)
         {
             if (!_tilemap.HasTile(tilePosition))
                 return;
 
+            _destroyedTiles.Add(tilePosition, _tilemap.GetTile(tilePosition));
             _tilemap.SetTile(tilePosition, null);
 
             Vector3 tileWorldCenter = _tilemap.CellToWorld(tilePosition);

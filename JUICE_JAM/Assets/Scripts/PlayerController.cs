@@ -3,7 +3,7 @@ namespace JuiceJam
     using UnityEngine;
     using RSLib.Extensions;
 
-    public class PlayerController : MonoBehaviour, IDamageable, IExplodable
+    public class PlayerController : MonoBehaviour, IDamageable, IExplodable, IRespawnable
     {
         [Header("VIEW")]
         [SerializeField] private PlayerView _playerView = null;
@@ -32,6 +32,7 @@ namespace JuiceJam
         [SerializeField] private RSLib.Dynamics.DynamicInt _health = null;
         [SerializeField, Min(0f)] private float _invulnerabilityWindowDuration = 1f;
 
+        private Vector3 _initPosition;
         private bool _firstMovementInputDone;
 
         private Rigidbody2D _rigidbody2D;
@@ -85,6 +86,8 @@ namespace JuiceJam
                     _playerView.PlayDeathAnimation();
                     FreezeFrameManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
                 }
+
+                GameController.Respawn();
             }
             else
             {
@@ -98,6 +101,19 @@ namespace JuiceJam
         public void Explode(ExplosionData explosionData)
         {
             _rigidbody2D.AddForce(explosionData.ComputeRelativeDirection(transform.position) * explosionData.ComputeForceAtPosition(transform.position), ForceMode2D.Impulse);
+        }
+
+        public void Respawn()
+        {
+            transform.position = Checkpoint.LastCheckpoint?.RespawnPosition ?? _initPosition;
+
+            _health.Value = _maxHealth;
+            _firstMovementInputDone = false;
+
+            _rigidbody2D.NullifyMovement();
+            _rigidbody2D.simulated = true;
+
+            _playerView.Respawn();
         }
 
         private void CheckGround()
@@ -200,6 +216,7 @@ namespace JuiceJam
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
+            _initPosition = transform.position;
             _weaponPivotXOffset = _weaponPivot.transform.localPosition.x;
 
             _health.Value = _maxHealth;

@@ -13,13 +13,17 @@ namespace JuiceJam
         public static event FadeEventHandler FadeBegan;
         public static event FadeEventHandler FadeOver;
 
+        public static bool IsFading { get; private set; }
+
         public static void FadeIn(float duration, Curve curve, float delay = 0f, System.Action callback = null)
         {
+            IsFading = true;
             Instance.StartCoroutine(Instance.FadeCoroutine(duration, curve, true, delay, callback));
         }
 
         public static void FadeOut(float duration, Curve curve, float delay = 0f, System.Action callback = null)
         {
+            IsFading = true;
             Instance.StartCoroutine(Instance.FadeCoroutine(duration, curve, false, delay, callback));
         }
 
@@ -54,6 +58,8 @@ namespace JuiceJam
                 _ditherSprite.sprite = _spritesSequence[0];
             else
                 _ditherSprite.enabled = false;
+
+            IsFading = false;
 
             FadeOver?.Invoke(fadeIn);
             callback?.Invoke();

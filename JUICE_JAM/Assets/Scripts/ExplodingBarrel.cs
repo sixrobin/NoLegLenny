@@ -2,7 +2,7 @@ namespace JuiceJam
 {
     using UnityEngine;
 
-    public class ExplodingBarrel : MonoBehaviour, IDamageable
+    public class ExplodingBarrel : MonoBehaviour, IDamageable, IRespawnable
     {
         [Header("REFS")]
         [SerializeField] private Collider2D _collider2D = null;
@@ -22,6 +22,18 @@ namespace JuiceJam
 
         public bool CanBeDamaged => true;
         public bool DontDestroyDamageSource => false;
+
+        public void TakeDamage(DamageData damageData)
+        {
+            _collider2D.enabled = false;
+            _animator.SetTrigger("Explode");
+        }
+
+        public void Respawn()
+        {
+            _collider2D.enabled = true;
+            _animator.SetTrigger("Respawn");
+        }
 
         [ContextMenu("Explode")]
         public void Explode()
@@ -45,12 +57,6 @@ namespace JuiceJam
 
             for (int i = _explosionParticlesSystems.Length - 1; i >= 0; --i)
                 _explosionParticlesSystems[i].Play();
-        }
-
-        public void TakeDamage(DamageData damageData)
-        {
-            _collider2D.enabled = false;
-            _animator.SetTrigger("Explode");
         }
 
         private void OnDrawGizmos()

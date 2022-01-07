@@ -45,6 +45,12 @@ namespace JuiceJam
         public int DeathFreezeFrameDelay => _deathFreezeFrameDelay;
         public float DeathTrauma => _deathTrauma;
 
+        public void Respawn()
+        {
+            DisplayPlayer(true);
+            _playerAnimator.SetTrigger("Respawn");
+        }
+
         public void DisplayPlayer(bool show)
         {
             _playerSpriteRenderer.enabled = show;
