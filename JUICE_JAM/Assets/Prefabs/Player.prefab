@@ -194,6 +194,7 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 576
+  _fireAxisMinValue: 0.85
   _weaponPivot: {fileID: 8518562701960543877}
   _weaponSpriteRenderer: {fileID: 8518562701616806105}
   _weaponView: {fileID: 8518562701616806087}

@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lightningAnimator: {fileID: 2794994326814583686}
+  _lightningSpriteRenderer: {fileID: 2794994326814583687}
   _strikesDelayMinMax: {x: 1.3, y: 3.5}
   _maxXOffset: 6.5
   _strikeTrauma: 0.15

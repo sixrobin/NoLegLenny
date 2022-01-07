@@ -3,7 +3,7 @@ namespace JuiceJam
     using UnityEngine;
     using RSLib.Extensions;
 
-    public class PlayerController : MonoBehaviour, IDamageable
+    public class PlayerController : MonoBehaviour, IDamageable, IExplodable
     {
         [Header("VIEW")]
         [SerializeField] private PlayerView _playerView = null;
@@ -18,6 +18,7 @@ namespace JuiceJam
         [SerializeField] private LayerMask _groundMask = 0;
 
         [Header("WEAPON")]
+        [SerializeField, Range(0f, 1f)] private float _fireAxisMinValue = 0.8f;
         [SerializeField] private Transform _weaponPivot = null;
         [SerializeField] private SpriteRenderer _weaponSpriteRenderer = null;
         [SerializeField] private GameObject _weaponView = null;
@@ -37,6 +38,7 @@ namespace JuiceJam
         private Vector2 _aimDirection;
         private Vector2 _shootImpulse;
         private float _weaponPivotXOffset;
+        private float _lastFireAxisValue;
 
         private Vector3 _lastMousePosition;
 
@@ -79,6 +81,11 @@ namespace JuiceJam
             }
         }
 
+        public void Explode(ExplosionData explosionData)
+        {
+            _rigidbody2D.AddForce(explosionData.ComputeRelativeDirection(transform.position) * explosionData.ComputeForceAtPosition(transform.position), ForceMode2D.Impulse);
+        }
+
         private void CheckGround()
         {
             IsGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, _groundMask);
@@ -117,7 +124,10 @@ namespace JuiceJam
 
         private void Shoot()
         {
-            if (Input.GetButtonDown("Fire"))
+            float fireAxis = Input.GetAxis("FireAxis");
+
+            if (Input.GetButtonDown("Fire")
+                || (fireAxis > _fireAxisMinValue && _lastFireAxisValue < _fireAxisMinValue))
             {
                 _shootImpulse = -_aimDirection * _shootImpulseForce;
                 SpawnBullet();
@@ -125,6 +135,8 @@ namespace JuiceJam
                 _playerView.PlayShootAnimation(_shootImpulse);
                 FreezeFrameManager.FreezeFrame(0, _playerView.ShootFreezeFrameDuration);
             }
+
+            _lastFireAxisValue = fireAxis;
         }
 
         private void SpawnBullet()

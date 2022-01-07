@@ -67,7 +67,7 @@
         [Header("DROPLET SETTINGS")]
         [SerializeField, Range(0.01f, 1f)] private float _refractionStrength = 0.5f;
         [SerializeField, Range(0.01f, 1f)] private float _reflectionStrength = 0.7f;
-        [SerializeField, Range(1f, 3f)] private float _waveSpeed = 1.25f;
+        [SerializeField, Range(1f, 10f)] private float _waveSpeed = 1.25f;
         [SerializeField] private Color _reflectionColor = Color.gray;
         [SerializeField] private bool _timeScaleDependent = false;
 

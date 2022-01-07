@@ -6,6 +6,7 @@ namespace JuiceJam
     public class Lightning : MonoBehaviour
     {
         [SerializeField] private Animator _lightningAnimator = null;
+        [SerializeField] private SpriteRenderer _lightningSpriteRenderer = null;
         [SerializeField] private Vector2 _strikesDelayMinMax = new Vector2(1f, 3f);
         [SerializeField, Min(0f)] private float _maxXOffset = 6.5f;
         [SerializeField, Range(0f, 1f)] private float _strikeTrauma = 0f;
@@ -31,6 +32,7 @@ namespace JuiceJam
         {
             _lightningAnimator.transform.SetPositionX(Random.Range(-_maxXOffset, _maxXOffset));
             _lightningAnimator.SetTrigger("Strike");
+            _lightningSpriteRenderer.flipX = RSLib.Helpers.CoinFlip();
         }
 
         private void PrepareNextStrike()
