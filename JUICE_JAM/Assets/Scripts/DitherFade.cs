@@ -43,6 +43,7 @@ namespace JuiceJam
 
             yield return RSLib.Yield.SharedYields.WaitForSeconds(delay);
 
+            _ditherSprite.enabled = true;
 
             for (float t = 0f; t < 1f; t += Time.deltaTime / duration)
             {

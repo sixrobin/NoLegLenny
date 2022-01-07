@@ -193,7 +193,7 @@ MonoBehaviour:
   _upwardMovementKeptOnShootPercentage: 0.5
   _groundMask:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 4672
   _fireAxisMinValue: 0.85
   _weaponPivot: {fileID: 8518562701960543877}
   _weaponSpriteRenderer: {fileID: 8518562701616806105}
