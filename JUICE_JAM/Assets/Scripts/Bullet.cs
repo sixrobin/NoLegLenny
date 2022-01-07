@@ -74,6 +74,7 @@ namespace JuiceJam
                 {
                     damageable.TakeDamage(new DamageData()
                     {
+                        Source = this,
                         Amount = _damage,
                         HitPoint = collision.contacts[0].point,
                         HitDirection = _direction

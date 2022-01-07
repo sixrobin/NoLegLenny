@@ -14,6 +14,9 @@ namespace JuiceJam
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (collision.TryGetComponent<Lava>(out _))
+                return;
+
             _coinsCollected.Value++;
             Destroy(collision.gameObject);
 

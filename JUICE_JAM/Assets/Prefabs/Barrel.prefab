@@ -155,7 +155,7 @@ MonoBehaviour:
   _explosionForceMin: 4
   _explosionParticlesSystems:
   - {fileID: 351091163060224424}
-  _destroyedTrauma: 0.5
+  _destroyedTrauma: 0.6
   _freezeFrameDuration: 0.16
   _freezeFrameDelay: 0
   _ripplePosition: {fileID: 351091162757347748}

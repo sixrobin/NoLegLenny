@@ -64,7 +64,7 @@ namespace JuiceJam
             if (IsInvulnerable || IsDead)
                 return;
 
-            _health.Value -= damageData.Amount;
+            _health.Value = Mathf.Max(0, _health.Value - damageData.Amount);
 
             if (_health.Value == 0)
             {

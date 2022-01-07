@@ -74,8 +74,7 @@ namespace JuiceJam
                 yield return RSLib.Yield.SharedYields.WaitForSeconds(_tilesAboveDestroyRate);
 
                 Vector3Int tilePosition = startPosition + new Vector3Int(0, i + 1);
-
-                if (i == -1 && !_tilemap.HasTile(tilePosition))
+                if (!_tilemap.HasTile(tilePosition))
                     yield break;
 
                 DestroyTile(tilePosition, _tilemap.CellToWorld(tilePosition) + Vector3.one * 0.5f);
