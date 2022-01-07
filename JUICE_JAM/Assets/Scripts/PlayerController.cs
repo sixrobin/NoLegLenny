@@ -32,6 +32,8 @@ namespace JuiceJam
         [SerializeField] private RSLib.Dynamics.DynamicInt _health = null;
         [SerializeField, Min(0f)] private float _invulnerabilityWindowDuration = 1f;
 
+        private bool _firstMovementInputDone;
+
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
 
@@ -41,6 +43,8 @@ namespace JuiceJam
         private float _lastFireAxisValue;
 
         private Vector3 _lastMousePosition;
+
+        public event System.Action FirstMovementInput;
 
         public enum ControllerType
         {
@@ -68,9 +72,19 @@ namespace JuiceJam
 
             if (_health.Value == 0)
             {
-                DropWeapon();
-                _playerView.PlayDeathAnimation();
-                FreezeFrameManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
+                if (damageData.Source is Lava)
+                {
+                    _rigidbody2D.simulated = false;
+                    _playerView.DisplayPlayer(false);
+                    FreezeFrameManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
+                    CameraShake.SetTrauma(_playerView.DeathTrauma);
+                }
+                else
+                {
+                    DropWeapon();
+                    _playerView.PlayDeathAnimation();
+                    FreezeFrameManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
+                }
             }
             else
             {
@@ -131,6 +145,12 @@ namespace JuiceJam
             {
                 _shootImpulse = -_aimDirection * _shootImpulseForce;
                 SpawnBullet();
+
+                if (!_firstMovementInputDone)
+                {
+                    FirstMovementInput?.Invoke();
+                    _firstMovementInputDone = true;
+                }
 
                 _playerView.PlayShootAnimation(_shootImpulse);
                 FreezeFrameManager.FreezeFrame(0, _playerView.ShootFreezeFrameDuration);

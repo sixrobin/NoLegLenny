@@ -7,9 +7,11 @@ namespace JuiceJam
         [Header("PLAYER")]
         [SerializeField] private PlayerController _playerController = null;
         [SerializeField] private Animator _playerAnimator = null;
+        [SerializeField] private SpriteRenderer _playerSpriteRenderer = null;
 
         [Header("SHOOT")]
         [SerializeField] private Animator _weaponAnimator = null;
+        [SerializeField] private SpriteRenderer _weaponSpriteRenderer = null;
         [SerializeField] private ParticleSystem[] _shootParticlesSystems = null;
         [SerializeField, Min(0f)] private float _shootFreezeFrameDur = 0f;
         [SerializeField, Range(0f, 1f)] private float _shootTrauma = 0.1f;
@@ -41,6 +43,13 @@ namespace JuiceJam
         public int DamageFreezeFrameDelay => _damageFreezeFrameDelay;
         public float DeathFreezeFrameDuration => _deathFreezeFrameDur;
         public int DeathFreezeFrameDelay => _deathFreezeFrameDelay;
+        public float DeathTrauma => _deathTrauma;
+
+        public void DisplayPlayer(bool show)
+        {
+            _playerSpriteRenderer.enabled = show;
+            _weaponSpriteRenderer.enabled = show;
+        }
 
         public void PlayImpulseAnimation(Vector2 shootDirection)
         {
