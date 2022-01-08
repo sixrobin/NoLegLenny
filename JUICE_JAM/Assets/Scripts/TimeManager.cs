@@ -1,10 +1,17 @@
 ﻿namespace JuiceJam
 {
-    public class FreezeFrameManager : RSLib.Framework.ConsoleProSingleton<FreezeFrameManager>
+    public class TimeManager : RSLib.Framework.ConsoleProSingleton<TimeManager>
     {
+        private static float _targetTimeScale = 1f;
         private System.Collections.IEnumerator _freezeFrameCoroutine;
 
         public static bool IsFroze => Exists() && Instance._freezeFrameCoroutine != null;
+
+        public static void SetTimeScale(float value)
+        {
+            _targetTimeScale = value;
+            UnityEngine.Time.timeScale = _targetTimeScale;
+        }
 
         public static void FreezeFrame(int framesDelay, float dur, float targetTimeScale = 0f, bool overrideCurrFreeze = false)
         {
@@ -29,7 +36,7 @@
 
             UnityEngine.Time.timeScale = targetTimeScale;
             yield return RSLib.Yield.SharedYields.WaitForSecondsRealtime(dur);
-            UnityEngine.Time.timeScale = 1f;
+            UnityEngine.Time.timeScale = _targetTimeScale;
 
             Instance._freezeFrameCoroutine = null;
         }

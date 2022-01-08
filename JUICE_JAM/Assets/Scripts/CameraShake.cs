@@ -56,6 +56,9 @@
 
         private void LateUpdate()
         {
+            if (UI.OptionsPanel.IsOpen || UI.OptionsPanel.PausingCoroutineRunning)
+                return;
+
             transform.position = GetShakeRaw();
         }
     }

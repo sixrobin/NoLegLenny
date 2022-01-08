@@ -79,14 +79,14 @@ namespace JuiceJam
                 {
                     _rigidbody2D.simulated = false;
                     _playerView.DisplayPlayer(false);
-                    FreezeFrameManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
+                    TimeManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
                     CameraShake.SetTrauma(_playerView.DeathTrauma);
                 }
                 else
                 {
                     DropWeapon();
                     _playerView.PlayDeathAnimation();
-                    FreezeFrameManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
+                    TimeManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
                 }
 
                 GameController.Respawn();
@@ -96,7 +96,7 @@ namespace JuiceJam
                 StartCoroutine(InvulnerabilityWindowCoroutine());
 
                 _playerView.PlayDamageAnimation(damageData);
-                FreezeFrameManager.FreezeFrame(_playerView.DamageFreezeFrameDelay, _playerView.DamageFreezeFrameDuration);
+                TimeManager.FreezeFrame(_playerView.DamageFreezeFrameDelay, _playerView.DamageFreezeFrameDuration);
             }
         }
 
@@ -174,7 +174,7 @@ namespace JuiceJam
                 }
 
                 _playerView.PlayShootAnimation(_shootImpulse);
-                FreezeFrameManager.FreezeFrame(0, _playerView.ShootFreezeFrameDuration);
+                TimeManager.FreezeFrame(0, _playerView.ShootFreezeFrameDuration);
             }
 
             _lastFireAxisValue = fireAxis;
@@ -229,6 +229,9 @@ namespace JuiceJam
 
         private void Update()
         {
+            if (UI.OptionsPanel.IsOpen || UI.OptionsPanel.PausingCoroutineRunning)
+                return;
+
             bool previousIsGrounded = GroundHit;
             CheckGround();
 

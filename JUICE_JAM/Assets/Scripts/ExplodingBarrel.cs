@@ -90,7 +90,7 @@ namespace JuiceJam
                 }
             }
 
-            FreezeFrameManager.FreezeFrame(_freezeFrameDelay, _freezeFrameDuration);
+            TimeManager.FreezeFrame(_freezeFrameDelay, _freezeFrameDuration);
             CameraShake.AddTrauma(_destroyedTrauma);
             RSLib.ImageEffects.RippleEffect.RippleAtWorldPosition(_ripplePosition.position);
 

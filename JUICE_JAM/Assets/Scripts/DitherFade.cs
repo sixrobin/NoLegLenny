@@ -45,7 +45,7 @@ namespace JuiceJam
 
             _ditherSprite.enabled = true;
 
-            for (float t = 0f; t < 1f; t += Time.deltaTime / duration)
+            for (float t = 0f; t < 1f; t += Time.unscaledDeltaTime / duration)
             {
                 float lerp = fadeIn ? Mathf.Lerp(1f, 0f, t.Ease(curve)) : Mathf.Lerp(0f, 1f, t.Ease(curve));
                 int spriteIndex = Mathf.RoundToInt(lerp * (_spritesSequence.Length - 1));

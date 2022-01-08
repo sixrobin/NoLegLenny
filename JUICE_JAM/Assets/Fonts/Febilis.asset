@@ -118,7 +118,7 @@ MonoBehaviour:
     m_PointSize: 16
     m_Scale: 1
     m_LineHeight: 7
-    m_AscentLine: 7.5
+    m_AscentLine: 9.5
     m_CapLine: 5
     m_MeanLine: 4
     m_Baseline: 1.5
