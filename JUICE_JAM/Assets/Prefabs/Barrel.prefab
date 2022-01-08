@@ -150,7 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider2D: {fileID: 351091162533122941}
   _animator: {fileID: 351091162533122938}
-  _explosionRadius: 6.53
+  _explosionRadius: 6.5
+  _barrelChainRadius: 4
   _explosionForce: 30
   _explosionForceMin: 4
   _explosionParticlesSystems:
@@ -159,6 +160,7 @@ MonoBehaviour:
   _freezeFrameDuration: 0.16
   _freezeFrameDelay: 0
   _ripplePosition: {fileID: 351091162757347748}
+  _barrelChainDelay: 0.2
 --- !u!1 &351091162593386420
 GameObject:
   m_ObjectHideFlags: 0
