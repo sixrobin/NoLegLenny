@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2089467164650863658}
   - component: {fileID: 5573999475218675603}
   - component: {fileID: 4663322850628538381}
+  - component: {fileID: 6900577650039674161}
   m_Layer: 5
   m_Name: Option Button
   m_TagString: Untagged
@@ -79,13 +80,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 0.37647063, g: 0.42352945, b: 0.5058824, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -113,37 +114,10 @@ MonoBehaviour:
   _onPointerEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7806825998216199792}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 2574973329302320865}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  _onPointerExit:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7806825998216199792}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 6900577650039674161}
+        m_TargetAssemblyTypeName: JuiceJam.UI.OptionButton, Assembly-CSharp
+        m_MethodName: OnSelect
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -152,10 +126,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2574973329302320865}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+  _onPointerExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6900577650039674161}
+        m_TargetAssemblyTypeName: JuiceJam.UI.OptionButton, Assembly-CSharp
+        m_MethodName: OnDeselect
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -169,6 +146,24 @@ MonoBehaviour:
       m_Calls: []
   _buttonText: {fileID: 3608064963243547589}
   _nonInteractableTextColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--- !u!114 &6900577650039674161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738727780838261551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90998681b553064499810bb554a9e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 4663322850628538381}
+  _selectionArrows:
+  - {fileID: 7806825998216199792}
+  - {fileID: 2574973329302320865}
+  _buttonText: {fileID: 3608064963243547589}
+  _selectedColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2574973329302320865
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,8 +336,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4286671968
+  m_fontColor: {r: 0.37647063, g: 0.42352945, b: 0.5058824, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

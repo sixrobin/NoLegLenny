@@ -187,6 +187,9 @@ MonoBehaviour:
   - {fileID: 8894681529371185427}
   - {fileID: 6705711354481320411}
   _canvas: {fileID: 3117321190313277659}
+  _resumeDelay: 0.3
+  _resumeButton: {fileID: 3682549739724128789}
+  _exitButton: {fileID: 6705711354481320411}
 --- !u!1001 &2141474396894966230
 PrefabInstance:
   m_ObjectHideFlags: 0
