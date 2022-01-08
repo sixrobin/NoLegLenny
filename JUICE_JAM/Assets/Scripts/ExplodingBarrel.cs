@@ -46,8 +46,11 @@ namespace JuiceJam
             StopAllCoroutines();
 
             _spriteRenderer.enabled = true;
-            _collider2D.enabled = true;
-            _animator.SetTrigger("Respawn");
+            if (!_collider2D.enabled)
+            {
+                _collider2D.enabled = true;
+                _animator.SetTrigger("Respawn");
+            }
         }
 
         [ContextMenu("Explode")]

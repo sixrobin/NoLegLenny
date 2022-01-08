@@ -12,6 +12,9 @@ namespace JuiceJam
         [SerializeField, Range(0f, 1f)] private float _strikeTrauma = 0f;
         [SerializeField] private bool _startIsOn = false;
 
+        [Header("RAIN")]
+        [SerializeField] private Rain _rain = null;
+
         private bool _isOn;
         private float _timer;
         private float _nextStrikeDelay;
@@ -19,13 +22,17 @@ namespace JuiceJam
         public void Toggle(bool on)
         {
             _isOn = on;
+
             if (_isOn)
                 PrepareNextStrike();
+            else
+                _rain?.Stop();
         }
 
         public void OnStrikeFrame()
         {
             CameraShake.AddTrauma(_strikeTrauma);
+            _rain?.Play();
         }
 
         private void Strike()
