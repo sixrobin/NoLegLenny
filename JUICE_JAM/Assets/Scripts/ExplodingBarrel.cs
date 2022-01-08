@@ -5,6 +5,7 @@ namespace JuiceJam
     public class ExplodingBarrel : MonoBehaviour, IDamageable, IExplodable, IRespawnable
     {
         [Header("REFS")]
+        [SerializeField] private SpriteRenderer _spriteRenderer = null;
         [SerializeField] private Collider2D _collider2D = null;
         [SerializeField] private Animator _animator = null;
 
@@ -21,6 +22,7 @@ namespace JuiceJam
         [SerializeField, Min(0)] private int _freezeFrameDelay = 0;
         [SerializeField] private Transform _ripplePosition = null;
         [SerializeField] private float _barrelChainDelay = 0.2f;
+        [SerializeField] private bool _hideAfterExplosion = false;
 
         public bool CanBeDamaged => true;
         public bool DontDestroyDamageSource => false;
@@ -41,6 +43,9 @@ namespace JuiceJam
 
         public void Respawn()
         {
+            StopAllCoroutines();
+
+            _spriteRenderer.enabled = true;
             _collider2D.enabled = true;
             _animator.SetTrigger("Respawn");
         }
@@ -90,13 +95,18 @@ namespace JuiceJam
                 _explosionParticlesSystems[i].Play();
         }
 
+        public void OnExplodedFrame()
+        {
+            _spriteRenderer.enabled = !_hideAfterExplosion;
+        }
+
         private System.Collections.IEnumerator ChainBarrelExplosion()
         {
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_barrelChainDelay);
-            TakeDamage(new());
+            TakeDamage(new DamageData() { Source = this });
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, _explosionRadius);

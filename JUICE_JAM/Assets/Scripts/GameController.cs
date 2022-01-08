@@ -1,5 +1,6 @@
 namespace JuiceJam
 {
+    using System.Linq;
     using UnityEngine;
 
     public class GameController : RSLib.Framework.Singleton<GameController>
@@ -34,7 +35,11 @@ namespace JuiceJam
         {
             Gizmos.color = _debugColor;
 
-            Checkpoint[] checkpoints = FindObjectsOfType<Checkpoint>();
+            Checkpoint[] checkpoints = FindObjectsOfType<Checkpoint>()
+                                                         .ToList()
+                                                         .OrderBy(o => o.transform.position.y)
+                                                         .ToArray();
+
             for (int i = checkpoints.Length - 1; i >= 0; --i)
             {
                 Gizmos.DrawWireSphere(checkpoints[i].transform.position, 1f);

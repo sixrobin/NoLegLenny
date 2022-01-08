@@ -111,7 +111,7 @@ namespace JuiceJam
                 {
                     for (int y = i; y >= -i; --y)
                     {
-                        Vector3Int tilePosition = _tilemap.WorldToCell(startPosition + new Vector3(x, y));
+                        Vector3Int tilePosition = _tilemap.LocalToCell(startPosition + new Vector3(x, y));
                         if (!_tilemap.HasTile(tilePosition))
                             continue;
 

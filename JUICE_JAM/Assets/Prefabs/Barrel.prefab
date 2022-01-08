@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea194bf50d64ebd4bb57c9597bb6d88b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 351091162533122940}
   _collider2D: {fileID: 351091162533122941}
   _animator: {fileID: 351091162533122938}
   _explosionRadius: 6.5
@@ -161,6 +162,7 @@ MonoBehaviour:
   _freezeFrameDelay: 0
   _ripplePosition: {fileID: 351091162757347748}
   _barrelChainDelay: 0.2
+  _hideAfterExplosion: 0
 --- !u!1 &351091162593386420
 GameObject:
   m_ObjectHideFlags: 0

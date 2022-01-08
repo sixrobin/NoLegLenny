@@ -2,11 +2,13 @@ namespace JuiceJam
 {
     using UnityEngine;
 
-    public class Checkpoint : MonoBehaviour
+    public class Checkpoint : MonoBehaviour, IRespawnable
     {
         [SerializeField] private Animator _animator = null;
         [SerializeField] private Transform _respawnPosition = null;
         [SerializeField] private RSLib.ImageEffects.SpriteBlink _spriteBlink = null;
+
+        [SerializeField] private UnityEngine.Events.UnityEvent _onRespawn = null;
 
         public static Checkpoint LastCheckpoint { get; private set; }
 
@@ -17,6 +19,12 @@ namespace JuiceJam
         {
             LastCheckpoint = this;
             _spriteBlink.BlinkColor(1, () => _animator.SetTrigger("Raise"));
+        }
+
+        public void Respawn()
+        {
+            if (LastCheckpoint == this)
+                _onRespawn?.Invoke();
         }
 
         private void Awake()

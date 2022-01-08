@@ -10,6 +10,7 @@ namespace JuiceJam
         private void Start()
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
         }
 
         private void Update()
