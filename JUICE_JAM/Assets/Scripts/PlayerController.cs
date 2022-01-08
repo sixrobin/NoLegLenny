@@ -14,7 +14,7 @@ namespace JuiceJam
         [SerializeField, Range(0f, 1f)] private float _groundBrakePercentage = 0.9f;
         [SerializeField, Min(0f)] private float _xVelocityMax = 5f;
         [SerializeField] private Vector2 _yVelocityMinMax = new Vector2(-3f, 10f);
-        [SerializeField, Range(0f, 1f)] private float _upwardMovementKeptOnShootPercentage = 0.5f;
+        [SerializeField, Range(0f, 1f)] private float _movementKeptOnShootPercentage = 0.5f;
         [SerializeField] private LayerMask _groundMask = 0;
 
         [Header("WEAPON")]
@@ -246,10 +246,10 @@ namespace JuiceJam
         {
             if (_shootImpulse.magnitude > 0.05f)
             {
-                float previousY = _rigidbody2D.velocity.y;
+                Vector2 previousVelocity = _rigidbody2D.velocity;
                 _rigidbody2D.velocity = _shootImpulse;
-                if (previousY > 0f)
-                    _rigidbody2D.velocity += new Vector2(1f, previousY * _upwardMovementKeptOnShootPercentage);
+                if (previousVelocity.magnitude > 0f)
+                    _rigidbody2D.velocity += previousVelocity * _movementKeptOnShootPercentage;
 
                 if (_shootImpulse.y > 0f && IsGrounded)
                     _playerView.PlayImpulseAnimation(_shootImpulse);

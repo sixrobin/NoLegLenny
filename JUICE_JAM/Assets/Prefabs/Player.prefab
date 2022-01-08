@@ -188,7 +188,7 @@ MonoBehaviour:
   _shootImpulseForce: 7
   _fallMultiplier: 1.05
   _groundBrakePercentage: 0.9
-  _xVelocityMax: 50
+  _xVelocityMax: 70
   _yVelocityMinMax: {x: -30, y: 40}
   _upwardMovementKeptOnShootPercentage: 0.5
   _groundMask:

@@ -9,10 +9,8 @@ namespace JuiceJam
 
         private void OnBulletHit(Bullet.BulletHitEventArgs args)
         {
-            if ((args.Position - transform.position).sqrMagnitude > _minDistanceToMove * _minDistanceToMove)
-                return;
-
-            if (args.Collision2D.gameObject.layer != LayerMask.NameToLayer("Ground"))
+            if ((args.Position - transform.position).sqrMagnitude > _minDistanceToMove * _minDistanceToMove
+                || args.Collision2D.gameObject.layer != LayerMask.NameToLayer("Ground"))
                 return;
 
             _animator.SetTrigger(transform.position.x > args.Position.x ? "Right" : "Left");
