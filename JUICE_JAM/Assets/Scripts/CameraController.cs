@@ -3,7 +3,7 @@ namespace JuiceJam
     using RSLib.Extensions;
     using UnityEngine;
 
-    public class CameraController : MonoBehaviour
+    public class CameraController : MonoBehaviour, IRespawnable
     {
         [SerializeField] private Transform _target = null;
         [SerializeField, Min(1f)] private float _lerpSpeed = 1f;
@@ -12,9 +12,14 @@ namespace JuiceJam
 
         private float _highestPositionReached;
 
-        private void Start()
+        public void Respawn()
         {
             transform.position = _target.position.WithZ(transform.position.z);
+        }
+
+        private void Start()
+        {
+            Respawn();
         }
 
         private void LateUpdate()

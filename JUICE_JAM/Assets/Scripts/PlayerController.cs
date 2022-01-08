@@ -37,6 +37,7 @@ namespace JuiceJam
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
+        private GameObject _droppedWeapon;
 
         private Vector2 _aimDirection;
         private Vector2 _shootImpulse;
@@ -66,7 +67,7 @@ namespace JuiceJam
 
         public void TakeDamage(DamageData damageData)
         {
-            if (IsInvulnerable || IsDead)
+            if (IsInvulnerable || IsDead || DitherFade.IsFading)
                 return;
 
             _health.Value = Mathf.Max(0, _health.Value - damageData.Amount);
@@ -114,6 +115,9 @@ namespace JuiceJam
             _rigidbody2D.simulated = true;
 
             _playerView.Respawn();
+            _weaponView.SetActive(true);
+            if (_droppedWeapon != null)
+                Destroy(_droppedWeapon);
         }
 
         private void CheckGround()
@@ -193,13 +197,13 @@ namespace JuiceJam
 
         private void DropWeapon()
         {
-            GameObject droppedWeapon = Instantiate(_weaponView, _weaponView.transform.position, _weaponView.transform.rotation);
+            _droppedWeapon = Instantiate(_weaponView, _weaponView.transform.position, _weaponView.transform.rotation);
             _weaponView.SetActive(false);
 
-            droppedWeapon.GetComponent<Collider2D>().enabled = true;
+            _droppedWeapon.GetComponent<Collider2D>().enabled = true;
 
-            Rigidbody2D weaponRigidbody2D = droppedWeapon.gameObject.AddComponent<Rigidbody2D>();
-            weaponRigidbody2D.sharedMaterial = droppedWeapon.GetComponent<Collider2D>().sharedMaterial;
+            Rigidbody2D weaponRigidbody2D = _droppedWeapon.gameObject.AddComponent<Rigidbody2D>();
+            weaponRigidbody2D.sharedMaterial = _droppedWeapon.GetComponent<Collider2D>().sharedMaterial;
             weaponRigidbody2D.AddForce(Random.insideUnitCircle.normalized * 10f, ForceMode2D.Impulse);
             weaponRigidbody2D.AddTorque(90f);
         }

@@ -9808,7 +9808,7 @@ MonoBehaviour:
   _minHeightReference: {fileID: 0}
   _speed: 0.6
   _maxHeightOffset: 9
-  _respawnCheckpointOffset: 2.5
+  _respawnCheckpointOffset: 3
   _lavaKillEffects: {fileID: 2979813140831434005, guid: a9829896ea36d9f49b0d5a0f5333ece5, type: 3}
 --- !u!1 &8772370713072333637
 GameObject:
