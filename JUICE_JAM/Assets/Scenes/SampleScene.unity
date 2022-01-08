@@ -3112,6 +3112,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &102980280
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -4660,6 +4662,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &155394910
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -11377,6 +11381,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &325890417
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -20337,6 +20343,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &547428845
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -21666,6 +21674,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &586389530
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -22719,6 +22729,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &622736074
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -27142,6 +27154,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &747021840
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -30327,6 +30341,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &788879964
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -41666,6 +41682,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &1033464072
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -43897,8 +43915,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1837753743}
   - {fileID: 645671136}
+  - {fileID: 1837753743}
   - {fileID: 899144593}
   m_Father: {fileID: 927133061}
   m_RootOrder: 4
@@ -47990,7 +48008,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1276125422
 PrefabInstance:
@@ -48436,6 +48454,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &1291271186
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -48718,8 +48738,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -9, y: 0, z: 0}
-  m_Size: {x: 18, y: 29, z: 1}
+  m_Origin: {x: -9, y: -3, z: 0}
+  m_Size: {x: 18, y: 32, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -60646,7 +60666,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1688724879
 MonoBehaviour:
@@ -63774,6 +63794,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &1845110474
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -66416,7 +66438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511574599477011333, guid: 5463758112c35004284480eea500709f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6511574599477011333, guid: 5463758112c35004284480eea500709f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -66796,6 +66818,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &2001149455
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -75455,6 +75479,8 @@ MonoBehaviour:
     TileCenterOffset: {x: 0.5, y: 0.5}
   _tileDestroyedContactPointFeedback: []
   _tilesAboveDestroyRate: 0.15
+  _tilesExplosionDestructionDelay: 0.1
+  _tilesExplosionDestructionRate: 0.08
 --- !u!19719996 &2101426552
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -78770,7 +78796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7759300091380642056, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7759300091380642056, guid: 39730cc9cd0a22b4c85c75925c5d0ba7, type: 3}
       propertyPath: m_AnchorMax.x
@@ -78891,11 +78917,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8518562701026797700, guid: b11d20eb50a064a4786ec1bcd9fb456b, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8518562701026797700, guid: b11d20eb50a064a4786ec1bcd9fb456b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.75
       objectReference: {fileID: 0}
     - target: {fileID: 8518562701026797700, guid: b11d20eb50a064a4786ec1bcd9fb456b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -79012,7 +79038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8772370712820263138, guid: 9ca95e889cf998c488cef2a68b49b0f7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ca95e889cf998c488cef2a68b49b0f7, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5735975439222538699}
   - component: {fileID: 5735975439222538696}
   - component: {fileID: 5735975439222538697}
+  - component: {fileID: 6689073663173578092}
   - component: {fileID: 5735975439222538702}
   m_Layer: 0
   m_Name: Flower 00
@@ -106,6 +107,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &6689073663173578092
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735975439222538703}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.1, y: 0.35}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!114 &5735975439222538702
 MonoBehaviour:
   m_ObjectHideFlags: 0

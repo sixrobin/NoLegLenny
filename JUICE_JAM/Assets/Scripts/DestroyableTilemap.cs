@@ -3,7 +3,7 @@ namespace JuiceJam
     using RSLib.Extensions;
     using UnityEngine;
 
-    public class DestroyableTilemap : MonoBehaviour, IDamageable, IRespawnable
+    public class DestroyableTilemap : MonoBehaviour, IDamageable, IExplodable, IRespawnable
     {
         [System.Serializable]
         public struct TileDestroyedFeedback
@@ -15,7 +15,9 @@ namespace JuiceJam
         [SerializeField] private UnityEngine.Tilemaps.Tilemap _tilemap = null;
         [SerializeField] private TileDestroyedFeedback[] _tileDestroyedCenterFeedback = null;
         [SerializeField] private GameObject[] _tileDestroyedContactPointFeedback = null;
-        [SerializeField] private float _tilesAboveDestroyRate = 0.1f;
+        [SerializeField, Min(0f)] private float _tilesAboveDestroyRate = 0.1f;
+        [SerializeField, Min(0f)] private float _tilesExplosionDestructionDelay = 0.1f;
+        [SerializeField, Min(0f)] private float _tilesExplosionDestructionRate = 0.08f;
 
         private System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase> _destroyedTiles = new System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase>();
 
@@ -44,6 +46,12 @@ namespace JuiceJam
 
                 break;
             }
+        }
+
+        public void Explode(ExplosionData explosionData)
+        {
+            int radius = Mathf.FloorToInt(explosionData.Radius);
+            StartCoroutine(ExplodeTiles(_tilemap.WorldToCell(explosionData.Source), radius));
         }
 
         public void Respawn()
@@ -88,6 +96,30 @@ namespace JuiceJam
                     yield break;
 
                 DestroyTile(tilePosition, _tilemap.CellToWorld(tilePosition) + Vector3.one * 0.5f);
+            }
+        }
+
+        private System.Collections.IEnumerator ExplodeTiles(Vector3Int startPosition, int radius)
+        {
+            yield return RSLib.Yield.SharedYields.WaitForSeconds(_tilesExplosionDestructionDelay);
+
+            for (int i = 0; i < radius; ++i)
+            {
+                yield return RSLib.Yield.SharedYields.WaitForSeconds(_tilesExplosionDestructionRate);
+
+                for (int x = i; x >= -i; --x)
+                {
+                    for (int y = i; y >= -i; --y)
+                    {
+                        Vector3Int tilePosition = _tilemap.WorldToCell(startPosition + new Vector3(x, y));
+                        if (!_tilemap.HasTile(tilePosition))
+                            continue;
+
+                        DestroyTile(tilePosition, tilePosition);
+                        if (i == radius - 1)
+                            StartCoroutine(DestroyTilesAbove(tilePosition, -1));
+                    }
+                }
             }
         }
     }
