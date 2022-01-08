@@ -72,7 +72,7 @@ namespace JuiceJam
             for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
                 _shootParticlesSystems[i].Play();
 
-            if (_playerController.IsGrounded)
+            if (_playerController.GroundHit)
             {
                 GameObject sidePuff = Instantiate(_landSidePuffPrefab, _landPuffPivot.position, _landSidePuffPrefab.transform.rotation);
                 sidePuff.GetComponent<SpriteRenderer>().flipX = shootDirection.x < 0f;
@@ -126,7 +126,7 @@ namespace JuiceJam
 
         private void Update()
         {
-            _playerAnimator.SetBool("Airborne", !_playerController.IsGrounded);
+            _playerAnimator.SetBool("Airborne", !_playerController.GroundHit);
         }
     }
 }

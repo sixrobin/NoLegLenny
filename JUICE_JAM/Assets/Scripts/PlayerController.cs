@@ -12,6 +12,7 @@ namespace JuiceJam
         [SerializeField, Min(0f)] private float _shootImpulseForce = 8f;
         [SerializeField, Min(1f)] private float _fallMultiplier = 1.05f;
         [SerializeField, Range(0f, 1f)] private float _groundBrakePercentage = 0.9f;
+        [SerializeField, Range(0f, 1f)] private float _checkpointBrakePercentage = 0.9f;
         [SerializeField, Min(0f)] private float _xVelocityMax = 5f;
         [SerializeField] private Vector2 _yVelocityMinMax = new Vector2(-3f, 10f);
         [SerializeField, Range(0f, 1f)] private float _movementKeptOnShootPercentage = 0.5f;
@@ -59,7 +60,7 @@ namespace JuiceJam
         public bool CanBeDamaged => !IsDead && !IsInvulnerable;
         public bool DontDestroyDamageSource => false;
 
-        public bool IsGrounded { get; private set; }
+        public RaycastHit2D GroundHit { get; private set; }
 
         public bool IsInvulnerable { get; private set; }
 
@@ -122,7 +123,7 @@ namespace JuiceJam
 
         private void CheckGround()
         {
-            IsGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, _groundMask);
+            GroundHit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, _groundMask);
         }
 
         private void Aim()
@@ -228,14 +229,14 @@ namespace JuiceJam
 
         private void Update()
         {
-            bool previousIsGrounded = IsGrounded;
+            bool previousIsGrounded = GroundHit;
             CheckGround();
 
             // Need to check ground to brake velocity, even in death.
             if (IsDead)
                 return;
 
-            if (IsGrounded && IsGrounded != previousIsGrounded)
+            if (GroundHit && GroundHit != previousIsGrounded)
                 Land();
 
             Aim();
@@ -251,17 +252,23 @@ namespace JuiceJam
                 if (previousVelocity.magnitude > 0f)
                     _rigidbody2D.velocity += previousVelocity * _movementKeptOnShootPercentage;
 
-                if (_shootImpulse.y > 0f && IsGrounded)
+                if (_shootImpulse.y > 0f && GroundHit)
                     _playerView.PlayImpulseAnimation(_shootImpulse);
 
                 _shootImpulse = Vector2.zero;
             }
 
-            if (!IsGrounded && _rigidbody2D.velocity.y < 0f)
+            if (!GroundHit && _rigidbody2D.velocity.y < 0f)
                 _rigidbody2D.velocity *= new Vector2(1f, _fallMultiplier);
 
-            if (IsGrounded)
-                _rigidbody2D.velocity *= new Vector2(_groundBrakePercentage, 1f);
+            if (GroundHit)
+            {
+                float brakePercentage = GroundHit.collider.gameObject.layer == LayerMask.NameToLayer("Checkpoint")
+                    ? _checkpointBrakePercentage
+                    : _groundBrakePercentage;
+
+                _rigidbody2D.velocity *= new Vector2(brakePercentage, 1f);
+            }
 
             _rigidbody2D.velocity = new Vector2(
                 Mathf.Clamp(_rigidbody2D.velocity.x, -_xVelocityMax, _xVelocityMax),
