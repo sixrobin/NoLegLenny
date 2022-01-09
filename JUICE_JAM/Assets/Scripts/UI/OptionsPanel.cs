@@ -32,8 +32,7 @@ namespace JuiceJam.UI
 
         private void OnResetButtonClicked()
         {
-            TimeManager.SetTimeScale(1f);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            GameController.ResetGame();
         }
 
         private void OnSettingsButtonClicked()

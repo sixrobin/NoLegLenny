@@ -17,6 +17,7 @@ namespace JuiceJam
         [SerializeField] private Vector2 _yVelocityMinMax = new Vector2(-3f, 10f);
         [SerializeField, Range(0f, 1f)] private float _movementKeptOnShootPercentage = 0.5f;
         [SerializeField] private LayerMask _groundMask = 0;
+        [SerializeField] private float _moonReachedUpwardVelocity = 10f;
 
         [Header("WEAPON")]
         [SerializeField, Range(0f, 1f)] private float _fireAxisMinValue = 0.8f;
@@ -48,6 +49,8 @@ namespace JuiceJam
 
         private Vector3 _lastMousePosition;
 
+        private bool _moonReached;
+
         public event System.Action FirstMovementInput;
 
         public enum ControllerType
@@ -68,6 +71,11 @@ namespace JuiceJam
         public bool IsDead => _health.Value == 0;
 
         public bool IsClouded { get; set; }
+
+        private void OnMoonFinalPositionReached()
+        {
+            _moonReached = true;
+        }
 
         public void TakeDamage(DamageData damageData)
         {
@@ -242,6 +250,8 @@ namespace JuiceJam
 
         private void Awake()
         {
+            Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
+
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
@@ -253,7 +263,7 @@ namespace JuiceJam
 
         private void Update()
         {
-            if (UI.OptionsPanel.Instance.IsOpen || UI.OptionsPanel.Instance.PausingCoroutineRunning)
+            if (UI.OptionsPanel.Instance.IsOpen || UI.OptionsPanel.Instance.PausingCoroutineRunning || _moonReached)
                 return;
 
             bool previousIsGrounded = GroundHit;
@@ -272,6 +282,14 @@ namespace JuiceJam
 
         private void FixedUpdate()
         {
+            if (_moonReached)
+            {
+                if (_rigidbody2D.velocity.y < _moonReachedUpwardVelocity)
+                    _rigidbody2D.velocity = new Vector2(0f, _moonReachedUpwardVelocity);
+
+                return;
+            }
+
             if (_shootImpulse.magnitude > 0.05f)
             {
                 Vector2 previousVelocity = _rigidbody2D.velocity;
@@ -300,6 +318,11 @@ namespace JuiceJam
             _rigidbody2D.velocity = new Vector2(
                 Mathf.Clamp(_rigidbody2D.velocity.x, -_xVelocityMax, _xVelocityMax),
                 Mathf.Clamp(_rigidbody2D.velocity.y, _yVelocityMinMax.x, _yVelocityMinMax.y));
+        }
+
+        private void OnDestroy()
+        {
+            Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
         }
     }
 }

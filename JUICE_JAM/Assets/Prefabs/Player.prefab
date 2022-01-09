@@ -195,6 +195,7 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 4672
+  _moonReachedUpwardVelocity: 30
   _fireAxisMinValue: 0.85
   _weaponPivot: {fileID: 8518562701960543877}
   _weaponSpriteRenderer: {fileID: 8518562701616806105}

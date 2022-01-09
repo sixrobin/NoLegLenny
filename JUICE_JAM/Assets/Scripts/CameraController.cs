@@ -14,10 +14,12 @@ namespace JuiceJam
         [SerializeField] private UnityEngine.U2D.PixelPerfectCamera _pixelPerfectCamera = null;
 
         private float _highestPositionReached;
+        private bool _moonReached;
 
         public void Respawn()
         {
             transform.position = _target.position.WithZ(transform.position.z);
+            _moonReached = false;
         }
 
         private void OnPixelPerfectValueChanged(bool currentValue)
@@ -25,16 +27,26 @@ namespace JuiceJam
             _pixelPerfectCamera.enabled = currentValue;
         }
 
+        private void OnMoonFinalPositionReached()
+        {
+            _moonReached = true;
+        }
+
         private void Start()
         {
             Settings.SettingsManager.PixelPerfect.ValueChanged += OnPixelPerfectValueChanged;
             OnPixelPerfectValueChanged(Settings.SettingsManager.PixelPerfect.Value);
+            
+            Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
 
             Respawn();
         }
 
         private void LateUpdate()
         {
+            if (_moonReached)
+                return;
+
             Vector3 targetPosition = _target.position;
             targetPosition.y += _targetHeightOffset;
 
@@ -55,6 +67,7 @@ namespace JuiceJam
         private void OnDestroy()
         {
             Settings.SettingsManager.PixelPerfect.ValueChanged -= OnPixelPerfectValueChanged;
+            Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
         }
     }
 }

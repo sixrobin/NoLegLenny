@@ -8,10 +8,12 @@ namespace JuiceJam
         [Header("REFS")]
         [SerializeField] private PlayerController _playerController = null;
         [SerializeField] private Transform _minHeightReference = null;
+        [SerializeField] private GameObject _lavaView = null;
 
         [Header("MOVEMENT")]
         [SerializeField, Min(0.1f)] private float _speed = 1f;
         [SerializeField, Min(1f)] private float _maxHeightOffset = 15f;
+        [SerializeField, Min(1f)] private float _moonReachedSpeed = 15f;
 
         [Header("RESPAWN")]
         [SerializeField, Min(0f)] private float _respawnCheckpointOffset = 2f;
@@ -21,10 +23,14 @@ namespace JuiceJam
 
         private bool _isOn;
         private float _initHeight;
+        private bool _moonReached;
 
         public void Respawn()
         {
             _isOn = false;
+            _moonReached = false;
+            _lavaView.SetActive(true);
+
             transform.SetPositionY(Checkpoint.LastCheckpoint != null ? Checkpoint.LastCheckpoint.RespawnPosition.y - _respawnCheckpointOffset : _initHeight);
         }
 
@@ -35,6 +41,8 @@ namespace JuiceJam
 
         private void Awake()
         {
+            Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
+
             _isOn = true;
             _initHeight = transform.position.y;
 
@@ -45,9 +53,15 @@ namespace JuiceJam
             }
         }
 
+        private void OnMoonFinalPositionReached()
+        {
+            _moonReached = true;
+            _lavaView.SetActive(false);
+        }
+
         private void Update()
         {
-            if (!_isOn || _playerController.IsDead)
+            if (!_isOn || _playerController.IsDead || _moonReached)
                 return;
 
             transform.Translate(0f, _speed * Time.deltaTime, 0f, Space.World);
@@ -80,6 +94,8 @@ namespace JuiceJam
 
         private void OnDestroy()
         {
+            Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
+
             if (_playerController != null)
                 _playerController.FirstMovementInput -= OnFirstMovementInput;
         }

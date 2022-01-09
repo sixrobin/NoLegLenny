@@ -25,11 +25,17 @@ namespace JuiceJam.UI
                 _canvas.enabled = true;
         }
 
+        private void OnMoonFinalPositionReached()
+        {
+            _canvas.enabled = false;
+        }
+
         private void Awake()
         {
             _playerHealth.ValueChanged += OnPlayerHealthValueChanged;
             DitherFade.FadeBegan += OnDitherFadeBegan;
             DitherFade.FadeOver += OnDitherFadeOver;
+            Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
         }
 
         private void OnDestroy()
@@ -37,6 +43,7 @@ namespace JuiceJam.UI
             _playerHealth.ValueChanged -= OnPlayerHealthValueChanged;
             DitherFade.FadeBegan -= OnDitherFadeBegan;
             DitherFade.FadeOver -= OnDitherFadeOver;
+            Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
         }
     }
 }

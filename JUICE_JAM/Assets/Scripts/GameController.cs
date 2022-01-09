@@ -7,12 +7,30 @@ namespace JuiceJam
     {
         [SerializeField, Min(0f)] private float _respawnSequenceDelay = 1f;
         [SerializeField] private Color _debugColor = Color.red;
+        [SerializeField] private UI.Score _score = null;
+
+        private static bool s_scoreDisplayed;
 
         private static System.Collections.Generic.IEnumerable<IRespawnable> s_respawnables;
 
+        public static int CoinsTotal { get; private set; }
+        public static int DeathsCount { get; private set; }
+
         public static void Respawn()
         {
+            DeathsCount++;
             Instance.StartCoroutine(Instance.RespawnCoroutine());
+        }
+
+        public static void ResetGame()
+        {
+            TimeManager.SetTimeScale(1f);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public static void DisplayStatistics()
+        {
+            Instance._score.DisplayScore(() => s_scoreDisplayed = true);
         }
 
         private System.Collections.IEnumerator RespawnCoroutine()
@@ -29,6 +47,13 @@ namespace JuiceJam
         private void Start()
         {
             s_respawnables = RSLib.Helpers.FindInstancesOfType<IRespawnable>();
+            CoinsTotal = FindObjectsOfType<CoinView>().Length;
+        }
+
+        private void Update()
+        {
+            if (s_scoreDisplayed && Input.anyKeyDown)
+                ResetGame();
         }
 
         private void OnDrawGizmosSelected()

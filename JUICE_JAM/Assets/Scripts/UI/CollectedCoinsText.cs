@@ -28,11 +28,18 @@ namespace JuiceJam.UI
             _coinsText.text = args.New.ToString();
         }
 
+        private void OnMoonFinalPositionReached()
+        {
+            _coinImage.enabled = false;
+            _coinsText.enabled = false;
+        }
+
         private void Awake()
         {
             _collectedCoins.ValueChanged += OnCoinsCollectedValueChanged;
             DitherFade.FadeBegan += OnDitherFadeBegan;
             DitherFade.FadeOver += OnDitherFadeOver;
+            Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
 
             _coinsText.text = "0";
         }
@@ -42,6 +49,7 @@ namespace JuiceJam.UI
             _collectedCoins.ValueChanged -= OnCoinsCollectedValueChanged;
             DitherFade.FadeBegan -= OnDitherFadeBegan;
             DitherFade.FadeOver -= OnDitherFadeOver;
+            Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
         }
     }
 }
