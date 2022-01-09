@@ -10,6 +10,9 @@ namespace JuiceJam
         [SerializeField] private Vector2 _maxOffset = new Vector2(0.6f, 3f);
         [SerializeField] private float _targetHeightOffset = 0f;
 
+        [Header("PIXEL PERFECT")]
+        [SerializeField] private UnityEngine.U2D.PixelPerfectCamera _pixelPerfectCamera = null;
+
         private float _highestPositionReached;
 
         public void Respawn()
@@ -17,8 +20,14 @@ namespace JuiceJam
             transform.position = _target.position.WithZ(transform.position.z);
         }
 
+        private void OnPixelPerfectValueChanged(bool currentValue)
+        {
+            _pixelPerfectCamera.enabled = currentValue;
+        }
+
         private void Start()
         {
+            Settings.SettingsManager.PixelPerfect.ValueChanged += OnPixelPerfectValueChanged;
             Respawn();
         }
 
@@ -39,6 +48,11 @@ namespace JuiceJam
                 _highestPositionReached = transform.position.y;
 
             transform.SetPositionZ(-10f);
+        }
+
+        private void OnDestroy()
+        {
+            Settings.SettingsManager.PixelPerfect.ValueChanged -= OnPixelPerfectValueChanged;
         }
     }
 }

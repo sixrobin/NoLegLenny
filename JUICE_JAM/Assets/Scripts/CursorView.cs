@@ -7,10 +7,17 @@ namespace JuiceJam
         [SerializeField] private PlayerController _playerController = null;
         [SerializeField] private SpriteRenderer[] _cursorsSpriteRenderers = null;
 
+        private void OnConstrainCursorValueChanged(bool currentValue)
+        {
+            Cursor.lockState = currentValue ? CursorLockMode.Confined : CursorLockMode.None;
+        }
+
         private void Start()
         {
+            Settings.SettingsManager.ConstrainCursor.ValueChanged += OnConstrainCursorValueChanged;
+            OnConstrainCursorValueChanged(Settings.SettingsManager.ConstrainCursor.Value);
+
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
         }
 
         private void Update()
@@ -24,6 +31,11 @@ namespace JuiceJam
                 mouseWorldPosition.z = 0f;
                 transform.position = mouseWorldPosition;
             }
+        }
+
+        private void OnDestroy()
+        {
+            Settings.SettingsManager.ConstrainCursor.ValueChanged -= OnConstrainCursorValueChanged;
         }
     }
 }

@@ -11,10 +11,16 @@ namespace JuiceJam.UI
 
         [Header("BUTTONS SPECS")]
         [SerializeField] private RSLib.Framework.GUI.EnhancedButton _resumeButton = null;
+        [SerializeField] private RSLib.Framework.GUI.EnhancedButton _resetButton = null;
+        [SerializeField] private RSLib.Framework.GUI.EnhancedButton _settingsButton = null;
         [SerializeField] private RSLib.Framework.GUI.EnhancedButton _exitButton = null;
 
-        public static bool PausingCoroutineRunning { get; private set; }
-        public static bool IsOpen { get; private set; }
+        [Header("SETTINGS")]
+        [SerializeField] private Canvas _settingsCanvas = null;
+        [SerializeField] private RSLib.Framework.GUI.EnhancedButton[] _settings = null;
+
+        public bool PausingCoroutineRunning { get; private set; }
+        public bool IsOpen { get; private set; }
 
         private void OnResumeButtonClicked()
         {
@@ -22,6 +28,20 @@ namespace JuiceJam.UI
                 return;
 
             TogglePause();
+        }
+
+        private void OnResetButtonClicked()
+        {
+            TimeManager.SetTimeScale(1f);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
+
+        private void OnSettingsButtonClicked()
+        {
+            _canvas.enabled = false;
+            _settingsCanvas.enabled = true;
+
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_settings[0].gameObject);
         }
 
         private void OnExitButtonClicked()
@@ -44,6 +64,13 @@ namespace JuiceJam.UI
                 _buttons[i].SetSelectOnDown(_buttons[RSLib.Helpers.Mod(i + 1, _buttons.Length)]);
                 _buttons[i].SetSelectOnUp(_buttons[RSLib.Helpers.Mod(i - 1, _buttons.Length)]);
             }
+
+            for (int i = 0; i < _settings.Length; ++i)
+            {
+                _settings[i].SetMode(UnityEngine.UI.Navigation.Mode.Explicit);
+                _settings[i].SetSelectOnDown(_settings[RSLib.Helpers.Mod(i + 1, _settings.Length)]);
+                _settings[i].SetSelectOnUp(_settings[RSLib.Helpers.Mod(i - 1, _settings.Length)]);
+            }
         }
 
         private void TogglePause()
@@ -65,12 +92,12 @@ namespace JuiceJam.UI
                 yield return RSLib.Yield.SharedYields.WaitForSecondsRealtime(0.2f);
 
                 _canvas.enabled = true;
-
                 UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_buttons[0].gameObject);
             }
             else
             {
                 _canvas.enabled = false;
+                _settingsCanvas.enabled = false;
 
                 DitherFade.FadeOut(0.3f, RSLib.Maths.Curve.Linear);
                 yield return new WaitUntil(() => !DitherFade.IsFading);
@@ -85,25 +112,44 @@ namespace JuiceJam.UI
         private void Start()
         {
             _resumeButton.onClick.AddListener(OnResumeButtonClicked);
+            _resetButton.onClick.AddListener(OnResetButtonClicked);
+            _settingsButton.onClick.AddListener(OnSettingsButtonClicked);
             _exitButton.onClick.AddListener(OnExitButtonClicked);
 
             InitNavigation();
+
             _canvas.enabled = false;
         }
 
         private void Update()
         {
-            if (!PausingCoroutineRunning
-                && !DitherFade.IsFading
-                && Input.GetButtonDown("Pause"))
+            if (PausingCoroutineRunning || DitherFade.IsFading)
+                return;
+
+            if (Input.GetButtonDown("Pause"))
             {
                 TogglePause();
+            }
+            else if (IsOpen && Input.GetKeyDown(KeyCode.Joystick1Button1))
+            {
+                if (_settingsCanvas.enabled)
+                {
+                    _settingsCanvas.enabled = false;
+                    _canvas.enabled = true;
+                    UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_settingsButton.gameObject);
+                }
+                else
+                {
+                    TogglePause();
+                }
             }
         }
 
         private void OnDestroy()
         {
             _resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
+            _resetButton.onClick.RemoveListener(OnResetButtonClicked);
+            _settingsButton.onClick.RemoveListener(OnSettingsButtonClicked);
             _exitButton.onClick.RemoveListener(OnExitButtonClicked);
         }
     }

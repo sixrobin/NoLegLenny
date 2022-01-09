@@ -50,13 +50,15 @@
 
             Vector2 rndDir = Random.insideUnitCircle.normalized;
             rndDir *= s_trauma;
+            Vector3 shake = rndDir * Instance._radius;
+            shake *= Settings.SettingsManager.ShakeAmount.Value;
 
-            return rndDir * Instance._radius;
+            return shake;
         }
 
         private void LateUpdate()
         {
-            if (UI.OptionsPanel.IsOpen || UI.OptionsPanel.PausingCoroutineRunning)
+            if (UI.OptionsPanel.Instance.IsOpen || UI.OptionsPanel.Instance.PausingCoroutineRunning)
                 return;
 
             transform.position = GetShakeRaw();

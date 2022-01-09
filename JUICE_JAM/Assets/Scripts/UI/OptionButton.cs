@@ -5,10 +5,9 @@ namespace JuiceJam.UI
 
     public class OptionButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
-        [SerializeField] private RSLib.Framework.GUI.EnhancedButton _button = null;
+        [SerializeField] protected RSLib.Framework.GUI.EnhancedButton _button = null;
         [SerializeField] private System.Collections.Generic.List<GameObject> _selectionArrows = null;
-        [SerializeField] private TMPro.TextMeshProUGUI _buttonText = null;
-        [SerializeField] private Color _selectedColor = Color.white;
+        [SerializeField] protected TMPro.TextMeshProUGUI _buttonText = null;
 
         private Color _baseColor;
 
@@ -22,7 +21,7 @@ namespace JuiceJam.UI
         public void OnSelect(BaseEventData eventData)
         {
             _selectionArrows.ForEach(o => o.SetActive(true));
-            _buttonText.color = _selectedColor;
+            _buttonText.color = Color.white;
         }
 
         public void OnDeselect()
@@ -47,7 +46,7 @@ namespace JuiceJam.UI
                 OnDeselect();
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _baseColor = _buttonText.color;
 
@@ -55,7 +54,7 @@ namespace JuiceJam.UI
             ButtonHovered += OnButtonHovered;
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             _button.PointerEnter -= OnPointerEnter;
             ButtonHovered -= OnButtonHovered;

@@ -130,6 +130,9 @@ namespace JuiceJam
         {
             Vector2 joystickAimDirection = new Vector2(Input.GetAxis("AimHorizontal"), Input.GetAxis("AimVertical"));
 
+            if (Settings.SettingsManager.YAxisReverse.Value)
+                joystickAimDirection *= -1;
+
             if (joystickAimDirection.magnitude > 0.01f)
             {
                 _aimDirection = joystickAimDirection;
@@ -229,7 +232,7 @@ namespace JuiceJam
 
         private void Update()
         {
-            if (UI.OptionsPanel.IsOpen || UI.OptionsPanel.PausingCoroutineRunning)
+            if (UI.OptionsPanel.Instance.IsOpen || UI.OptionsPanel.Instance.PausingCoroutineRunning)
                 return;
 
             bool previousIsGrounded = GroundHit;
