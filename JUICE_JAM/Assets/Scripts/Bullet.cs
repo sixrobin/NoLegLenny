@@ -62,6 +62,37 @@ namespace JuiceJam
             }
         }
 
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (!collider.TryGetComponent(out FollowingEnemy enemy))
+                return;
+
+            if (enemy.CanBeDamaged)
+            {
+                enemy.TakeDamage(new DamageData()
+                {
+                    Source = this,
+                    Amount = _damage,
+                    HitPoint = transform.position,
+                    HitDirection = _direction
+                });
+            }
+
+            for (int i = _collisionPrefabs.Length - 1; i >= 0; --i)
+            {
+                if (!_collisionPrefabs[i].Layer.HasLayer(collider.gameObject.layer))
+                    continue;
+
+                for (int j = _collisionPrefabs[i].BulletPositionPrefabs.Length - 1; j >= 0; --j)
+                    Instantiate(_collisionPrefabs[i].BulletPositionPrefabs[j], transform.position, _collisionPrefabs[i].BulletPositionPrefabs[j].transform.rotation);
+
+                for (int j = _collisionPrefabs[i].CollisionPositionPrefabs.Length - 1; j >= 0; --j)
+                    Instantiate(_collisionPrefabs[i].CollisionPositionPrefabs[j], transform.position, _collisionPrefabs[i].CollisionPositionPrefabs[j].transform.rotation);
+            }
+
+            Destroy(gameObject);
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             bool dontDestroy = false;

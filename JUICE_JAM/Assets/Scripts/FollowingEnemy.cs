@@ -53,12 +53,18 @@ namespace JuiceJam
 
         public void Explode(ExplosionData explosionData)
         {
-            throw new System.NotImplementedException();
+            Kill();
         }
 
         public void Respawn()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Kill()
+        {
+            Debug.LogError("particles!");
+            gameObject.SetActive(false);
         }
 
         private bool IsPlayerInRange(float range)
@@ -122,10 +128,11 @@ namespace JuiceJam
         private System.Collections.IEnumerator HurtCoroutine(DamageData damageData)
         {
             _isBeingHurt = true;
+            _isCharging = false;
 
             _rigidbody2D.NullifyMovement();
 
-            Vector3 recoilDirection = transform.position - (Vector3)damageData.HitPoint;
+            Vector3 recoilDirection = damageData.HitDirection.normalized;
             Vector3 hurtStartPosition = transform.position;
             Vector3 hurtEndPosition = transform.position + recoilDirection * _hurtLength;
 
@@ -182,6 +189,28 @@ namespace JuiceJam
                 {
                     _rigidbody2D.NullifyMovement();
                 }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.TryGetComponent(out IDamageable damageable))
+            {
+                if (!damageable.CanBeDamaged)
+                    return;
+
+                if (!_isCharging && !(damageable is PlayerController))
+                    return;
+
+                DamageData damageData = new DamageData()
+                {
+                    Source = this,
+                    Amount = 1,
+                    HitDirection = _rigidbody2D.velocity,
+                    HitPoint = transform.position
+                };
+
+                damageable.TakeDamage(damageData);
             }
         }
 

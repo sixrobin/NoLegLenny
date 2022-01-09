@@ -190,7 +190,7 @@ MonoBehaviour:
   _collisionPrefabs:
   - Layer:
       serializedVersion: 2
-      m_Bits: 576
+      m_Bits: 12864
     BulletPositionPrefabs:
     - {fileID: 7785969178593554384, guid: 55bee7fd84af6ed4181b97cb9780085c, type: 3}
     CollisionPositionPrefabs:

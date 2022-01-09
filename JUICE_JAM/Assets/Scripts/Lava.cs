@@ -70,6 +70,12 @@ namespace JuiceJam
                 GameObject killParticles = Instantiate(_lavaKillEffects, playerController.transform.position, _lavaKillEffects.transform.rotation);
                 Destroy(killParticles, 3f);
             }
+            else if (collision.TryGetComponent(out FollowingEnemy enemy))
+            {
+                enemy.Kill();
+                GameObject killParticles = Instantiate(_lavaKillEffects, enemy.transform.position, _lavaKillEffects.transform.rotation);
+                Destroy(killParticles, 3f);
+            }
         }
 
         private void OnDestroy()
