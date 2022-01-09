@@ -59,7 +59,7 @@ namespace JuiceJam
             Joystick
         }
 
-        public ControllerType LastControllerType { get; private set; }
+        public ControllerType LastControllerType { get; private set; } = ControllerType.Joystick;
 
         public bool CanBeDamaged => !IsDead && !IsInvulnerable;
         public bool DontDestroyDamageSource => false;

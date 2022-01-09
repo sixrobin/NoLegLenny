@@ -84,6 +84,9 @@ namespace JuiceJam
 
         public void PlayLandAnimation(Vector2 velocity)
         {
+            if (_playerController.IsDead)
+                return;
+
             _playerAnimator.SetTrigger("Land");
 
             if (Mathf.Abs(velocity.x) > _landSidePuffMinSpeed)
@@ -110,6 +113,7 @@ namespace JuiceJam
 
         public void PlayDeathAnimation()
         {
+            _playerAnimator.ResetTrigger("Respawn");
             _playerAnimator.SetTrigger("Death");
 
             CameraShake.SetTrauma(_deathTrauma);

@@ -44,8 +44,8 @@ namespace JuiceJam.UI
 
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_delayBetweenValues);
 
-            // TODO.
-            _timeText.text = $"X:XX:XX";
+            System.TimeSpan timer = System.TimeSpan.FromSeconds(GameController.Instance.Timer);
+            _timeText.text = timer.ToString("mm':'ss'.'fff");
             _time.SetActive(true);
 
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_pressAnyKeyDelay);

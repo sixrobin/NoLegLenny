@@ -8,17 +8,21 @@ namespace JuiceJam
         [SerializeField, Min(0f)] private float _respawnSequenceDelay = 1f;
         [SerializeField] private Color _debugColor = Color.red;
         [SerializeField] private UI.Score _score = null;
+        [SerializeField] private PlayerController _playerController = null;
 
         private static bool s_scoreDisplayed;
+        private static bool s_timerGoing;
 
         private static System.Collections.Generic.IEnumerable<IRespawnable> s_respawnables;
 
         public static int CoinsTotal { get; private set; }
         public static int DeathsCount { get; private set; }
+        public float Timer { get; private set; }
 
         public static void Respawn()
         {
             DeathsCount++;
+
             Instance.StartCoroutine(Instance.RespawnCoroutine());
         }
 
@@ -46,14 +50,31 @@ namespace JuiceJam
 
         private void Start()
         {
+            Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
+
             s_respawnables = RSLib.Helpers.FindInstancesOfType<IRespawnable>();
             CoinsTotal = FindObjectsOfType<CoinView>().Length;
+
+            s_timerGoing = true;
+        }
+
+        private void OnMoonFinalPositionReached()
+        {
+            s_timerGoing = false;
         }
 
         private void Update()
         {
+            if (s_timerGoing && !_playerController.IsDead && !DitherFade.IsFading)
+                Timer += Time.deltaTime;
+
             if (s_scoreDisplayed && Input.anyKeyDown)
                 ResetGame();
+        }
+
+        private void OnDestroy()
+        {
+            Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
         }
 
         private void OnDrawGizmosSelected()
