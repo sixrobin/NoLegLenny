@@ -58,11 +58,21 @@ namespace JuiceJam
 
         public void Respawn()
         {
-            throw new System.NotImplementedException();
+            _isCharging = false;
+            _chargeOnCooldown = false;
+            _isBeingHurt = false;
+            _isFollowing = false;
+
+            transform.position = _startPosition;
+            gameObject.SetActive(true);
+
+            _followingEnemyView?.LookAt(Vector2.zero);
+            _followingEnemyView?.UseIdleFace();
         }
 
         public void Kill()
         {
+            StopAllCoroutines();
             Debug.LogError("particles!");
             gameObject.SetActive(false);
         }
@@ -96,11 +106,11 @@ namespace JuiceJam
             _rigidbody2D.NullifyMovement();
 
             Vector3 chargeDirection = (_player.transform.position - transform.position).normalized;
-            _followingEnemyView?.SetAngryFace();
 
             for (float t = 0f; t <= 1f; t += Time.deltaTime / _chargeDelay)
             {
                 chargeDirection = (_player.transform.position - transform.position).normalized;
+                _followingEnemyView?.SetAngryFace(chargeDirection);
                 _followingEnemyView?.LookAt(chargeDirection);
                 yield return null;
             }
@@ -118,8 +128,6 @@ namespace JuiceJam
             _rigidbody2D.MovePosition(chargeEndPosition);
             _isCharging = false;
 
-            _followingEnemyView?.SetNormalFace();
-
             _chargeOnCooldown = true;
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_chargeCooldown);
             _chargeOnCooldown = false;
@@ -128,7 +136,6 @@ namespace JuiceJam
         private System.Collections.IEnumerator HurtCoroutine(DamageData damageData)
         {
             _isBeingHurt = true;
-            _isCharging = false;
 
             _rigidbody2D.NullifyMovement();
 
@@ -137,6 +144,7 @@ namespace JuiceJam
             Vector3 hurtEndPosition = transform.position + recoilDirection * _hurtLength;
 
             _followingEnemyView?.SetHurtFace();
+            _followingEnemyView?.LookAt(-recoilDirection);
 
             for (float t = 0f; t <= 1f; t += Time.deltaTime / _hurtDuration)
             {
@@ -145,9 +153,9 @@ namespace JuiceJam
                 yield return null;
             }
 
-            _followingEnemyView?.SetNormalFace();
-
             _isBeingHurt = false;
+            _isCharging = false;
+            _chargeOnCooldown = false;
         }
 
         private void Awake()
@@ -175,6 +183,7 @@ namespace JuiceJam
                 else
                 {
                     _rigidbody2D.velocity = (_player.transform.position - transform.position).normalized * _baseSpeed;
+                    _followingEnemyView?.SetNormalFace(_rigidbody2D.velocity);
                     _followingEnemyView?.LookAt(_rigidbody2D.velocity);
                 }
             }
@@ -188,6 +197,7 @@ namespace JuiceJam
                 else
                 {
                     _rigidbody2D.NullifyMovement();
+                    _followingEnemyView.UseIdleFace();
                 }
             }
         }

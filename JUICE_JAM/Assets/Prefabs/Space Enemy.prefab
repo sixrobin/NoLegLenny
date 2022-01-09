@@ -88,8 +88,8 @@ MonoBehaviour:
   _followingEnemyView: {fileID: 8608931300918214750}
   _detectionDistance: 7
   _chargeDistance: 4
-  _stopFollowDistance: 9
-  _maxHeightFollowFromInitPosition: 10
+  _stopFollowDistance: 14
+  _maxHeightFollowFromInitPosition: 12
   _chargeDelay: 0.6
   _chargeLength: 6
   _chargeDuration: 0.75
@@ -130,7 +130,7 @@ MonoBehaviour:
   _hurtLength: 2.5
   _hurtDuration: 0.5
   _hurtCurve: 14
-  _baseSpeed: 1.3
+  _baseSpeed: 1.6
 --- !u!1 &8608931300918214721
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,10 +230,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _faceSpriteRenderer: {fileID: 8608931300919340206}
-  _normalFace: {fileID: 21300000, guid: 273c9fcb572f50845b5086784c80f6ce, type: 3}
-  _angryFace: {fileID: 21300000, guid: acd4f8554cb58e94da07829e4af532e7, type: 3}
+  _normalFaces:
+  - Direction: {x: -1, y: -1}
+    FaceSprite: {fileID: 21300000, guid: 5aebfc5b05f03dc4f9737c5df7417516, type: 3}
+  - Direction: {x: -1, y: 1}
+    FaceSprite: {fileID: 21300000, guid: ab0baf2b359a1a844893370593eba41e, type: 3}
+  - Direction: {x: 1, y: -1}
+    FaceSprite: {fileID: 21300000, guid: ac322af7bf427204db88f88a859f0a08, type: 3}
+  - Direction: {x: 1, y: 1}
+    FaceSprite: {fileID: 21300000, guid: 97e880b5603a4c04ca6238d690730aca, type: 3}
+  - Direction: {x: -1, y: 0}
+    FaceSprite: {fileID: 21300000, guid: ab0baf2b359a1a844893370593eba41e, type: 3}
+  - Direction: {x: 0, y: -1}
+    FaceSprite: {fileID: 21300000, guid: ac322af7bf427204db88f88a859f0a08, type: 3}
+  - Direction: {x: 1, y: 0}
+    FaceSprite: {fileID: 21300000, guid: 97e880b5603a4c04ca6238d690730aca, type: 3}
+  - Direction: {x: 0, y: 1}
+    FaceSprite: {fileID: 21300000, guid: ab0baf2b359a1a844893370593eba41e, type: 3}
+  _angryFaces:
+  - Direction: {x: -1, y: -1}
+    FaceSprite: {fileID: 21300000, guid: 906555106f292774f9e17024ebdf6b68, type: 3}
+  - Direction: {x: -1, y: 1}
+    FaceSprite: {fileID: 21300000, guid: 88717828821ee0e42a6d901cb094dbde, type: 3}
+  - Direction: {x: 1, y: -1}
+    FaceSprite: {fileID: 21300000, guid: 5f3c0a4a430c7c54286ba28240a28ed8, type: 3}
+  - Direction: {x: 1, y: 1}
+    FaceSprite: {fileID: 21300000, guid: 70f011fff4fc1e04e897d858d2d8d758, type: 3}
+  - Direction: {x: -1, y: 0}
+    FaceSprite: {fileID: 21300000, guid: 88717828821ee0e42a6d901cb094dbde, type: 3}
+  - Direction: {x: 0, y: -1}
+    FaceSprite: {fileID: 21300000, guid: 5f3c0a4a430c7c54286ba28240a28ed8, type: 3}
+  - Direction: {x: 1, y: 0}
+    FaceSprite: {fileID: 21300000, guid: 70f011fff4fc1e04e897d858d2d8d758, type: 3}
+  - Direction: {x: 0, y: 1}
+    FaceSprite: {fileID: 21300000, guid: 88717828821ee0e42a6d901cb094dbde, type: 3}
   _hurtFace: {fileID: 21300000, guid: 2e0b6711cdff33f468b359536d602dd5, type: 3}
-  _lookAtOffset: 0.083333336
+  _lookAtOffset: 0.08333334
+  _idleRotationSpeed: 3
 --- !u!1 &8608931300919340240
 GameObject:
   m_ObjectHideFlags: 0
