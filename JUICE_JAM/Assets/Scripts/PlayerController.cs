@@ -130,9 +130,6 @@ namespace JuiceJam
         {
             Vector2 joystickAimDirection = new Vector2(Input.GetAxis("AimHorizontal"), Input.GetAxis("AimVertical"));
 
-            if (Settings.SettingsManager.YAxisReverse.Value)
-                joystickAimDirection *= -1;
-
             if (joystickAimDirection.magnitude > 0.01f)
             {
                 _aimDirection = joystickAimDirection;
@@ -150,6 +147,9 @@ namespace JuiceJam
                     LastControllerType = ControllerType.Mouse;
                 }
             }
+
+            if (Settings.SettingsManager.AxisReverse.Value)
+                _aimDirection *= -1;
 
             _weaponPivot.transform.right = _aimDirection;
 

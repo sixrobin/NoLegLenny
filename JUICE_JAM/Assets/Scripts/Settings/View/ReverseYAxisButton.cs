@@ -4,12 +4,12 @@ namespace JuiceJam.UI
     {
         private void RefreshText()
         {
-            _buttonText.text = $"Y Axis: {(Settings.SettingsManager.YAxisReverse.Value ? "Reversed" : "Normal")}";
+            _buttonText.text = $"Axis: {(Settings.SettingsManager.AxisReverse.Value ? "Reversed" : "Normal")}";
         }
 
         private void OnButtonClicked()
         {
-            Settings.SettingsManager.YAxisReverse.Value = !Settings.SettingsManager.YAxisReverse.Value;
+            Settings.SettingsManager.AxisReverse.Value = !Settings.SettingsManager.AxisReverse.Value;
             RefreshText();
         }
 

@@ -130,13 +130,15 @@ namespace JuiceJam.UI
             {
                 TogglePause();
             }
-            else if (IsOpen && Input.GetKeyDown(KeyCode.Joystick1Button1))
+            else if (IsOpen && (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetMouseButtonDown(1)))
             {
                 if (_settingsCanvas.enabled)
                 {
                     _settingsCanvas.enabled = false;
                     _canvas.enabled = true;
-                    UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_settingsButton.gameObject);
+
+                    if (!Input.GetMouseButtonDown(1))
+                        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_settingsButton.gameObject);
                 }
                 else
                 {

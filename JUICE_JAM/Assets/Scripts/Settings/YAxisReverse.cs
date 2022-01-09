@@ -2,15 +2,15 @@ namespace JuiceJam.Settings
 {
     using System.Xml.Linq;
 
-    public class YAxisReverse : BoolSetting
+    public class AxisReverse : BoolSetting
     {
-        public const string SAVE_ELEMENT_NAME = "YAxisReverse";
+        public const string SAVE_ELEMENT_NAME = "AxisReverse";
 
-        public YAxisReverse() : base()
+        public AxisReverse() : base()
         {
         }
 
-        public YAxisReverse(XElement element) : base(element)
+        public AxisReverse(XElement element) : base(element)
         {
         }
 

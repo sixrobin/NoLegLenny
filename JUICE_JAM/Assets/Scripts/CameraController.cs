@@ -28,6 +28,8 @@ namespace JuiceJam
         private void Start()
         {
             Settings.SettingsManager.PixelPerfect.ValueChanged += OnPixelPerfectValueChanged;
+            OnPixelPerfectValueChanged(Settings.SettingsManager.PixelPerfect.Value);
+
             Respawn();
         }
 
