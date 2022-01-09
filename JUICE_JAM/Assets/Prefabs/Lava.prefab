@@ -9806,7 +9806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 0}
   _minHeightReference: {fileID: 0}
-  _speed: 0.6
+  _speed: 0.7
   _maxHeightOffset: 9
   _respawnCheckpointOffset: 2.5
   _lavaKillEffects: {fileID: 2979813140831434005, guid: a9829896ea36d9f49b0d5a0f5333ece5, type: 3}

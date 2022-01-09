@@ -57,5 +57,11 @@
 
             return (UnityEngine.FullScreenMode)System.Enum.Parse(typeof(UnityEngine.FullScreenMode), Value.StringValue);
         }
+
+        public override void Init()
+        {
+            base.Init();
+            UnityEngine.Screen.fullScreen = true;
+        }
     }
 }
