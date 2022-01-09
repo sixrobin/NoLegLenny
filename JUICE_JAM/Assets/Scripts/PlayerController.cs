@@ -66,6 +66,8 @@ namespace JuiceJam
 
         public bool IsDead => _health.Value == 0;
 
+        public bool IsClouded { get; set; }
+
         public void TakeDamage(DamageData damageData)
         {
             if (IsInvulnerable || IsDead || DitherFade.IsFading)
@@ -185,6 +187,9 @@ namespace JuiceJam
 
         private void SpawnBullet()
         {
+            if (IsClouded)
+                return;
+
             //Collider2D[] nearColliders = Physics2D.OverlapCircleAll(_bulletSpawnPosition.position, 0.15f);
             //for (int i = nearColliders.Length - 1; i >= 0; --i)
             //    if (nearColliders[i].gameObject.layer == LayerMask.NameToLayer("Ground"))

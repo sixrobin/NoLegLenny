@@ -69,13 +69,16 @@ namespace JuiceJam
 
             CameraShake.SetTrauma(_shootTrauma);
 
-            for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
-                _shootParticlesSystems[i].Play();
-
-            if (_playerController.GroundHit)
+            if (!_playerController.IsClouded)
             {
-                GameObject sidePuff = Instantiate(_landSidePuffPrefab, _landPuffPivot.position, _landSidePuffPrefab.transform.rotation);
-                sidePuff.GetComponent<SpriteRenderer>().flipX = shootDirection.x < 0f;
+                for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
+                    _shootParticlesSystems[i].Play();
+
+                if (_playerController.GroundHit)
+                {
+                    GameObject sidePuff = Instantiate(_landSidePuffPrefab, _landPuffPivot.position, _landSidePuffPrefab.transform.rotation);
+                    sidePuff.GetComponent<SpriteRenderer>().flipX = shootDirection.x < 0f;
+                }
             }
         }
 
