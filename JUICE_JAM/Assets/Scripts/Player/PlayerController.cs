@@ -44,6 +44,7 @@ namespace JuiceJam
         private Vector2 _shootImpulse;
         private float _weaponPivotXOffset;
         private float _lastFireAxisValue;
+        private float _shootForceMultiplier = 1f;
 
         private Vector3 _lastMousePosition;
 
@@ -123,6 +124,16 @@ namespace JuiceJam
                 Destroy(_droppedWeapon);
         }
 
+        public void SetGravityScale(float value)
+        {
+            _rigidbody2D.gravityScale = value;
+        }
+
+        public void SetShootForceMultiplier(float value)
+        {
+            _shootForceMultiplier = value;
+        }
+
         private void CheckGround()
         {
             GroundHit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, _groundMask);
@@ -169,7 +180,7 @@ namespace JuiceJam
             if (Input.GetButtonDown("Fire")
                 || (fireAxis > _fireAxisMinValue && _lastFireAxisValue < _fireAxisMinValue))
             {
-                _shootImpulse = -_aimDirection * _shootImpulseForce;
+                _shootImpulse = -_aimDirection * _shootImpulseForce * _shootForceMultiplier;
                 SpawnBullet();
 
                 if (!_firstMovementInputDone)
