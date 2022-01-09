@@ -16,16 +16,20 @@ namespace JuiceJam
         {
             Settings.SettingsManager.ConstrainCursor.ValueChanged += OnConstrainCursorValueChanged;
             OnConstrainCursorValueChanged(Settings.SettingsManager.ConstrainCursor.Value);
-
-            Cursor.visible = false;
         }
 
         private void Update()
         {
-            for (int i = _cursorsSpriteRenderers.Length - 1; i >= 0; --i)
-                _cursorsSpriteRenderers[i].enabled = _playerController.LastControllerType == PlayerController.ControllerType.Mouse;
+            Cursor.visible = false;
 
-            if (_playerController.LastControllerType == PlayerController.ControllerType.Mouse)
+            for (int i = _cursorsSpriteRenderers.Length - 1; i >= 0; --i)
+            {
+                _cursorsSpriteRenderers[i].enabled = _playerController.LastControllerType == PlayerController.ControllerType.Mouse
+                                                     || (UI.OptionsPanel.Instance.IsOpen && !UI.OptionsPanel.Instance.PausingCoroutineRunning);
+
+            }
+
+            if (_playerController.LastControllerType == PlayerController.ControllerType.Mouse || UI.OptionsPanel.Instance.IsOpen)
             {
                 Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mouseWorldPosition.z = 0f;
