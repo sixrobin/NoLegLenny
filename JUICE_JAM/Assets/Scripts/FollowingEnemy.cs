@@ -23,6 +23,11 @@ namespace JuiceJam
         [SerializeField] private AnimationCurve _chargeCurve = new();
         [SerializeField] private float _chargeCooldown = 0.5f;
 
+        [Header("CHARGE")]
+        [SerializeField] private float _hurtLength = 4f;
+        [SerializeField] private float _hurtDuration = 0.8f;
+        [SerializeField] private Curve _hurtCurve = Curve.InCubic;
+
         [Header("SPEED")]
         [SerializeField] private float _baseSpeed = 1f;
 
@@ -31,6 +36,7 @@ namespace JuiceJam
         
         private bool _isFollowing;
         private bool _isCharging;
+        private bool _isBeingHurt;
         private bool _chargeOnCooldown;
 
         public bool CanBeDamaged => true;
@@ -38,7 +44,11 @@ namespace JuiceJam
 
         public void TakeDamage(DamageData damageData)
         {
-            throw new System.NotImplementedException();
+            if (_isBeingHurt)
+                return;
+
+            StopAllCoroutines();
+            StartCoroutine(HurtCoroutine(damageData));
         }
 
         public void Explode(ExplosionData explosionData)
@@ -80,11 +90,14 @@ namespace JuiceJam
             _rigidbody2D.NullifyMovement();
 
             Vector3 chargeDirection = (_player.transform.position - transform.position).normalized;
-
             _followingEnemyView?.SetAngryFace();
-            _followingEnemyView?.LookAt(chargeDirection);
 
-            yield return RSLib.Yield.SharedYields.WaitForSeconds(_chargeDelay);
+            for (float t = 0f; t <= 1f; t += Time.deltaTime / _chargeDelay)
+            {
+                chargeDirection = (_player.transform.position - transform.position).normalized;
+                _followingEnemyView?.LookAt(chargeDirection);
+                yield return null;
+            }
 
             Vector3 chargeStartPosition = transform.position;
             Vector3 chargeEndPosition = transform.position + chargeDirection * _chargeLength;
@@ -106,6 +119,30 @@ namespace JuiceJam
             _chargeOnCooldown = false;
         }
 
+        private System.Collections.IEnumerator HurtCoroutine(DamageData damageData)
+        {
+            _isBeingHurt = true;
+
+            _rigidbody2D.NullifyMovement();
+
+            Vector3 recoilDirection = transform.position - (Vector3)damageData.HitPoint;
+            Vector3 hurtStartPosition = transform.position;
+            Vector3 hurtEndPosition = transform.position + recoilDirection * _hurtLength;
+
+            _followingEnemyView?.SetHurtFace();
+
+            for (float t = 0f; t <= 1f; t += Time.deltaTime / _hurtDuration)
+            {
+                Vector3 position = Vector3.LerpUnclamped(hurtStartPosition, hurtEndPosition, t.Ease(_hurtCurve));
+                _rigidbody2D.MovePosition(position);
+                yield return null;
+            }
+
+            _followingEnemyView?.SetNormalFace();
+
+            _isBeingHurt = false;
+        }
+
         private void Awake()
         {
             _startPosition = transform.position;
@@ -114,6 +151,9 @@ namespace JuiceJam
 
         private void Update()
         {
+            if (_isBeingHurt)
+                return;
+
             UpdateFollowState();
 
             if (_isFollowing)
@@ -122,16 +162,26 @@ namespace JuiceJam
                     return;
 
                 if (IsPlayerInRange(_chargeDistance) && !_chargeOnCooldown)
+                {
                     StartCoroutine(ChargeCoroutine());
+                }
                 else
+                {
                     _rigidbody2D.velocity = (_player.transform.position - transform.position).normalized * _baseSpeed;
+                    _followingEnemyView?.LookAt(_rigidbody2D.velocity);
+                }
             }
             else
             {
                 if ((_startPosition - transform.position).sqrMagnitude > 0.3f * 0.3f)
+                {
                     _rigidbody2D.velocity = (_startPosition - transform.position).normalized * _baseSpeed;
+                    _followingEnemyView?.LookAt(_rigidbody2D.velocity);
+                }
                 else
+                {
                     _rigidbody2D.NullifyMovement();
+                }
             }
         }
 

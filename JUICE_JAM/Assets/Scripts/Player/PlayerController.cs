@@ -134,6 +134,11 @@ namespace JuiceJam
             _shootForceMultiplier = value;
         }
 
+        public void SetMaxFallVelocity(float value)
+        {
+            _yVelocityMinMax.x = value;
+        }
+
         private void CheckGround()
         {
             GroundHit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, _groundMask);

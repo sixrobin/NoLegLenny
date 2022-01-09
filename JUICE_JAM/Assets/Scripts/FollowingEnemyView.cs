@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class FollowingEnemyView : MonoBehaviour
 {
+    private static readonly Vector3[] _lookAtDirections = new Vector3[]
+    {
+        Vector3.up,
+        Vector3.right,
+        Vector3.down,
+        Vector3.left,
+        Vector3.up + Vector3.right,
+        Vector3.down + Vector3.right,
+        Vector3.up + Vector3.left,
+        Vector3.down + Vector3.left
+    };
+
     [SerializeField] private SpriteRenderer _faceSpriteRenderer = null;
 
     [Header("FACES")]
@@ -33,7 +45,20 @@ public class FollowingEnemyView : MonoBehaviour
 
     public void LookAt(Vector2 direction)
     {
-        _faceSpriteRenderer.transform.localPosition = _faceInitLocalPosition + (Vector3)direction.normalized * _lookAtOffset;
+        Vector3 closestDirection = Vector3.zero;
+        float closestAngle = Mathf.Infinity;
+
+        for (int i = _lookAtDirections.Length - 1; i >= 0; --i)
+        {
+            float angle = Vector3.Angle(_lookAtDirections[i], direction);
+            if (angle < closestAngle)
+            {
+                closestAngle = angle;
+                closestDirection = _lookAtDirections[i];
+            }
+        }
+
+        _faceSpriteRenderer.transform.localPosition = _faceInitLocalPosition + closestDirection * _lookAtOffset;
     }
 
     private void Awake()
