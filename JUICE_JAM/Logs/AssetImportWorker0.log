@@ -1,0 +1,447 @@
+Using pre-set license
+Built from '2021.2/staging' branch; Version is '2021.2.7f1 (6bd9e232123f) revision 7068130'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19043) 64bit Professional' Language: 'fr' Physical Memory: 16289 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/_Projets/JUICE_JAM/JUICE_JAM
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+63617
+Successfully changed project path to: D:/_Projets/JUICE_JAM/JUICE_JAM
+D:/_Projets/JUICE_JAM/JUICE_JAM
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 100.36 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.2.7f1 (6bd9e232123f)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/_Projets/JUICE_JAM/JUICE_JAM/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1080 Ti (ID=0x1b06)
+    Vendor:   NVIDIA
+    VRAM:     11127 MB
+    Driver:   30.0.14.7111
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56192
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.7f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.008042 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 100.37 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.623 seconds
+Domain Reload Profiling:
+	ReloadAssembly (624ms)
+		BeginReloadAssembly (78ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (466ms)
+			LoadAssemblies (75ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (108ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (25ms)
+			SetupLoadedEditorAssemblies (286ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (15ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (100ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (126ms)
+				ProcessInitializeOnLoadMethodAttributes (42ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.007350 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\_Projets\JUICE_JAM\JUICE_JAM\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\_Projets\JUICE_JAM\JUICE_JAM\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 95.92 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.549 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1550ms)
+		BeginReloadAssembly (109ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (19ms)
+		EndReloadAssembly (1346ms)
+			LoadAssemblies (84ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (224ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (64ms)
+			SetupLoadedEditorAssemblies (939ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (10ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (96ms)
+				BeforeProcessingInitializeOnLoad (96ms)
+				ProcessInitializeOnLoadAttributes (696ms)
+				ProcessInitializeOnLoadMethodAttributes (31ms)
+				AfterProcessingInitializeOnLoad (9ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 1.03 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4396 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 54 unused Assets / (1.4 MB). Loaded Objects now: 4840.
+Memory consumption went from 185.9 MB to 184.5 MB.
+Total: 4.644800 ms (FindLiveObjects: 0.493400 ms CreateObjectMapping: 0.126500 ms MarkObjects: 3.554500 ms  DeleteObjects: 0.468800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1876213.294107 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_V.png
+  artifactKey: Guid(430ead4634ec23843bd79913b0858c3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_V.png using Guid(430ead4634ec23843bd79913b0858c3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e7af3ba1276be661d5b96bcf863706a') in 0.102994 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.180059 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_V_B.png
+  artifactKey: Guid(1f71932abf9ebab41ab216f0ef1cb7f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_V_B.png using Guid(1f71932abf9ebab41ab216f0ef1cb7f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f4a0662dd94a641af95c976a1a09f76') in 0.008770 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.510330 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_V_T.png
+  artifactKey: Guid(b113956e073463249a3c203900b11bf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_V_T.png using Guid(b113956e073463249a3c203900b11bf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4416ecef8b3ade5146ed17bccac57bfb') in 0.008526 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.162191 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_V_T.png
+  artifactKey: Guid(b113956e073463249a3c203900b11bf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_V_T.png using Guid(b113956e073463249a3c203900b11bf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab786c95cef120352959ef42f684f749') in 0.008266 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.067433 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_R.png
+  artifactKey: Guid(ccba6437e23e5984aa2eba2c9b21e9b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_R.png using Guid(ccba6437e23e5984aa2eba2c9b21e9b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2cb1de17833a997d1e7a3742e0e5a390') in 0.008686 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.242671 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_R.png
+  artifactKey: Guid(ccba6437e23e5984aa2eba2c9b21e9b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_R.png using Guid(ccba6437e23e5984aa2eba2c9b21e9b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a23675e05286d01fde2459731ea38ca2') in 0.008490 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.078498 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_One.png
+  artifactKey: Guid(8b967a4fbd47a7d48a90e444caedaac2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_One.png using Guid(8b967a4fbd47a7d48a90e444caedaac2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '538393dcb0e861ef1d5e9bacc6267122') in 0.008593 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.550967 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_One.png
+  artifactKey: Guid(8b967a4fbd47a7d48a90e444caedaac2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_One.png using Guid(8b967a4fbd47a7d48a90e444caedaac2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4b91560a463ac9d9e6b2b446338da90') in 0.009838 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.066179 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_LT.png
+  artifactKey: Guid(3dde629757c79fd4cbad7ba0abb24dcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_LT.png using Guid(3dde629757c79fd4cbad7ba0abb24dcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6d3466cee7260ab968be2938c848093') in 0.008427 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.374785 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_LT.png
+  artifactKey: Guid(3dde629757c79fd4cbad7ba0abb24dcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_LT.png using Guid(3dde629757c79fd4cbad7ba0abb24dcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8416fdf9931bcf70d5703894d6c23e9e') in 0.009693 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.542915 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_RB_1C.png
+  artifactKey: Guid(c00237d2b5edefc4d92f4008b4c2c9ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_RB_1C.png using Guid(c00237d2b5edefc4d92f4008b4c2c9ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4add960a06f5013f9dbb0d0468afa6c5') in 0.010008 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.530344 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_RB_1C.png
+  artifactKey: Guid(c00237d2b5edefc4d92f4008b4c2c9ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_RB_1C.png using Guid(c00237d2b5edefc4d92f4008b4c2c9ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0bb207cdbafc3b651bd05068553db488') in 0.009888 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.066783 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_R_1C.png
+  artifactKey: Guid(c5a08a57fc49fca48948be451ac4ba42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_R_1C.png using Guid(c5a08a57fc49fca48948be451ac4ba42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '623c5289c89be8a3d1607cce279244fd') in 0.018158 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.616646 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_RB.png
+  artifactKey: Guid(f0f7936e725a7cc42b50a8d803c92d5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_RB.png using Guid(f0f7936e725a7cc42b50a8d803c92d5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d9700028d37a2d87cdd7590bb604c4b') in 0.008460 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.051118 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_RB.png
+  artifactKey: Guid(f0f7936e725a7cc42b50a8d803c92d5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_RB.png using Guid(f0f7936e725a7cc42b50a8d803c92d5b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d4330b4deb6c7abd51224967e98bde8') in 0.008822 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.415317 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_R_1C.png
+  artifactKey: Guid(c5a08a57fc49fca48948be451ac4ba42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_R_1C.png using Guid(c5a08a57fc49fca48948be451ac4ba42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '926b8c0a7e2b5682b5524d2631227e5b') in 0.010634 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.067296 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_LB_1C.png
+  artifactKey: Guid(2befc2c3e8b7fae4183cc49f90d81d67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_LB_1C.png using Guid(2befc2c3e8b7fae4183cc49f90d81d67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce6550c32646a5f0124aa7ee9a47c941') in 0.009079 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.332516 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_LB_1C.png
+  artifactKey: Guid(2befc2c3e8b7fae4183cc49f90d81d67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_LB_1C.png using Guid(2befc2c3e8b7fae4183cc49f90d81d67) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88446fda0b766e65a2e7173ef2539d06') in 0.010654 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.151699 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_RT.png
+  artifactKey: Guid(bcd3af2cc0f689e479e16273969b419e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_RT.png using Guid(bcd3af2cc0f689e479e16273969b419e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af2f3a0f69925ce10ffe862fdb89e933') in 0.008728 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.921071 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_RT.png
+  artifactKey: Guid(bcd3af2cc0f689e479e16273969b419e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_RT.png using Guid(bcd3af2cc0f689e479e16273969b419e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a89948138d66ca3e16dd7feb9c9d537') in 0.009151 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.067445 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_LB.png
+  artifactKey: Guid(8ab6ec275a9799f468f25994e9989e60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_LB.png using Guid(8ab6ec275a9799f468f25994e9989e60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4edd829b928503d2b0a47c5cb75f0875') in 0.008745 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.736236 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_LB.png
+  artifactKey: Guid(8ab6ec275a9799f468f25994e9989e60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_LB.png using Guid(8ab6ec275a9799f468f25994e9989e60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bb3839370ad450a79c0245bb818b6e6') in 0.008606 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.066882 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_L_1C.png
+  artifactKey: Guid(b264509c4ffe8f449a8140dbd75ce567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_L_1C.png using Guid(b264509c4ffe8f449a8140dbd75ce567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1327c57703bfc899cbf1f8782e5230d9') in 0.008641 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.320087 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_L_1C.png
+  artifactKey: Guid(b264509c4ffe8f449a8140dbd75ce567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_L_1C.png using Guid(b264509c4ffe8f449a8140dbd75ce567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '235a8227d6a215238422c64c545219b1') in 0.010884 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.065362 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_L.png
+  artifactKey: Guid(31a3d82706bbcc8428e5aa9bc18eeebd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_L.png using Guid(31a3d82706bbcc8428e5aa9bc18eeebd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff944c5571adeb577f9f6e6eb1d27ce3') in 0.008626 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.109542 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_L.png
+  artifactKey: Guid(31a3d82706bbcc8428e5aa9bc18eeebd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_L.png using Guid(31a3d82706bbcc8428e5aa9bc18eeebd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8740962e2bc4b44dc396a8916b330c56') in 0.008736 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.067896 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_H_R.png
+  artifactKey: Guid(e19d97d64101d39468b55c060b6f6a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_H_R.png using Guid(e19d97d64101d39468b55c060b6f6a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6130b2e0c540d4a9277cc95c45fbf8a3') in 0.008989 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.965134 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_H_R.png
+  artifactKey: Guid(e19d97d64101d39468b55c060b6f6a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_H_R.png using Guid(e19d97d64101d39468b55c060b6f6a7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2d4733c637ce2cf298323058cf5611f') in 0.008865 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.067806 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_H_L.png
+  artifactKey: Guid(7da02bf43ad15084a9cba7c282dd1f92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_H_L.png using Guid(7da02bf43ad15084a9cba7c282dd1f92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edcb3e6dfbfee378a05be22b9a716e8e') in 0.010474 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.595391 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_H_L.png
+  artifactKey: Guid(7da02bf43ad15084a9cba7c282dd1f92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_H_L.png using Guid(7da02bf43ad15084a9cba7c282dd1f92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04e550685d906ddfe02b3c98f8cbb5d0') in 0.009484 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.059774 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_H.png
+  artifactKey: Guid(ba4f564a3709ed346bed492a5dfe1f26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_H.png using Guid(ba4f564a3709ed346bed492a5dfe1f26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68bdb49fbcf739376fa724661b89cc79') in 0.010513 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.024445 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_H.png
+  artifactKey: Guid(ba4f564a3709ed346bed492a5dfe1f26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_H.png using Guid(ba4f564a3709ed346bed492a5dfe1f26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81aba39bece509652efe04abe09b2388') in 0.008624 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.060734 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Fill.png
+  artifactKey: Guid(1c1930f18320c96409856246beb822e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Fill.png using Guid(1c1930f18320c96409856246beb822e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e20cc70538343941f9ae396bc639ef2') in 0.009308 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.492275 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_Fill.png
+  artifactKey: Guid(1c1930f18320c96409856246beb822e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_Fill.png using Guid(1c1930f18320c96409856246beb822e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b3c035b5262ded8e52bfc465dab9f3c') in 0.009890 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.062335 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_B.png
+  artifactKey: Guid(489b13fffdc013f4e9dcead4430731df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_B.png using Guid(489b13fffdc013f4e9dcead4430731df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3dbeb5dfb0d6449e8097c092e081622b') in 0.008719 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.467978 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_B.png
+  artifactKey: Guid(489b13fffdc013f4e9dcead4430731df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_B.png using Guid(489b13fffdc013f4e9dcead4430731df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '300eb3eebda11ff688cd93d8ee8ac2ef') in 0.009244 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.060497 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_2C_In_B.png
+  artifactKey: Guid(1744db83a3e9ec24b8521c2d99ab87a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_2C_In_B.png using Guid(1744db83a3e9ec24b8521c2d99ab87a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d810f988f4f19b9cdfa1439d0fcbec1') in 0.008595 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.476371 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_2C_In_B.png
+  artifactKey: Guid(1744db83a3e9ec24b8521c2d99ab87a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_2C_In_B.png using Guid(1744db83a3e9ec24b8521c2d99ab87a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c192f0d9e1ce69db8712bf4883c48c3') in 0.009664 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.552058 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_2C_In.png
+  artifactKey: Guid(ad6cd30cc45a3194ab23826e5d79ffed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_2C_In.png using Guid(ad6cd30cc45a3194ab23826e5d79ffed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ad903f01189e3d235fbedd1e14dd346') in 0.009948 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.058322 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_1C_In_R_B.png
+  artifactKey: Guid(1955cb17cbbb3c4459acbfad1c13ac3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_1C_In_R_B.png using Guid(1955cb17cbbb3c4459acbfad1c13ac3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f51c3061abd6eafc81c59fe1a5f490c') in 0.008630 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.508428 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_1C_In_R_B.png
+  artifactKey: Guid(1955cb17cbbb3c4459acbfad1c13ac3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_1C_In_R_B.png using Guid(1955cb17cbbb3c4459acbfad1c13ac3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '898a43d168ba370d1199da52977b82b5') in 0.009233 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.065053 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_1C_In_L_B.png
+  artifactKey: Guid(fb849f1e85a75a340b69abf90fca4cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_1C_In_L_B.png using Guid(fb849f1e85a75a340b69abf90fca4cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60f72ce0e6154560c6dbbd650be4d7f1') in 0.008834 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.594749 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_1C_In_L_B.png
+  artifactKey: Guid(fb849f1e85a75a340b69abf90fca4cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_1C_In_L_B.png using Guid(fb849f1e85a75a340b69abf90fca4cb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68daaefb5053e375572559905afaf21f') in 0.010282 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 74.296903 seconds.
+  path: Assets/Tiles/RuleTile_Ground.asset
+  artifactKey: Guid(29db7b58499ca19488304dcef619d1ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tiles/RuleTile_Ground.asset using Guid(29db7b58499ca19488304dcef619d1ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5fd58acfe5018f828d0e00d6faa80a3') in 0.032020 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.670512 seconds.
+  path: Assets/Tiles/RuleTile_Ground 1.asset
+  artifactKey: Guid(ef5f825357065a749b7949a59feb42c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tiles/RuleTile_Ground 1.asset using Guid(ef5f825357065a749b7949a59feb42c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7eebe766baf18a159ee65339f881ba4') in 0.017349 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.505802 seconds.
+  path: Assets/Tiles/RuleTile_Space.asset
+  artifactKey: Guid(ef5f825357065a749b7949a59feb42c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tiles/RuleTile_Space.asset using Guid(ef5f825357065a749b7949a59feb42c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52f174365923b6ed53fff81cb91d5f72') in 0.017374 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 51.339660 seconds.
+  path: Assets/Tiles/RuleTile_Rock.asset
+  artifactKey: Guid(72cc48bd5a9439d428d1c050683b719e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tiles/RuleTile_Rock.asset using Guid(72cc48bd5a9439d428d1c050683b719e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6545247f2d2bca3b12eee07b94425c04') in 0.006979 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 79.914929 seconds.
+  path: Assets/Textures/Tileset/Space/Tileset_Space_T.png
+  artifactKey: Guid(d168537a1e7529f4294e0b2e9e58381c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Tileset/Space/Tileset_Space_T.png using Guid(d168537a1e7529f4294e0b2e9e58381c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b772d181e531ea3c2ed2d6044bd350a1') in 0.010040 seconds 
