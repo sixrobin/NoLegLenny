@@ -19,6 +19,9 @@ namespace JuiceJam
         [SerializeField, Min(0f)] private float _tilesExplosionDestructionDelay = 0.1f;
         [SerializeField, Min(0f)] private float _tilesExplosionDestructionRate = 0.08f;
 
+        [Header("AUDIO")]
+        [SerializeField] private RSLib.Audio.ClipProvider _destroyedTileClip = null;
+
         private System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase> _destroyedTiles = new System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase>();
 
         public bool CanBeDamaged => true;
@@ -83,6 +86,8 @@ namespace JuiceJam
                     hitPosition,
                     _tileDestroyedContactPointFeedback[i].transform.rotation);
             }
+
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_destroyedTileClip);
         }
 
         private System.Collections.IEnumerator DestroyTilesAbove(Vector3Int startPosition, int count)

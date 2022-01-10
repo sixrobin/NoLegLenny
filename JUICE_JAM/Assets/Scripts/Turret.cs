@@ -5,12 +5,16 @@ namespace JuiceJam
     public class Turret : MonoBehaviour, IRespawnable
     {
         [SerializeField] private Animator _animator = null;
+        [SerializeField] private SpriteRenderer _spriteRenderer = null;
         [SerializeField] private Bullet _bulletPrefab = null;
         [SerializeField] private Transform _bulletSpawnPosition = null;
         [SerializeField] private ParticleSystem[] _shootParticlesSystems = null;
         [SerializeField] private float _shootRate = 1f;
         [SerializeField] private float _initDelay = 0f;
         [SerializeField] private float _minCameraOffsetToShoot = 15f;
+
+        [Header("AUDIO")]
+        [SerializeField] private RSLib.Audio.ClipProvider _shootClip = null;
 
         private float _shootTimer;
 
@@ -29,6 +33,9 @@ namespace JuiceJam
 
             for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
                 _shootParticlesSystems[i].Play();
+
+            if (_spriteRenderer.isVisible)
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_shootClip);
         }
 
         private void Start()

@@ -34,6 +34,9 @@ namespace JuiceJam
         [SerializeField] private RSLib.Dynamics.DynamicInt _health = null;
         [SerializeField, Min(0f)] private float _invulnerabilityWindowDuration = 1f;
 
+        [Header("AUDIO")]
+        [SerializeField] private RSLib.Audio.ClipProvider _landClip = null;
+
         private Vector3 _initPosition;
         private bool _firstMovementInputDone;
 
@@ -226,6 +229,7 @@ namespace JuiceJam
         private void Land()
         {
             _playerView.PlayLandAnimation(_rigidbody2D.velocity);
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_landClip);
         }
 
         private void DropWeapon()

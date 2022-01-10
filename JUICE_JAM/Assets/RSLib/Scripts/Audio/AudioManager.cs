@@ -53,15 +53,20 @@
             return Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20f;
         }
 
+        public static void PlayNextPlaylistSoundOnAudioSource(IClipProvider clipProvider, AudioSource audioSource)
+        {
+            AudioClipPlayDatas clipDatas = clipProvider.GetNextClipDatas();
+
+            audioSource.clip = clipDatas.Clip;
+            audioSource.volume = clipDatas.RandomVolume;
+            audioSource.pitch = 1f + clipDatas.PitchVariation;
+            audioSource.Play();
+        }
+
         public static void PlayNextPlaylistSound(IClipProvider clipProvider)
         {
             AudioSource source = GetSFXSource(clipProvider);
-            AudioClipPlayDatas clipDatas = clipProvider.GetNextClipDatas();
-
-            source.clip = clipDatas.Clip;
-            source.volume = clipDatas.RandomVolume;
-            source.pitch = 1f + clipDatas.PitchVariation;
-            source.Play();
+            PlayNextPlaylistSoundOnAudioSource(clipProvider, source);
         }
 
         public static void PlayNextPlaylistSound(ClipProvider clipProvider)

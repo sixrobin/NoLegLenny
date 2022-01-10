@@ -1,4 +1,4 @@
-namespace JuiceJam
+namespace JuiceJam.UI
 {
     using UnityEngine;
 
@@ -24,7 +24,6 @@ namespace JuiceJam
 
         private void OnDitherFadeOver(bool fadeIn)
         {
-            Debug.Log("oui");
             if (!fadeIn)
                 gameObject.SetActive(!s_firstInputDoneOnce);
         }

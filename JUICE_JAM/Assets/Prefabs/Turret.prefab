@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 4526546718765685001}
+  _spriteRenderer: {fileID: 4526546718765685000}
   _bulletPrefab: {fileID: 25673995525451465, guid: 077c6abd173791646a7df1740503fa02, type: 3}
   _bulletSpawnPosition: {fileID: 4955524317001344308}
   _shootParticlesSystems:
@@ -245,6 +246,7 @@ MonoBehaviour:
   _shootRate: 1.5
   _initDelay: 0
   _minCameraOffsetToShoot: 12
+  _shootClip: {fileID: 11400000, guid: 3938e004c288bca45901638f3705b374, type: 2}
 --- !u!61 &7569421008562673091
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ namespace JuiceJam
 
         [SerializeField] private float _landAnimationDelay = 1.5f;
         [SerializeField] private float _landedTrauma = 0.15f;
+        [SerializeField] private RSLib.Audio.ClipProvider _landClip = null;
 
         private bool _reached;
 
@@ -22,6 +23,7 @@ namespace JuiceJam
         public void OnLandedFrame()
         {
             CameraShake.SetTrauma(_landedTrauma);
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_landClip);
         }
 
         public void OnLandAnimationOver()

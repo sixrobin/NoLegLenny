@@ -15,6 +15,9 @@ namespace JuiceJam
         [Header("RAIN")]
         [SerializeField] private Rain _rain = null;
 
+        [Header("AUDIO")]
+        [SerializeField] private RSLib.Audio.ClipProvider _lightningStrikeClip = null;
+
         private bool _isOn;
         private float _timer;
         private float _nextStrikeDelay;
@@ -32,6 +35,8 @@ namespace JuiceJam
         public void OnStrikeFrame()
         {
             CameraShake.AddTrauma(_strikeTrauma);
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_lightningStrikeClip);
+
             _rain?.Play();
         }
 

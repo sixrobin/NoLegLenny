@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ba60081a51c464eb8eff7c02623a0c, type: 3}
+  m_Name: Playlist - Crate Destroy
+  m_EditorClassIdentifier: 
+  _mixerGroup: {fileID: -3539871569477767839, guid: 1ec8c024ee2e0c844a668d2c1a533b14, type: 2}
+  _clipsPlayDatas:
+  - _clip: {fileID: 8300000, guid: f35f2f64098d1d3488bbd307c20df6a0, type: 3}
+    _volumeRandomRange: {x: 0.13, y: 0.13}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: c4ba0882c7b629447bf76d2fd2d3e42e, type: 3}
+    _volumeRandomRange: {x: 0.13, y: 0.13}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: 5cda4a29a8c599e489f6acf52c308836, type: 3}
+    _volumeRandomRange: {x: 0.13, y: 0.13}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: d2a7f48e9fb739b429b606be4fe73cd4, type: 3}
+    _volumeRandomRange: {x: 0.13, y: 0.13}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: 200a30ee9ddc71145ad4c9a8bec27140, type: 3}
+    _volumeRandomRange: {x: 0.13, y: 0.13}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: d72e89669e977794a9e6f1d03e314f68, type: 3}
+    _volumeRandomRange: {x: 0.13, y: 0.13}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: 1c3f0831e3f41474caea7e83a414afd5, type: 3}
+    _volumeRandomRange: {x: 0.13, y: 0.13}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: 69707318d80c87d4f9eaa39b30d7085a, type: 3}
+    _volumeRandomRange: {x: 0.13, y: 0.13}
+    _pitchVariation: 0

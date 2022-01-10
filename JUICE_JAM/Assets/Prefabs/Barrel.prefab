@@ -163,6 +163,7 @@ MonoBehaviour:
   _ripplePosition: {fileID: 351091162757347748}
   _barrelChainDelay: 0.2
   _hideAfterExplosion: 0
+  _explosionClip: {fileID: 11400000, guid: bb3010d1264675d45ba4e6bc4a37c63e, type: 2}
 --- !u!1 &351091162593386420
 GameObject:
   m_ObjectHideFlags: 0

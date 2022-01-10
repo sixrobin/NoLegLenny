@@ -125,6 +125,8 @@ MonoBehaviour:
   _maxXOffset: 6.5
   _strikeTrauma: 0.15
   _startIsOn: 0
+  _rain: {fileID: 0}
+  _lightningStrikeClip: {fileID: 11400000, guid: e45687e5dc03c74468a5202444640445, type: 2}
 --- !u!1 &2794994327701854944
 GameObject:
   m_ObjectHideFlags: 0

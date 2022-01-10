@@ -97,6 +97,7 @@ MonoBehaviour:
   _coinCollectedParticles:
   - {fileID: 158677170908733111, guid: 3a41703f98cf7da4c8d111c82da956ab, type: 3}
   - {fileID: 4818961138188435950, guid: 28fb3b98da5027f4fb05986d552a1c5c, type: 3}
+  _coinPickupClip: {fileID: 11400000, guid: acb638cb604384d459d01cc68b3b7a5b, type: 2}
 --- !u!1 &8518562701026797696
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +206,7 @@ MonoBehaviour:
   _maxHealth: 3
   _health: {fileID: 11400000, guid: f4b97ff7ea431d54b9cc8e29a397aaa6, type: 2}
   _invulnerabilityWindowDuration: 1
+  _landClip: {fileID: 11400000, guid: aad650fa3e3a1bd498ad8a1db400b34d, type: 2}
 --- !u!114 &8518562701026797702
 MonoBehaviour:
   m_ObjectHideFlags: 0

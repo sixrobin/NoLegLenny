@@ -24,6 +24,9 @@ namespace JuiceJam
         [SerializeField] private float _barrelChainDelay = 0.2f;
         [SerializeField] private bool _hideAfterExplosion = false;
 
+        [Header("AUDIO")]
+        [SerializeField] private RSLib.Audio.ClipProvider _explosionClip = null;
+
         public bool CanBeDamaged => true;
         public bool DontDestroyDamageSource => false;
 
@@ -96,6 +99,8 @@ namespace JuiceJam
 
             for (int i = _explosionParticlesSystems.Length - 1; i >= 0; --i)
                 _explosionParticlesSystems[i].Play();
+
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_explosionClip);
         }
 
         public void OnExplodedFrame()
