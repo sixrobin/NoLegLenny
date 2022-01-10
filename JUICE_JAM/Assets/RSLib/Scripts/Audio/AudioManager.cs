@@ -92,6 +92,13 @@
                 Instance.StartCoroutine(_musicFadeCoroutine = Instance.FadeMusicCoroutine(musicProvider, transitionDatas));
         }
 
+        public static void StopMusic()
+        {
+            AudioSource source = GetCurrentMusicSource();
+            source.volume = 0f;
+            source.Stop();
+        }
+
         private System.Collections.IEnumerator CrossFadeMusicCoroutine(IClipProvider musicProvider, MusicTransitionsDatas transitionDatas)
         {
             AudioSource prev = GetCurrentMusicSource();
@@ -187,7 +194,10 @@
             newPlayerParent.transform.SetParent(Instance.transform);
 
             for (int i = 0; i < 2; ++i)
+            {
                 s_musicSources[i] = CreateAudioSource($"Music Source {i}", newPlayerParent.transform, Instance._musicMixerGroup);
+                s_musicSources[i].loop = true;
+            }
         }
 
         private static AudioSource CreateAudioSource(string gameObjectName, Transform parent, AudioMixerGroup mixerGroup)

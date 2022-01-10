@@ -8,6 +8,8 @@ namespace JuiceJam.UI
         [SerializeField] private TMPro.TextMeshProUGUI _coinsText = null;
         [SerializeField] private UnityEngine.UI.Image _coinImage = null;
 
+        private bool _moonReached;
+
         private void OnDitherFadeBegan(bool fadeIn)
         {
             _coinImage.enabled = false;
@@ -16,7 +18,7 @@ namespace JuiceJam.UI
 
         private void OnDitherFadeOver(bool fadeIn)
         {
-            if (!fadeIn)
+            if (!fadeIn && !_moonReached)
             {
                 _coinImage.enabled = true;
                 _coinsText.enabled = true;
@@ -30,6 +32,7 @@ namespace JuiceJam.UI
 
         private void OnMoonFinalPositionReached()
         {
+            _moonReached = true;
             _coinImage.enabled = false;
             _coinsText.enabled = false;
         }

@@ -19,7 +19,7 @@ namespace JuiceJam
 
         private void OnMoonFinalPositionReached()
         {
-            _mainMixer.SetFloat("musicVolume", -80f);
+            RSLib.Audio.AudioManager.StopMusic();
         }
 
         private System.Collections.IEnumerator StartMusicCoroutine()

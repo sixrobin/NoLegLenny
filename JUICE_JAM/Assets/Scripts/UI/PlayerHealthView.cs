@@ -7,6 +7,8 @@ namespace JuiceJam.UI
         [SerializeField] private Canvas _canvas = null;
         [SerializeField] private RSLib.Dynamics.DynamicInt _playerHealth = null;
         [SerializeField] private PlayerHealthHeartView[] _hearts = null;
+        
+        private bool _moonReached;
 
         private void OnPlayerHealthValueChanged(RSLib.Dynamics.DynamicInt.ValueChangedEventArgs args)
         {
@@ -21,12 +23,13 @@ namespace JuiceJam.UI
 
         private void OnDitherFadeOver(bool fadeIn)
         {
-            if (!fadeIn)
+            if (!fadeIn && !_moonReached)
                 _canvas.enabled = true;
         }
 
         private void OnMoonFinalPositionReached()
         {
+            _moonReached = true;
             _canvas.enabled = false;
         }
 
