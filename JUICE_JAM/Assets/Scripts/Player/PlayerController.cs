@@ -220,7 +220,7 @@ namespace JuiceJam
             //        return;
 
             Bullet bullet = Instantiate(_bulletPrefab, _bulletSpawnPosition.position, Quaternion.identity);
-            bullet.Launch(_weaponPivot.right, false);
+            bullet.Launch(_weaponPivot.right, false, this);
         }
 
         private void Land()

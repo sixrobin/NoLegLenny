@@ -95,6 +95,8 @@ namespace JuiceJam.UI
             }
             else
             {
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
                 _canvas.enabled = false;
                 _settingsCanvas.enabled = false;
 

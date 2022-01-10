@@ -10,6 +10,7 @@ namespace JuiceJam
         [SerializeField] private ParticleSystem[] _shootParticlesSystems = null;
         [SerializeField] private float _shootRate = 1f;
         [SerializeField] private float _initDelay = 0f;
+        [SerializeField] private float _minCameraOffsetToShoot = 15f;
 
         private float _shootTimer;
 
@@ -20,8 +21,11 @@ namespace JuiceJam
 
         public void Shoot()
         {
+            if (Mathf.Abs(transform.position.y - MainCamera.Position.y) > _minCameraOffsetToShoot)
+                return;
+
             Bullet bullet = Instantiate(_bulletPrefab, _bulletSpawnPosition.position, Quaternion.identity);
-            bullet.Launch(-_bulletSpawnPosition.right * transform.localScale.x, true);
+            bullet.Launch(-_bulletSpawnPosition.right * transform.localScale.x, true, this);
 
             for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
                 _shootParticlesSystems[i].Play();

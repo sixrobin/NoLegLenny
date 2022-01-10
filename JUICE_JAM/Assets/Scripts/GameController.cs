@@ -51,10 +51,14 @@ namespace JuiceJam
         private void Start()
         {
             Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
+            _playerController.FirstMovementInput += OnPlayerFirstMovementInput;
 
             s_respawnables = RSLib.Helpers.FindInstancesOfType<IRespawnable>();
             CoinsTotal = FindObjectsOfType<CoinView>().Length;
+        }
 
+        private void OnPlayerFirstMovementInput()
+        {
             s_timerGoing = true;
         }
 
@@ -75,6 +79,7 @@ namespace JuiceJam
         private void OnDestroy()
         {
             Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
+            _playerController.FirstMovementInput -= OnPlayerFirstMovementInput;
         }
 
         private void OnDrawGizmosSelected()

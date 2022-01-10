@@ -7,6 +7,7 @@ namespace JuiceJam
     {
         [Header("REFS")]
         [SerializeField] private PlayerController _playerController = null;
+        [SerializeField] private Collider2D _collider = null;
         [SerializeField] private Transform _minHeightReference = null;
         [SerializeField] private GameObject _lavaView = null;
 
@@ -18,10 +19,14 @@ namespace JuiceJam
         [Header("RESPAWN")]
         [SerializeField, Min(0f)] private float _respawnCheckpointOffset = 2f;
 
+        [Header("OPTION TOGGLE")]
+        [SerializeField] private float _minDistanceToKillOnReenable = 1f;
+
         [Header("VFX")]
         [SerializeField] private GameObject _lavaKillEffects = null;
 
         private bool _isOn;
+        private bool _isEnabled;
         private float _initHeight;
         private bool _moonReached;
 
@@ -39,8 +44,24 @@ namespace JuiceJam
             _isOn = true;
         }
 
-        private void Awake()
+        private void OnLavaToggleValueChanged(bool currentValue)
         {
+            _isEnabled = currentValue;
+            gameObject.SetActive(_isEnabled);
+
+            if (!currentValue)
+                _collider.enabled = false;
+        }
+
+        private void OnMoonFinalPositionReached()
+        {
+            _moonReached = true;
+            _lavaView.SetActive(false);
+        }
+
+        private void Start()
+        {
+            Settings.SettingsManager.LavaToggle.ValueChanged += this.OnLavaToggleValueChanged;
             Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
 
             _isOn = true;
@@ -51,18 +72,34 @@ namespace JuiceJam
                 _playerController.FirstMovementInput += OnFirstMovementInput;
                 _isOn = false;
             }
-        }
 
-        private void OnMoonFinalPositionReached()
-        {
-            _moonReached = true;
-            _lavaView.SetActive(false);
+            OnLavaToggleValueChanged(Settings.SettingsManager.LavaToggle.Value);
         }
 
         private void Update()
         {
             if (!_isOn || _playerController.IsDead || _moonReached)
                 return;
+
+            // Handle lava being reenabled by game settings.
+            if (!_collider.enabled && _isEnabled && !DitherFade.IsFading && !UI.OptionsPanel.Instance.IsOpen)
+            {
+                _collider.enabled = true;
+
+                if (_playerController.transform.position.y - _minDistanceToKillOnReenable < transform.position.y)
+                {
+                    _playerController.TakeDamage(new DamageData()
+                    {
+                        Source = this,
+                        Amount = int.MaxValue
+                    });
+
+                    _isOn = false;
+
+                    GameObject killParticles = Instantiate(_lavaKillEffects, _playerController.transform.position, _lavaKillEffects.transform.rotation);
+                    Destroy(killParticles, 3f);
+                }
+            }
 
             transform.Translate(0f, _speed * Time.deltaTime, 0f, Space.World);
             if (_minHeightReference.position.y - transform.position.y > _maxHeightOffset)
@@ -94,6 +131,7 @@ namespace JuiceJam
 
         private void OnDestroy()
         {
+            Settings.SettingsManager.LavaToggle.ValueChanged -= this.OnLavaToggleValueChanged;
             Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
 
             if (_playerController != null)

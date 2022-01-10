@@ -244,6 +244,7 @@ MonoBehaviour:
   - {fileID: 1727502417152839856}
   _shootRate: 1.5
   _initDelay: 0
+  _minCameraOffsetToShoot: 12
 --- !u!61 &7569421008562673091
 BoxCollider2D:
   m_ObjectHideFlags: 0

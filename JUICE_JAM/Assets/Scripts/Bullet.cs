@@ -39,10 +39,13 @@ namespace JuiceJam
 
         public static event System.Action<BulletHitEventArgs> BulletHit;
 
-        public void Launch(Vector3 direction, bool keepDirection)
+        public object Source { get; private set; }
+
+        public void Launch(Vector3 direction, bool keepDirection, object source)
         {
             _direction = direction.normalized;
             _keepDirection = keepDirection;
+            Source = source;
 
             transform.right = _direction;
             _rigidbody2D.velocity = transform.right * _speed;
@@ -101,6 +104,9 @@ namespace JuiceJam
 
             if (collision.gameObject.TryGetComponent(out IDamageable damageable))
             {
+                if (damageable == Source)
+                    return;
+
                 if (damageable.CanBeDamaged)
                 {
                     damageable.TakeDamage(new DamageData()

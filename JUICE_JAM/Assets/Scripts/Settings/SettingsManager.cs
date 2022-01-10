@@ -8,15 +8,17 @@
         public static RunInBackground RunInBackground { get; private set; }
         public static AxisReverse AxisReverse { get; private set; }
         public static ShakeAmount ShakeAmount { get; private set; }
+        public static LavaToggle LavaToggle { get; private set; }
 
         public static void Init()
         {
-            ConstrainCursor = new ConstrainCursor();
-            FullscreenMode = new FullscreenMode();
-            PixelPerfect = new PixelPerfect();
-            RunInBackground = new RunInBackground();
-            AxisReverse = new AxisReverse();
-            ShakeAmount = new ShakeAmount();
+            ConstrainCursor = new();
+            FullscreenMode = new();
+            PixelPerfect = new();
+            RunInBackground = new();
+            AxisReverse = new();
+            ShakeAmount = new();
+            LavaToggle = new();
         }
 
         protected override void Awake()
