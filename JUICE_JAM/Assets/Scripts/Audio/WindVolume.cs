@@ -23,18 +23,18 @@ namespace JuiceJam
 
         private void AdjustVolume()
         {
+            float targetVolume;
+
             if (_normalizationTarget.position.y < _windFadeInPositionA.position.y || _normalizationTarget.position.y > _windFadeOutPositionB.position.y)
             {
-                _windAudioSource.volume = 0f;
+                targetVolume = 0f;
             }
             else if (_normalizationTarget.position.y > _windFadeInPositionB.position.y && _normalizationTarget.position.y < _windFadeOutPositionA.position.y)
             {
-                _windAudioSource.volume = _baseVolume;
+                targetVolume = _baseVolume;
             }
             else
             {
-                float targetVolume;
-
                 if (_normalizationTarget.position.y < _windFadeInPositionB.position.y)
                 {
                     float percentage = RSLib.Maths.Maths.Normalize01(
@@ -54,9 +54,9 @@ namespace JuiceJam
                                    _baseVolume,
                                    0f);
                 }
-
-                _windAudioSource.volume = targetVolume;
             }
+
+            _windAudioSource.volume = targetVolume * (1f - DitherFade.FadedPercentage);
         }
 
         private void Start()

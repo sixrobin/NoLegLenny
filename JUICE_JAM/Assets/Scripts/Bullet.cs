@@ -31,8 +31,9 @@ namespace JuiceJam
         [SerializeField, Min(0)] private int _damage = 1;
         [SerializeField] private bool _goThroughIfNotDamageable = true;
 
-        [Header("VFX")]
+        [Header("FEEDBACK")]
         [SerializeField] private CollisionPrefabs[] _collisionPrefabs = null;
+        [SerializeField] private RSLib.Audio.ClipProvider _hitClip = null;
 
         private Vector2 _direction;
         private bool _keepDirection;
@@ -93,6 +94,9 @@ namespace JuiceJam
                     Instantiate(_collisionPrefabs[i].CollisionPositionPrefabs[j], transform.position, _collisionPrefabs[i].CollisionPositionPrefabs[j].transform.rotation);
             }
 
+            if (_bulletSpriteRenderer.isVisible)
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_hitClip);
+
             Destroy(gameObject);
         }
 
@@ -124,7 +128,7 @@ namespace JuiceJam
             if (dontDestroy)
                 return;
 
-            for (int i = _collisionPrefabs.Length -1; i >= 0; --i)
+            for (int i = _collisionPrefabs.Length - 1; i >= 0; --i)
             {
                 if (!_collisionPrefabs[i].Layer.HasLayer(collision.gameObject.layer))
                 {
@@ -137,6 +141,9 @@ namespace JuiceJam
                 for (int j = _collisionPrefabs[i].CollisionPositionPrefabs.Length - 1; j >= 0; --j)
                     Instantiate(_collisionPrefabs[i].CollisionPositionPrefabs[j], collision.contacts[0].point, _collisionPrefabs[i].CollisionPositionPrefabs[j].transform.rotation);
             }
+
+            if (_bulletSpriteRenderer.isVisible)
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_hitClip);
 
             Destroy(gameObject);
         }

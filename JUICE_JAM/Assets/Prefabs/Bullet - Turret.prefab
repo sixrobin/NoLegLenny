@@ -182,3 +182,4 @@ MonoBehaviour:
     CollisionPositionPrefabs:
     - {fileID: 1181883022838042512, guid: 6519c681efd6310439d224b1161e1196, type: 3}
     - {fileID: 5704374645281147717, guid: 732827263a034a349bc0f42add206ba4, type: 3}
+  _hitClip: {fileID: 11400000, guid: 51ca91dcf3e8c8343967edf1184c7e06, type: 2}

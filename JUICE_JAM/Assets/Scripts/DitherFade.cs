@@ -15,6 +15,9 @@ namespace JuiceJam
 
         public static bool IsFading { get; private set; }
 
+        public static float FadedPercentage { get; private set; }
+        public static float FadePercentageEased { get; private set; }
+
         public static void FadeIn(float duration, Curve curve, float delay = 0f, System.Action callback = null)
         {
             IsFading = true;
@@ -41,12 +44,16 @@ namespace JuiceJam
                 _ditherSprite.enabled = false;
             }
 
+            FadedPercentage = fadeIn ? 0f : 1f;
+
             yield return RSLib.Yield.SharedYields.WaitForSeconds(delay);
 
             _ditherSprite.enabled = true;
 
             for (float t = 0f; t < 1f; t += Time.unscaledDeltaTime / duration)
             {
+                FadedPercentage = fadeIn ? t : 1f - t;
+
                 float lerp = fadeIn ? Mathf.Lerp(1f, 0f, t.Ease(curve)) : Mathf.Lerp(0f, 1f, t.Ease(curve));
                 int spriteIndex = Mathf.RoundToInt(lerp * (_spritesSequence.Length - 1));
 
@@ -61,6 +68,7 @@ namespace JuiceJam
                 _ditherSprite.enabled = false;
 
             IsFading = false;
+            FadedPercentage = fadeIn ? 1f : 0f;
 
             FadeOver?.Invoke(fadeIn);
             callback?.Invoke();

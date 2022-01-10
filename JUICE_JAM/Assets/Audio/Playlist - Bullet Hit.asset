@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ba60081a51c464eb8eff7c02623a0c, type: 3}
+  m_Name: Playlist - Bullet Hit
+  m_EditorClassIdentifier: 
+  _mixerGroup: {fileID: -3539871569477767839, guid: 1ec8c024ee2e0c844a668d2c1a533b14, type: 2}
+  _clipsPlayDatas:
+  - _clip: {fileID: 8300000, guid: 427865f7e75f2684da292fca75ac9a81, type: 3}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: bebee552c4540734d8d2867e68a55768, type: 3}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: 82094b2654f2c0940b6a75926ebf83d3, type: 3}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: 2d7e5b456d0d7164593477cd1a389bd3, type: 3}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _pitchVariation: 0
+  - _clip: {fileID: 8300000, guid: 29f0ea405379a0c42b6fd90f00e4395d, type: 3}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _pitchVariation: 0

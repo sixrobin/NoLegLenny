@@ -74,7 +74,8 @@ namespace JuiceJam
                                                  _minHeightReference.position.y - _maxHeightOffset,
                                                  _minHeightReference.position.y);
 
-            _lavaIdleSource.volume = Mathf.LerpUnclamped(_lavaIdleVolumeRange.x, _lavaIdleVolumeRange.y, percentage.Ease(_lavaIdleVolumeCurve));
+            float volumeRanged = Mathf.LerpUnclamped(_lavaIdleVolumeRange.x, _lavaIdleVolumeRange.y, percentage.Ease(_lavaIdleVolumeCurve));
+            _lavaIdleSource.volume = volumeRanged * (1f - DitherFade.FadedPercentage);
         }
 
         private void Start()
@@ -143,6 +144,9 @@ namespace JuiceJam
 
                 GameObject killParticles = Instantiate(_lavaKillEffects, playerController.transform.position, _lavaKillEffects.transform.rotation);
                 Destroy(killParticles, 3f);
+
+                if (_lavaSpriteRenderer.isVisible)
+                    RSLib.Audio.AudioManager.PlayNextPlaylistSound(_lavaKillClip);
             }
             else if (collision.TryGetComponent(out FollowingEnemy enemy))
             {

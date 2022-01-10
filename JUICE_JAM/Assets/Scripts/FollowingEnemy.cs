@@ -33,6 +33,10 @@ namespace JuiceJam
 
         [Header("FEEDBACK")]
         [SerializeField] private GameObject _deathParticles = null;
+        [SerializeField] private ParticleSystem _chargeParticleSystem = null;
+        [SerializeField] private RSLib.Audio.ClipProvider _chargeClip = null;
+        [SerializeField, Range(0f, 1f)] private float _chargeParticlesPercentageDelay = 0.2f;
+        [SerializeField, Range(0f, 1f)] private float _chargeAudioPercentageDelay = 0.2f;
         [SerializeField] private RSLib.Audio.ClipProvider _deathClip = null;
 
         private PlayerController _player;
@@ -126,8 +130,23 @@ namespace JuiceJam
             Vector3 chargeStartPosition = transform.position;
             Vector3 chargeEndPosition = transform.position + chargeDirection * _chargeLength;
 
+            bool chargeAudioPlayed = false;
+            bool chargeParticlesPlayed = false;
+
             for (float t = 0f; t <= 1f; t += Time.deltaTime / _chargeDuration)
             {
+                if (!chargeAudioPlayed && t > _chargeAudioPercentageDelay)
+                {
+                    RSLib.Audio.AudioManager.PlayNextPlaylistSound(_chargeClip);
+                    chargeAudioPlayed = true;
+                }
+
+                if (!chargeParticlesPlayed && t > _chargeParticlesPercentageDelay)
+                {
+                    _chargeParticleSystem.Play();
+                    chargeParticlesPlayed = true;
+                }
+
                 Vector3 position = Vector3.LerpUnclamped(chargeStartPosition, chargeEndPosition, _chargeCurve.Evaluate(t));
                 _rigidbody2D.MovePosition(position);
                 yield return null;
