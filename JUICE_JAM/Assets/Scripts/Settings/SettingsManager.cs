@@ -9,6 +9,7 @@
         public static AxisReverse AxisReverse { get; private set; }
         public static ShakeAmount ShakeAmount { get; private set; }
         public static LavaToggle LavaToggle { get; private set; }
+        public static Volume Volume { get; private set; }
 
         public static void Init()
         {
@@ -19,6 +20,7 @@
             AxisReverse = new();
             ShakeAmount = new();
             LavaToggle = new();
+            Volume = new();
         }
 
         protected override void Awake()

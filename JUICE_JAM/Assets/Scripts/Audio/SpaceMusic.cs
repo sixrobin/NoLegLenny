@@ -24,7 +24,7 @@ namespace JuiceJam
 
         private System.Collections.IEnumerator StartMusicCoroutine()
         {
-            yield return RSLib.Yield.SharedYields.WaitForSeconds(_musicStartDelay);
+            yield return RSLib.Yield.SharedYields.WaitForSecondsRealtime(_musicStartDelay);
 
             _mainMixer.SetFloat("musicVolume", RSLib.Audio.AudioManager.Instance.BaseMusicVolume);
             RSLib.Audio.AudioManager.PlayMusic(_musicClip, _musicInDatas);

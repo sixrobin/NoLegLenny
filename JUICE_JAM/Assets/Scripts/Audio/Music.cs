@@ -29,7 +29,7 @@ namespace JuiceJam
 
         private System.Collections.IEnumerator StartMusicCoroutine()
         {
-            yield return RSLib.Yield.SharedYields.WaitForSeconds(_musicStartDelay);
+            yield return RSLib.Yield.SharedYields.WaitForSecondsRealtime(_musicStartDelay);
             RSLib.Audio.AudioManager.PlayMusic(_musicClip, _musicInDatas);
         }
     }

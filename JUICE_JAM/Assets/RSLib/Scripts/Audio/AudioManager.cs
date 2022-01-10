@@ -210,6 +210,11 @@
             return source;
         }
 
+        private void OnVolumeChanged(float previousValue, float currentValue)
+        {
+            AudioListener.volume = currentValue;
+        }
+
         protected override void Awake()
         {
             base.Awake();
@@ -217,6 +222,16 @@
             InitMusicSources();
 
             _mixer.GetFloat("musicVolume", out BaseMusicVolume);
+        }
+
+        private void Start()
+        {
+            JuiceJam.Settings.SettingsManager.Volume.ValueChanged += OnVolumeChanged;
+        }
+
+        private void OnDestroy()
+        {
+            JuiceJam.Settings.SettingsManager.Volume.ValueChanged -= OnVolumeChanged;
         }
     }
 }
