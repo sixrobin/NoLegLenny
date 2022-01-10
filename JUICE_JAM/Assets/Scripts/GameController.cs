@@ -9,6 +9,7 @@ namespace JuiceJam
         [SerializeField] private Color _debugColor = Color.red;
         [SerializeField] private UI.Score _score = null;
         [SerializeField] private PlayerController _playerController = null;
+        [SerializeField] private RSLib.Framework.DisabledString _totalCoinsCount = new();
 
         private static bool s_scoreDisplayed;
         private static bool s_timerGoing;
@@ -97,6 +98,8 @@ namespace JuiceJam
                 if (i > 0)
                     Gizmos.DrawLine(checkpoints[i].transform.position, checkpoints[i - 1].transform.position);
             }
+
+            _totalCoinsCount = new RSLib.Framework.DisabledString(FindObjectsOfType<CoinView>().Length.ToString());
         }
     }
 }
