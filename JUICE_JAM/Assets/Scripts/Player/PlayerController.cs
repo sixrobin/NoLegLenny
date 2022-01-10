@@ -107,6 +107,7 @@ namespace JuiceJam
                 }
 
                 RSLib.Audio.AudioManager.PlayNextPlaylistSound(_deathClip);
+                LowPassTween.Instance.TweenLowPass(50f, 1f, 1.5f);
 
                 GameController.Respawn();
             }
@@ -116,7 +117,9 @@ namespace JuiceJam
 
                 _playerView.PlayDamageAnimation(damageData);
                 TimeManager.FreezeFrame(_playerView.DamageFreezeFrameDelay, _playerView.DamageFreezeFrameDuration);
+
                 RSLib.Audio.AudioManager.PlayNextPlaylistSound(_hurtClip);
+                LowPassTween.Instance.TweenLowPass(100f, 2f, 0.75f);
             }
         }
 

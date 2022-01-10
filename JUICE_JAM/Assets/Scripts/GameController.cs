@@ -74,7 +74,10 @@ namespace JuiceJam
                 Timer += Time.deltaTime;
 
             if (s_scoreDisplayed && Input.anyKeyDown)
+            {
+                s_scoreDisplayed = false;
                 ResetGame();
+            }
         }
 
         private void OnDestroy()

@@ -15,14 +15,14 @@ MonoBehaviour:
   _mixerGroup: {fileID: -3539871569477767839, guid: 1ec8c024ee2e0c844a668d2c1a533b14, type: 2}
   _clipsPlayDatas:
   - _clip: {fileID: 8300000, guid: b4f169a535a99204e8c78021a77e1712, type: 3}
-    _volumeRandomRange: {x: 0.15, y: 0.15}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
     _pitchVariation: 0
   - _clip: {fileID: 8300000, guid: 0f586148f9b40de428e089c9aa02a006, type: 3}
-    _volumeRandomRange: {x: 0.15, y: 0.15}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
     _pitchVariation: 0
   - _clip: {fileID: 8300000, guid: 08faa8442b35d3945bcb9e680dd736dc, type: 3}
-    _volumeRandomRange: {x: 0.15, y: 0.15}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
     _pitchVariation: 0
   - _clip: {fileID: 8300000, guid: c48fec17db93c9a48ba01152a7b65592, type: 3}
-    _volumeRandomRange: {x: 0.15, y: 0.15}
+    _volumeRandomRange: {x: 0.25, y: 0.25}
     _pitchVariation: 0

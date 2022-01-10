@@ -14,18 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mixerGroup: {fileID: -3539871569477767839, guid: 1ec8c024ee2e0c844a668d2c1a533b14, type: 2}
   _clipsPlayDatas:
-  - _clip: {fileID: 8300000, guid: 427865f7e75f2684da292fca75ac9a81, type: 3}
-    _volumeRandomRange: {x: 0.25, y: 0.25}
-    _pitchVariation: 0
-  - _clip: {fileID: 8300000, guid: bebee552c4540734d8d2867e68a55768, type: 3}
-    _volumeRandomRange: {x: 0.25, y: 0.25}
-    _pitchVariation: 0
-  - _clip: {fileID: 8300000, guid: 82094b2654f2c0940b6a75926ebf83d3, type: 3}
-    _volumeRandomRange: {x: 0.25, y: 0.25}
-    _pitchVariation: 0
   - _clip: {fileID: 8300000, guid: 2d7e5b456d0d7164593477cd1a389bd3, type: 3}
-    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _volumeRandomRange: {x: 0.1, y: 0.1}
     _pitchVariation: 0
   - _clip: {fileID: 8300000, guid: 29f0ea405379a0c42b6fd90f00e4395d, type: 3}
-    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _volumeRandomRange: {x: 0.1, y: 0.1}
     _pitchVariation: 0

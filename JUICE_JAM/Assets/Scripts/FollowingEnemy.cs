@@ -37,6 +37,7 @@ namespace JuiceJam
         [SerializeField] private RSLib.Audio.ClipProvider _chargeClip = null;
         [SerializeField, Range(0f, 1f)] private float _chargeParticlesPercentageDelay = 0.2f;
         [SerializeField, Range(0f, 1f)] private float _chargeAudioPercentageDelay = 0.2f;
+        [SerializeField] private RSLib.Audio.ClipProvider _damageClip = null;
         [SerializeField] private RSLib.Audio.ClipProvider _deathClip = null;
 
         private PlayerController _player;
@@ -57,6 +58,8 @@ namespace JuiceJam
 
             StopAllCoroutines();
             StartCoroutine(HurtCoroutine(damageData));
+
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_damageClip);
         }
 
         public void Explode(ExplosionData explosionData)

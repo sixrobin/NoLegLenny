@@ -15,5 +15,5 @@ MonoBehaviour:
   _mixerGroup: {fileID: -3539871569477767839, guid: 1ec8c024ee2e0c844a668d2c1a533b14, type: 2}
   _clipPlayDatas:
     _clip: {fileID: 8300000, guid: cd18929403f682946a15e8df9685f621, type: 3}
-    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _volumeRandomRange: {x: 0.4, y: 0.4}
     _pitchVariation: 0
