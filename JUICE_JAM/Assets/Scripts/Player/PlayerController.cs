@@ -20,6 +20,7 @@ namespace JuiceJam
         [SerializeField] private float _moonReachedUpwardVelocity = 10f;
 
         [Header("WEAPON")]
+        [SerializeField, Range(0f, 0.99f)] private float _joystickAimDeadZone = 0.7f;
         [SerializeField, Range(0f, 1f)] private float _fireAxisMinValue = 0.8f;
         [SerializeField] private Transform _weaponPivot = null;
         [SerializeField] private SpriteRenderer _weaponSpriteRenderer = null;
@@ -48,6 +49,7 @@ namespace JuiceJam
         private GameObject _droppedWeapon;
 
         private Vector2 _aimDirection;
+        private Vector2 _lastNonNullJoystickAimDirection;
         private Vector2 _shootImpulse;
         private float _weaponPivotXOffset;
         private float _lastFireAxisValue;
@@ -168,11 +170,12 @@ namespace JuiceJam
         {
             Vector2 joystickAimDirection = new Vector2(Input.GetAxis("AimHorizontal"), Input.GetAxis("AimVertical"));
 
-            if (joystickAimDirection.magnitude > 0.01f)
+            if (joystickAimDirection.magnitude > _joystickAimDeadZone)
             {
-                _aimDirection = joystickAimDirection;
                 if (_lastMousePosition == Input.mousePosition)
                     LastControllerType = ControllerType.Joystick;
+
+                    _aimDirection = joystickAimDirection;
             }
             else
             {
@@ -189,7 +192,9 @@ namespace JuiceJam
             if (Settings.SettingsManager.AxisReverse.Value)
                 _aimDirection *= -1;
 
-            _weaponPivot.transform.right = _aimDirection;
+            //_weaponPivot.transform.right = _aimDirection;
+
+            _weaponPivot.transform.localEulerAngles = new Vector3(0f, 0f, Vector2.SignedAngle(Vector2.right, _aimDirection));
 
             _spriteRenderer.flipX = _aimDirection.x < 0f;
             _weaponSpriteRenderer.flipY = _aimDirection.x < 0f;
