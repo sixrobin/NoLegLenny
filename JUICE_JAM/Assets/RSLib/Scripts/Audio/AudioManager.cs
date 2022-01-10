@@ -35,6 +35,7 @@
         }
 
         [SerializeField] private SFXPlayer[] _sfxPlayers = null;
+        [SerializeField] private AudioMixer _mixer = null;
         [SerializeField] private AudioMixerGroup _musicMixerGroup = null;
 
         [Header("UI")]
@@ -46,6 +47,8 @@
         private static int _nextMusicIndex;
 
         private static System.Collections.IEnumerator _musicFadeCoroutine;
+
+        public float BaseMusicVolume;
 
         /// <summary>
         /// Remaps a value from [0.0001f, 1f] to [-80f, 0f], to adjust a percentage to the decibels scaling.
@@ -202,6 +205,8 @@
             base.Awake();
             InitSFXSources();
             InitMusicSources();
+
+            _mixer.GetFloat("musicVolume", out BaseMusicVolume);
         }
     }
 }

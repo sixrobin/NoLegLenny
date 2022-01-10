@@ -8,6 +8,7 @@ namespace JuiceJam
         [SerializeField] private Transform _respawnPosition = null;
         [SerializeField] private RSLib.ImageEffects.SpriteBlink _spriteBlink = null;
 
+        [SerializeField] private UnityEngine.Events.UnityEvent _onRegister = null;
         [SerializeField] private UnityEngine.Events.UnityEvent _onRespawn = null;
 
         [Header("AUDIO")]
@@ -23,6 +24,8 @@ namespace JuiceJam
             LastCheckpoint = this;
             _spriteBlink.BlinkColor(1, () => _animator.SetTrigger("Raise"));
             RSLib.Audio.AudioManager.PlayNextPlaylistSound(_checkClip);
+
+            _onRegister?.Invoke();
         }
 
         public void Respawn()

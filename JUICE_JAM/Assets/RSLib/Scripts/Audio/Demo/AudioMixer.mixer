@@ -188,10 +188,12 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
-  - guid: f827580feb065c04da02325ee29a4c3d
-    name: CutoffFreq
+  - guid: 53d3e017ca3318d4f8dc9ed5a2acf2a6
+    name: musicVolume
   - guid: 549abb4c56ea51c49abd0a6863921215
     name: Resonance
+  - guid: f827580feb065c04da02325ee29a4c3d
+    name: CutoffFreq
   m_AudioMixerGroupViews:
   - guids:
     - 8906d281eade21c4983cf1b289497e3b
@@ -262,6 +264,7 @@ AudioMixerSnapshotController:
     80712dd5e0cca074b89616525002cbfe: 10
     2bacb7f56d1c45e49883b04c3a860643: -1238
     83b5a7064699bee47b8a662bd0536e45: -6038
+    53d3e017ca3318d4f8dc9ed5a2acf2a6: -19.999998
     9c951dd7c9ab7a34b9f42bcdaa34e85c: 0.92
     f6ae5b4944329c64a87b7c034b360b01: 54.2
     9678f16905a70c648875ded31aa6afb7: 8.74
