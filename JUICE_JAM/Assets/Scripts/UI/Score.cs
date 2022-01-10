@@ -25,6 +25,9 @@ namespace JuiceJam.UI
         [Header("PRESS ANY KEY")]
         [SerializeField] private GameObject _pressAnyKey = null;
 
+        [Header("AUDIO")]
+        [SerializeField] private RSLib.Audio.ClipProvider _statAppearingClip = null;
+
         public void DisplayScore(System.Action callback = null)
         {
             StartCoroutine(DisplayScoreCoroutine(callback));
@@ -36,17 +39,20 @@ namespace JuiceJam.UI
 
             _coinsCountText.text = $"{_coinsCollected.Value}/{GameController.CoinsTotal}";
             _coins.SetActive(true);
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_statAppearingClip);
 
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_delayBetweenValues);
 
             _deathsCountText.text = $"{GameController.DeathsCount} {(GameController.DeathsCount <= 1 ? "death" : "deaths")}";
             _deaths.SetActive(true);
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_statAppearingClip);
 
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_delayBetweenValues);
 
             System.TimeSpan timer = System.TimeSpan.FromSeconds(GameController.Instance.Timer);
             _timeText.text = timer.ToString("mm':'ss'.'fff");
             _time.SetActive(true);
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_statAppearingClip);
 
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_pressAnyKeyDelay);
 

@@ -11,6 +11,7 @@ namespace JuiceJam.UI
         {
             Settings.SettingsManager.ConstrainCursor.Value = !Settings.SettingsManager.ConstrainCursor.Value;
             RefreshText();
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(RSLib.Audio.AudioManager.Instance.UIClickClip);
         }
 
         private void Start()

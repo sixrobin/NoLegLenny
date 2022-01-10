@@ -10,6 +10,9 @@ namespace JuiceJam
 
         [SerializeField] private UnityEngine.Events.UnityEvent _onRespawn = null;
 
+        [Header("AUDIO")]
+        [SerializeField] private RSLib.Audio.ClipProvider _checkClip = null;
+
         public static Checkpoint LastCheckpoint { get; private set; }
 
         public Vector3 RespawnPosition => _respawnPosition.position;
@@ -19,6 +22,7 @@ namespace JuiceJam
         {
             LastCheckpoint = this;
             _spriteBlink.BlinkColor(1, () => _animator.SetTrigger("Raise"));
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_checkClip);
         }
 
         public void Respawn()

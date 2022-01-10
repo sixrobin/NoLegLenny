@@ -11,6 +11,7 @@ namespace JuiceJam.UI
         {
             Settings.SettingsManager.AxisReverse.Value = !Settings.SettingsManager.AxisReverse.Value;
             RefreshText();
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(RSLib.Audio.AudioManager.Instance.UIClickClip);
         }
 
         private void Start()

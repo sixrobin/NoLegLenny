@@ -11,6 +11,7 @@ namespace JuiceJam.UI
         {
             Settings.SettingsManager.LavaToggle.Value = !Settings.SettingsManager.LavaToggle.Value;
             RefreshText();
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(RSLib.Audio.AudioManager.Instance.UIClickClip);
         }
 
         private void Start()

@@ -11,6 +11,7 @@ namespace JuiceJam.UI
         {
             Settings.SettingsManager.PixelPerfect.Value = !Settings.SettingsManager.PixelPerfect.Value;
             RefreshText();
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(RSLib.Audio.AudioManager.Instance.UIClickClip);
         }
 
         private void Start()

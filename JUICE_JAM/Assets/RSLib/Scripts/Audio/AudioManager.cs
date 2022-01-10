@@ -37,6 +37,10 @@
         [SerializeField] private SFXPlayer[] _sfxPlayers = null;
         [SerializeField] private AudioMixerGroup _musicMixerGroup = null;
 
+        [Header("UI")]
+        [SerializeField] public ClipProvider UIHoverClip = null;
+        [SerializeField] public ClipProvider UIClickClip = null;
+
         private static System.Collections.Generic.Dictionary<AudioMixerGroup, RuntimeSFXPlayer> s_sfxPlayersDict;
         private static AudioSource[] s_musicSources;
         private static int _nextMusicIndex;

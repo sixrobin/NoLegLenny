@@ -1,6 +1,7 @@
 namespace JuiceJam
 {
     using RSLib.Extensions;
+    using RSLib.Maths;
     using UnityEngine;
 
     public class Lava : MonoBehaviour, IRespawnable
@@ -10,6 +11,7 @@ namespace JuiceJam
         [SerializeField] private Collider2D _collider = null;
         [SerializeField] private Transform _minHeightReference = null;
         [SerializeField] private GameObject _lavaView = null;
+        [SerializeField] private SpriteRenderer _lavaSpriteRenderer = null;
 
         [Header("MOVEMENT")]
         [SerializeField, Min(0.1f)] private float _speed = 1f;
@@ -24,6 +26,12 @@ namespace JuiceJam
 
         [Header("VFX")]
         [SerializeField] private GameObject _lavaKillEffects = null;
+
+        [Header("AUDIO")]
+        [SerializeField] private AudioSource _lavaIdleSource = null;
+        [SerializeField] private Vector2 _lavaIdleVolumeRange = new Vector2(0f, 0.5f);
+        [SerializeField] private Curve _lavaIdleVolumeCurve = Curve.Linear;
+        [SerializeField] private RSLib.Audio.ClipProvider _lavaKillClip = null;
 
         private bool _isOn;
         private bool _isEnabled;
@@ -59,9 +67,19 @@ namespace JuiceJam
             _lavaView.SetActive(false);
         }
 
+        private void AdjustLavaVolume()
+        {
+            float percentage = RSLib.Maths.Maths.Normalize01(
+                                                 transform.position.y,
+                                                 _minHeightReference.position.y - _maxHeightOffset,
+                                                 _minHeightReference.position.y);
+
+            _lavaIdleSource.volume = Mathf.LerpUnclamped(_lavaIdleVolumeRange.x, _lavaIdleVolumeRange.y, percentage.Ease(_lavaIdleVolumeCurve));
+        }
+
         private void Start()
         {
-            Settings.SettingsManager.LavaToggle.ValueChanged += this.OnLavaToggleValueChanged;
+            Settings.SettingsManager.LavaToggle.ValueChanged += OnLavaToggleValueChanged;
             Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
 
             _isOn = true;
@@ -78,6 +96,8 @@ namespace JuiceJam
 
         private void Update()
         {
+            AdjustLavaVolume();
+
             if (!_isOn || _playerController.IsDead || _moonReached)
                 return;
 
@@ -98,6 +118,9 @@ namespace JuiceJam
 
                     GameObject killParticles = Instantiate(_lavaKillEffects, _playerController.transform.position, _lavaKillEffects.transform.rotation);
                     Destroy(killParticles, 3f);
+
+                    if (_lavaSpriteRenderer.isVisible)
+                        RSLib.Audio.AudioManager.PlayNextPlaylistSound(_lavaKillClip);
                 }
             }
 
@@ -124,14 +147,18 @@ namespace JuiceJam
             else if (collision.TryGetComponent(out FollowingEnemy enemy))
             {
                 enemy.Kill();
+
                 GameObject killParticles = Instantiate(_lavaKillEffects, enemy.transform.position, _lavaKillEffects.transform.rotation);
                 Destroy(killParticles, 3f);
+
+                if (_lavaSpriteRenderer.isVisible)
+                    RSLib.Audio.AudioManager.PlayNextPlaylistSound(_lavaKillClip);
             }
         }
 
         private void OnDestroy()
         {
-            Settings.SettingsManager.LavaToggle.ValueChanged -= this.OnLavaToggleValueChanged;
+            Settings.SettingsManager.LavaToggle.ValueChanged -= OnLavaToggleValueChanged;
             Moon.MoonFinalPositionReached -= OnMoonFinalPositionReached;
 
             if (_playerController != null)

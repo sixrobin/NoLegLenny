@@ -31,6 +31,10 @@ namespace JuiceJam
         [Header("SPEED")]
         [SerializeField] private float _baseSpeed = 1f;
 
+        [Header("FEEDBACK")]
+        [SerializeField] private GameObject _deathParticles = null;
+        [SerializeField] private RSLib.Audio.ClipProvider _deathClip = null;
+
         private PlayerController _player;
         private Vector3 _startPosition;
         
@@ -73,8 +77,12 @@ namespace JuiceJam
         public void Kill()
         {
             StopAllCoroutines();
-            Debug.LogError("particles!");
             gameObject.SetActive(false);
+
+            GameObject deathParticles = Instantiate(_deathParticles, transform.position, _deathParticles.transform.rotation);
+            Destroy(deathParticles, 3f);
+
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_deathClip);
         }
 
         private bool IsPlayerInRange(float range)

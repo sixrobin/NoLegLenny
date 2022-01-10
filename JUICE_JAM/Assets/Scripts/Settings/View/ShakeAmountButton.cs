@@ -15,6 +15,8 @@ namespace JuiceJam.UI
                 Settings.SettingsManager.ShakeAmount.Value += 0.2f;
 
             RefreshText();
+         
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(RSLib.Audio.AudioManager.Instance.UIClickClip);
         }
 
         private void Start()

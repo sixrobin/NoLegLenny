@@ -22,6 +22,8 @@ namespace JuiceJam.UI
         {
             _selectionArrows.ForEach(o => o.SetActive(true));
             _buttonText.color = Color.white;
+
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(RSLib.Audio.AudioManager.Instance.UIHoverClip);
         }
 
         public void OnDeselect()

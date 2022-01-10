@@ -207,6 +207,8 @@ MonoBehaviour:
   _health: {fileID: 11400000, guid: f4b97ff7ea431d54b9cc8e29a397aaa6, type: 2}
   _invulnerabilityWindowDuration: 1
   _landClip: {fileID: 11400000, guid: aad650fa3e3a1bd498ad8a1db400b34d, type: 2}
+  _hurtClip: {fileID: 11400000, guid: 6942a0cc36ca3404d8f3d5309a28a394, type: 2}
+  _deathClip: {fileID: 11400000, guid: f5acf298769cfd34d9393daf2f10b72b, type: 2}
 --- !u!114 &8518562701026797702
 MonoBehaviour:
   m_ObjectHideFlags: 0

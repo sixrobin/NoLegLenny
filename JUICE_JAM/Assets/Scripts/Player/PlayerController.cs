@@ -35,7 +35,10 @@ namespace JuiceJam
         [SerializeField, Min(0f)] private float _invulnerabilityWindowDuration = 1f;
 
         [Header("AUDIO")]
+        [SerializeField] private RSLib.Audio.ClipProvider _shootClip = null;
         [SerializeField] private RSLib.Audio.ClipProvider _landClip = null;
+        [SerializeField] private RSLib.Audio.ClipProvider _hurtClip = null;
+        [SerializeField] private RSLib.Audio.ClipProvider _deathClip = null;
 
         private Vector3 _initPosition;
         private bool _firstMovementInputDone;
@@ -103,6 +106,8 @@ namespace JuiceJam
                     TimeManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
                 }
 
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_deathClip);
+
                 GameController.Respawn();
             }
             else
@@ -111,6 +116,7 @@ namespace JuiceJam
 
                 _playerView.PlayDamageAnimation(damageData);
                 TimeManager.FreezeFrame(_playerView.DamageFreezeFrameDelay, _playerView.DamageFreezeFrameDuration);
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_hurtClip);
             }
         }
 
@@ -207,6 +213,7 @@ namespace JuiceJam
 
                 _playerView.PlayShootAnimation(_shootImpulse);
                 TimeManager.FreezeFrame(0, _playerView.ShootFreezeFrameDuration);
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_shootClip);
             }
 
             _lastFireAxisValue = fireAxis;
