@@ -32,6 +32,7 @@ namespace JuiceJam.UI
 
         private void OnResetButtonClicked()
         {
+            RSLib.Audio.AudioManager.StopMusic();
             GameController.ResetGame();
         }
 
