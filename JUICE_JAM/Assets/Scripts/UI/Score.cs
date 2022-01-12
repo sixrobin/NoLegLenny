@@ -124,7 +124,6 @@ namespace JuiceJam.UI
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_pressAnyKeyDelay);
 
             _pressAnyKey.SetActive(true);
-
             callback?.Invoke();
         }
 
