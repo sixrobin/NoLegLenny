@@ -125,7 +125,11 @@ namespace JuiceJam
                 }
             }
 
-            transform.Translate(0f, _speed * Time.deltaTime, 0f, Space.World);
+            if (Checkpoint.LastCheckpoint == null
+                || !Checkpoint.LastCheckpoint.IsPlayerOnCheckpoint
+                || transform.position.y < Checkpoint.LastCheckpoint.RespawnPosition.y - _respawnCheckpointOffset)
+                transform.Translate(0f, _speed * Time.deltaTime, 0f, Space.World);
+
             if (_minHeightReference.position.y - transform.position.y > _maxHeightOffset)
                 transform.SetPositionY(_minHeightReference.position.y - _maxHeightOffset);
         }

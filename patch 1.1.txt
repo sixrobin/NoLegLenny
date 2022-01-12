@@ -3,3 +3,4 @@
 - Fix for the character sprite flickering left and right when using the mouse and aiming up or down.
 - Enemies in space now dies from exploding barrels when those explode at a more visually accurate range.
 - Run timer can now be displayed during the ascension. Disabled by default, can be toggled in settings.
+- Lava now stops right below the player position if he's standing on a checkpoint.

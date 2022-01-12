@@ -16,12 +16,15 @@ namespace JuiceJam
 
         public static Checkpoint LastCheckpoint { get; private set; }
 
+        public bool IsPlayerOnCheckpoint { get; private set; }
+
         public Vector3 RespawnPosition => _respawnPosition.position;
 
         [ContextMenu("Register")]
         public void Register()
         {
             LastCheckpoint = this;
+
             _spriteBlink.BlinkColor(1, () => _animator.SetTrigger("Raise"));
             RSLib.Audio.AudioManager.PlayNextPlaylistSound(_checkClip);
 
@@ -41,11 +44,22 @@ namespace JuiceJam
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (LastCheckpoint == this)
+            if (collision.gameObject.TryGetComponent<PlayerController>(out _))
+            {
+                if (LastCheckpoint != this)
+                    Register();
+
+                IsPlayerOnCheckpoint = true;
+            }
+        }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (LastCheckpoint != this)
                 return;
 
             if (collision.gameObject.TryGetComponent<PlayerController>(out _))
-                Register();
+                IsPlayerOnCheckpoint = false;
         }
     }
 }
