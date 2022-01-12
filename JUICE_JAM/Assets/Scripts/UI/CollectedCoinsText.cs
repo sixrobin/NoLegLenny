@@ -5,7 +5,7 @@ namespace JuiceJam.UI
     public class CollectedCoinsText : MonoBehaviour
     {
         [SerializeField] private RSLib.Dynamics.DynamicInt _collectedCoins = null;
-        [SerializeField] private TMPro.TextMeshProUGUI _coinsText = null;
+        [SerializeField] private System.Collections.Generic.List<TMPro.TextMeshProUGUI> _coinsTexts = null;
         [SerializeField] private UnityEngine.UI.Image _coinImage = null;
 
         private bool _moonReached;
@@ -13,7 +13,7 @@ namespace JuiceJam.UI
         private void OnDitherFadeBegan(bool fadeIn)
         {
             _coinImage.enabled = false;
-            _coinsText.enabled = false;
+            _coinsTexts.ForEach(o => o.enabled = false);
         }
 
         private void OnDitherFadeOver(bool fadeIn)
@@ -21,20 +21,20 @@ namespace JuiceJam.UI
             if (!fadeIn && !_moonReached)
             {
                 _coinImage.enabled = true;
-                _coinsText.enabled = true;
+                _coinsTexts.ForEach(o => o.enabled = true);
             }
         }
 
         private void OnCoinsCollectedValueChanged(RSLib.Dynamics.DynamicInt.ValueChangedEventArgs args)
         {
-            _coinsText.text = args.New.ToString();
+            _coinsTexts.ForEach(o => o.text = args.New.ToString());
         }
 
         private void OnMoonFinalPositionReached()
         {
             _moonReached = true;
             _coinImage.enabled = false;
-            _coinsText.enabled = false;
+            _coinsTexts.ForEach(o => o.enabled = false);
         }
 
         private void Awake()
@@ -44,7 +44,7 @@ namespace JuiceJam.UI
             DitherFade.FadeOver += OnDitherFadeOver;
             Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
 
-            _coinsText.text = "0";
+            OnCoinsCollectedValueChanged(new RSLib.Dynamics.DynamicInt.ValueChangedEventArgs() { New = 0 });
         }
 
         private void OnDestroy()

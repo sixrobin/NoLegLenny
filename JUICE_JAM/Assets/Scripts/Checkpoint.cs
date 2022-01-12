@@ -11,6 +11,9 @@ namespace JuiceJam
         [SerializeField] private UnityEngine.Events.UnityEvent _onRegister = null;
         [SerializeField] private UnityEngine.Events.UnityEvent _onRespawn = null;
 
+        [Header("ANIMATION")]
+        [SerializeField, Min(0f)] private float _idleSpeedMultiplier = 1f;
+
         [Header("AUDIO")]
         [SerializeField] private RSLib.Audio.ClipProvider _checkClip = null;
 
@@ -23,12 +26,19 @@ namespace JuiceJam
         [ContextMenu("Register")]
         public void Register()
         {
+            LastCheckpoint?.Unregister();
             LastCheckpoint = this;
 
             _spriteBlink.BlinkColor(1, () => _animator.SetTrigger("Raise"));
             RSLib.Audio.AudioManager.PlayNextPlaylistSound(_checkClip);
 
             _onRegister?.Invoke();
+        }
+
+        [ContextMenu("Unregister")]
+        public void Unregister()
+        {
+            _animator.SetTrigger("Off");
         }
 
         public void Respawn()
@@ -40,6 +50,7 @@ namespace JuiceJam
         private void Awake()
         {
             LastCheckpoint = null;
+            _animator.SetFloat("IdleSpeedMult", _idleSpeedMultiplier);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -61,5 +72,12 @@ namespace JuiceJam
             if (collision.gameObject.TryGetComponent<PlayerController>(out _))
                 IsPlayerOnCheckpoint = false;
         }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            _animator.SetFloat("IdleSpeedMult", _idleSpeedMultiplier);
+        }
+#endif
     }
 }
