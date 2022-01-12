@@ -197,6 +197,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4672
   _moonReachedUpwardVelocity: 30
+  _joystickAimDeadZone: 0.7
   _fireAxisMinValue: 0.85
   _weaponPivot: {fileID: 8518562701960543877}
   _weaponSpriteRenderer: {fileID: 8518562701616806105}
@@ -5341,8 +5342,8 @@ BoxCollider2D:
   m_Offset: {x: 0.6666667, y: 0.12669957}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0.5}
-    oldSize: {x: 1.3333334, y: 0.6666667}
+    pivot: {x: -0, y: 0.375}
+    oldSize: {x: 1.5, y: 0.6666667}
     newSize: {x: 1.3333334, y: 0.6666667}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5376,7 +5377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8518562701732614186}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0.083, z: -2}
+  m_LocalPosition: {x: 1.25, y: 0.171, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5460,7 +5461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8518562701960543874}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.16599989, y: 0.4180001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.418, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

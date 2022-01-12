@@ -5001,6 +5001,7 @@ MonoBehaviour:
   _hurtDuration: 0.5
   _hurtCurve: 14
   _baseSpeed: 1.6
+  _minExplosionDistance: 3
   _deathParticles: {fileID: 3560364200488412419, guid: 035f38292175e4a449c4ead7cdc18493, type: 3}
   _chargeParticleSystem: {fileID: 4940157962721757012}
   _chargeClip: {fileID: 11400000, guid: b244ac259a0e69e40b096617f2bf99ef, type: 2}

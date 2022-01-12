@@ -1,0 +1,5 @@
+- Moon does not slightly appear anymore before reaching its height in space.
+- Landing sound does not play anymore when landing for the first time at the start of the game.
+- Fix for the character sprite flickering left and right when using the mouse and aiming up or down.
+- Enemies in space now dies from exploding barrels when those explode at a more visually accurate range.
+- Run timer can now be displayed during the ascension. Disabled by default, can be toggled in settings.

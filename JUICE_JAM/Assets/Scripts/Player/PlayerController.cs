@@ -43,13 +43,13 @@ namespace JuiceJam
 
         private Vector3 _initPosition;
         private bool _firstMovementInputDone;
+        private bool _firstLandingDone;
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
         private GameObject _droppedWeapon;
 
         private Vector2 _aimDirection;
-        private Vector2 _lastNonNullJoystickAimDirection;
         private Vector2 _shootImpulse;
         private float _weaponPivotXOffset;
         private float _lastFireAxisValue;
@@ -243,6 +243,13 @@ namespace JuiceJam
 
         private void Land()
         {
+            if (!_firstLandingDone)
+            {
+                // Do not play landing FX when landing at game start during fade out.
+                _firstLandingDone = true;
+                return;
+            }
+
             _playerView.PlayLandAnimation(_rigidbody2D.velocity);
             RSLib.Audio.AudioManager.PlayNextPlaylistSound(_landClip);
         }

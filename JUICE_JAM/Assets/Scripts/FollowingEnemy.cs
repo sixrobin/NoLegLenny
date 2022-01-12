@@ -31,6 +31,9 @@ namespace JuiceJam
         [Header("SPEED")]
         [SerializeField] private float _baseSpeed = 1f;
 
+        [Header("EXPLOSION")]
+        [SerializeField] private float _minExplosionDistance = 2f;
+
         [Header("FEEDBACK")]
         [SerializeField] private GameObject _deathParticles = null;
         [SerializeField] private ParticleSystem _chargeParticleSystem = null;
@@ -64,7 +67,8 @@ namespace JuiceJam
 
         public void Explode(ExplosionData explosionData)
         {
-            Kill();
+            if ((transform.position - explosionData.Source).sqrMagnitude < _minExplosionDistance * _minExplosionDistance)
+                Kill();
         }
 
         public void Respawn()

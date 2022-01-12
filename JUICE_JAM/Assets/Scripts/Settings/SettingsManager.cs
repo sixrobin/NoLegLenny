@@ -10,6 +10,7 @@
         public static ShakeAmount ShakeAmount { get; private set; }
         public static LavaToggle LavaToggle { get; private set; }
         public static Volume Volume { get; private set; }
+        public static TimerDisplay TimerDisplay { get; private set; }
 
         public static void Init()
         {
@@ -21,6 +22,7 @@
             ShakeAmount = new();
             LavaToggle = new();
             Volume = new();
+            TimerDisplay = new();
         }
 
         protected override void Awake()

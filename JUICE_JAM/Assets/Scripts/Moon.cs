@@ -6,6 +6,7 @@ namespace JuiceJam
     public class Moon : MonoBehaviour
     {
         [SerializeField] private Animator _animator = null;
+        [SerializeField] private SpriteRenderer _spriteRenderer = null;
         [SerializeField] private Transform _player = null;
         [SerializeField] private Transform _playerReferenceA = null;
         [SerializeField] private Transform _playerReferenceB = null;
@@ -55,10 +56,13 @@ namespace JuiceJam
             {
                 MoonFinalPositionReached?.Invoke();
                 StartCoroutine(PlayLandAnimationCoroutine());
+                _spriteRenderer.enabled = true; // Should not be necessary, but a small security at no cost.
                 _reached = true;
             }
 
             transform.SetPositionY(targetY);
+
+            _spriteRenderer.enabled = transform.position.y < _moonPositionA.position.y;
         }
     }
 }
