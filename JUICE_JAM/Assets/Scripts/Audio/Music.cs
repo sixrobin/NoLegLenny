@@ -13,6 +13,7 @@ namespace JuiceJam
 
         private void OnFirstMovementInput()
         {
+            // [TODO] This causes the music being played on top of space music. Check if a music is already playing?
             StartCoroutine(StartMusicCoroutine());
         }
 

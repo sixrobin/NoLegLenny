@@ -64,6 +64,26 @@
             return new XElement(SaveElementName, Value.StringValue);
         }
 
+        public override void LoadFromPlayerPrefs()
+        {
+            if (!UnityEngine.PlayerPrefs.HasKey(SaveElementName))
+                return;
+
+            string savedValue = UnityEngine.PlayerPrefs.GetString(SaveElementName);
+
+            System.Collections.Generic.IEnumerable<StringOption> fittingOptions = Options.Where(o => o.StringValue == savedValue);
+            if (fittingOptions.Count() > 0)
+            {
+                Value = fittingOptions.First();
+                return;
+            }
+        }
+
+        public override void SaveToPlayerPrefs()
+        {
+            UnityEngine.PlayerPrefs.SetString(SaveElementName, Value.StringValue);
+        }
+
         public override void Init()
         {
             UnityEngine.Assertions.Assert.IsFalse(Options.Where(o => o.IsDefaultOne).Count() == 0, "No default option has been set.");

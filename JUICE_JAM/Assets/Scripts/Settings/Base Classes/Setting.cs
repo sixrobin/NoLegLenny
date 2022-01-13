@@ -17,8 +17,17 @@
         public abstract string SaveElementName { get; }
 
         public abstract void Init();
+
         public abstract void Load(XElement element);
         public abstract XElement Save();
+
+        public abstract void LoadFromPlayerPrefs();
+        public abstract void SaveToPlayerPrefs();
+
+        public void DeleteFromPlayerPrefs()
+        {
+            UnityEngine.PlayerPrefs.DeleteKey(SaveElementName);
+        }
     
         public virtual bool CanBeDisplayedToUser()
         {

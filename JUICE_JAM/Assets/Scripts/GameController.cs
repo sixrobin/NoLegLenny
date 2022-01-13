@@ -39,6 +39,7 @@ namespace JuiceJam
         public static void ResetGame()
         {
             TimeManager.SetTimeScale(1f);
+            s_timerGoing = false;
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
 
@@ -80,7 +81,7 @@ namespace JuiceJam
         private void Update()
         {
             if (s_timerGoing && !_playerController.IsDead && !DitherFade.IsFading)
-                Timer += Time.deltaTime;
+                Timer += Time.unscaledDeltaTime;
 
             if (s_scoreDisplayed && Input.anyKeyDown)
             {

@@ -47,5 +47,16 @@
         {
             return new XElement(SaveElementName, Value);
         }
+
+        public override void LoadFromPlayerPrefs()
+        {
+            if (UnityEngine.PlayerPrefs.HasKey(SaveElementName))
+                Value = UnityEngine.PlayerPrefs.GetFloat(SaveElementName);
+        }
+
+        public override void SaveToPlayerPrefs()
+        {
+            UnityEngine.PlayerPrefs.SetFloat(SaveElementName, Value);
+        }
     }
 }

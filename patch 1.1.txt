@@ -7,3 +7,6 @@
 - Checkpoints flags now have slightly different animation speed depending on where they are.
 - When reaching a checkpoint, previous one goes back to its waiting animation.
 - Added a shadow below the coins count text to help readability.
+- Run statistics are now displayed with tweens, and a small animation is played if player got all coins.
+- Fix for timer duration being slightly off and for the timer to start before the first input after using the Reset option.
+- Settings are now saved using UnityEngine.PlayerPrefs.

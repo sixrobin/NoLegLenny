@@ -4,7 +4,7 @@ namespace JuiceJam.Settings
 
     public class LavaToggle : BoolSetting
     {
-        public const string SAVE_ELEMENT_NAME = "PixelPerfect";
+        public const string SAVE_ELEMENT_NAME = "Lava";
 
         public LavaToggle() : base()
         {

@@ -44,5 +44,16 @@
         {
             return new XElement(SaveElementName, Value);
         }
+
+        public override void LoadFromPlayerPrefs()
+        {
+            if (UnityEngine.PlayerPrefs.HasKey(SaveElementName))
+                Value = UnityEngine.PlayerPrefs.GetInt(SaveElementName);
+        }
+
+        public override void SaveToPlayerPrefs()
+        {
+            UnityEngine.PlayerPrefs.SetInt(SaveElementName, Value);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace JuiceJam.Settings
 {
-    public class SettingsManager : RSLib.Framework.ConsoleProSingleton<SettingsManager>
+    public class SettingsManager : RSLib.Framework.Singleton<SettingsManager>
     {
         public static ConstrainCursor ConstrainCursor { get; private set; }
         public static FullscreenMode FullscreenMode { get; private set; }
@@ -25,6 +25,63 @@
             TimerDisplay = new();
         }
 
+        public static void SaveToPlayerPrefs()
+        {
+            ConstrainCursor.SaveToPlayerPrefs();
+            FullscreenMode.SaveToPlayerPrefs();
+            PixelPerfect.SaveToPlayerPrefs();
+            RunInBackground.SaveToPlayerPrefs();
+            AxisReverse.SaveToPlayerPrefs();
+            ShakeAmount.SaveToPlayerPrefs();
+            LavaToggle.SaveToPlayerPrefs();
+            Volume.SaveToPlayerPrefs();
+            TimerDisplay.SaveToPlayerPrefs();
+
+            UnityEngine.PlayerPrefs.Save();
+            Instance.Log("PlayerPrefs settings keys have been saved.", forceVerbose: true);
+        }
+
+        public static void LoadFromPlayerPrefs()
+        {
+            ConstrainCursor.LoadFromPlayerPrefs();
+            FullscreenMode.LoadFromPlayerPrefs();
+            PixelPerfect.LoadFromPlayerPrefs();
+            RunInBackground.LoadFromPlayerPrefs();
+            AxisReverse.LoadFromPlayerPrefs();
+            ShakeAmount.LoadFromPlayerPrefs();
+            LavaToggle.LoadFromPlayerPrefs();
+            Volume.LoadFromPlayerPrefs();
+            TimerDisplay.LoadFromPlayerPrefs();
+
+            Instance.Log("PlayerPrefs settings keys have been loaded.", forceVerbose: true);
+        }
+
+        [UnityEngine.ContextMenu("Delete PlayerPrefs Keys")]
+        public void DeletePlayerPrefsKeys()
+        {
+            ConstrainCursor.DeleteFromPlayerPrefs();
+            FullscreenMode.DeleteFromPlayerPrefs();
+            PixelPerfect.DeleteFromPlayerPrefs();
+            RunInBackground.DeleteFromPlayerPrefs();
+            AxisReverse.DeleteFromPlayerPrefs();
+            ShakeAmount.DeleteFromPlayerPrefs();
+            LavaToggle.DeleteFromPlayerPrefs();
+            Volume.DeleteFromPlayerPrefs();
+            TimerDisplay.DeleteFromPlayerPrefs();
+
+            UnityEngine.PlayerPrefs.Save();
+            Instance.Log("PlayerPrefs settings keys have been deleted.", forceVerbose: true);
+        }
+
+        [UnityEngine.ContextMenu("Delete All PlayerPrefs Keys")]
+        public void DeleteAllPlayerPrefsKeys()
+        {
+            UnityEngine.PlayerPrefs.DeleteAll();
+            UnityEngine.PlayerPrefs.Save();
+
+            Instance.Log("All PlayerPrefs keys have been deleted.", forceVerbose: true);
+        }
+
         protected override void Awake()
         {
             base.Awake();
@@ -32,6 +89,9 @@
                 return;
 
             Init();
+            LoadFromPlayerPrefs();
+
+            UnityEngine.Debug.Log(PixelPerfect.Value);
         }
     }
 }
