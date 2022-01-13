@@ -1,16 +1,10 @@
 namespace JuiceJam.Settings
 {
-    using System.Xml.Linq;
-
     public class Volume : FloatSetting
     {
         public const string SAVE_ELEMENT_NAME = "Volume";
 
         public Volume() : base()
-        {
-        }
-
-        public Volume(XElement element) : base(element)
         {
         }
 

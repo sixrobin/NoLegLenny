@@ -1,7 +1,5 @@
 ﻿namespace JuiceJam.Settings
 {
-    using System.Xml.Linq;
-
     public class FullscreenMode : StringRangeSetting
     {
         public const string SAVE_ELEMENT_NAME = "FullscreenMode";
@@ -9,10 +7,6 @@
         private StringOption[] _options;
 
         public FullscreenMode() : base()
-        {
-        }
-
-        public FullscreenMode(XElement element) : base(element)
         {
         }
 

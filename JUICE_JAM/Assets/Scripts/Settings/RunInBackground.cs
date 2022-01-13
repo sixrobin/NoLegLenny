@@ -1,16 +1,10 @@
 ﻿namespace JuiceJam.Settings
 {
-    using System.Xml.Linq;
-
     public class RunInBackground : BoolSetting
     {
         public const string SAVE_ELEMENT_NAME = "RunInBackground";
 
         public RunInBackground() : base()
-        {
-        }
-
-        public RunInBackground(XElement element) : base(element)
         {
         }
 

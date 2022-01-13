@@ -1,7 +1,6 @@
 ﻿namespace JuiceJam.Settings
 {
     using System.Linq;
-    using System.Xml.Linq;
 
     public abstract class StringRangeSetting : Setting
     {
@@ -25,10 +24,6 @@
         {
         }
 
-        public StringRangeSetting(XElement element) : base(element)
-        {
-        }
-
         public delegate void ValueChangedEventHandler(StringOption previousValue, StringOption currentValue);
         public event ValueChangedEventHandler ValueChanged;
 
@@ -45,24 +40,6 @@
         }
 
         protected abstract StringOption[] Options { get; }
-
-        public override void Load(XElement element)
-        {
-            System.Collections.Generic.IEnumerable<StringOption> fittingOptions = Options.Where(o => o.StringValue == element.Value);
-            if (fittingOptions.Count() > 0)
-            {
-                Value = fittingOptions.First();
-                return;
-            }
-
-            UnityEngine.Debug.LogWarning($"No option with string value {element.Value} has been found, using default option.");
-            Init();
-        }
-
-        public override XElement Save()
-        {
-            return new XElement(SaveElementName, Value.StringValue);
-        }
 
         public override void LoadFromPlayerPrefs()
         {

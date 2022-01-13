@@ -9,10 +9,6 @@
         {
         }
 
-        public BoolSetting(XElement element) : base(element)
-        {
-        }
-
         public delegate void ValueChangedEventHandler(bool currentValue);
         public event ValueChangedEventHandler ValueChanged;
 
@@ -25,16 +21,6 @@
                 _value = value;
                 ValueChanged?.Invoke(_value);
             }
-        }
-
-        public override void Load(XElement element)
-        {
-            Value = element.ValueToBool();
-        }
-
-        public override XElement Save()
-        {
-            return new XElement(SaveElementName, Value);
         }
 
         public override void LoadFromPlayerPrefs()

@@ -1,15 +1,10 @@
 ﻿namespace JuiceJam.Settings
 {
     using RSLib.Extensions;
-    using System.Xml.Linq;
 
     public abstract class FloatSetting : Setting
     {
         public FloatSetting() : base()
-        {
-        }
-
-        public FloatSetting(XElement element) : base(element)
         {
         }
 
@@ -36,16 +31,6 @@
         public override void Init()
         {
             Value = Default;
-        }
-
-        public override void Load(XElement element)
-        {
-            Value = element.ValueToFloat();
-        }
-
-        public override XElement Save()
-        {
-            return new XElement(SaveElementName, Value);
         }
 
         public override void LoadFromPlayerPrefs()

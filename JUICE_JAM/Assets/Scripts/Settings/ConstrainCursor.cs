@@ -1,16 +1,10 @@
 ﻿namespace JuiceJam.Settings
 {
-    using System.Xml.Linq;
-
     public class ConstrainCursor : BoolSetting
     {
         public const string SAVE_ELEMENT_NAME = "ConstrainCursor";
 
         public ConstrainCursor() : base()
-        {
-        }
-
-        public ConstrainCursor(XElement element) : base(element)
         {
         }
 

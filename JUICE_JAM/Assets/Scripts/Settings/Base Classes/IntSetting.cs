@@ -1,15 +1,8 @@
 ﻿namespace JuiceJam.Settings
 {
-    using RSLib.Extensions;
-    using System.Xml.Linq;
-
     public abstract class IntSetting : Setting
     {
         public IntSetting() : base()
-        {
-        }
-
-        public IntSetting(XElement element) : base(element)
         {
         }
 
@@ -33,16 +26,6 @@
         public override void Init()
         {
             Value = Range.Max;
-        }
-
-        public override void Load(XElement element)
-        {
-            Value = element.ValueToInt();
-        }
-
-        public override XElement Save()
-        {
-            return new XElement(SaveElementName, Value);
         }
 
         public override void LoadFromPlayerPrefs()

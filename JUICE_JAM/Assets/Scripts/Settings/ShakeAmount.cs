@@ -1,16 +1,10 @@
 ﻿namespace JuiceJam.Settings
 {
-    using System.Xml.Linq;
-
     public class ShakeAmount : FloatSetting
     {
         public const string SAVE_ELEMENT_NAME = "ShakeAmount";
 
         public ShakeAmount() : base()
-        {
-        }
-
-        public ShakeAmount(XElement element) : base(element)
         {
         }
 
