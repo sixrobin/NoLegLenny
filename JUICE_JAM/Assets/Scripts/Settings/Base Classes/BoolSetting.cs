@@ -1,8 +1,5 @@
 ﻿namespace JuiceJam.Settings
 {
-    using RSLib.Extensions;
-    using System.Xml.Linq;
-
     public abstract class BoolSetting : Setting
     {
         public BoolSetting() : base()

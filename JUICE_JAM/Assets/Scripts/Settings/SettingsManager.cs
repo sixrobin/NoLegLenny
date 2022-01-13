@@ -90,8 +90,6 @@
 
             Init();
             LoadFromPlayerPrefs();
-
-            UnityEngine.Debug.Log(PixelPerfect.Value);
         }
     }
 }

@@ -1,6 +1,5 @@
 namespace JuiceJam
 {
-
     using UnityEngine;
 
     public class Music : MonoBehaviour
@@ -13,8 +12,14 @@ namespace JuiceJam
 
         private void OnFirstMovementInput()
         {
-            // [TODO] This causes the music being played on top of space music. Check if a music is already playing?
-            StartCoroutine(StartMusicCoroutine());
+            if (!RSLib.Audio.AudioManager.IsMusicPlaying)
+                StartCoroutine(StartMusicCoroutine());
+        }
+
+        private System.Collections.IEnumerator StartMusicCoroutine()
+        {
+            yield return RSLib.Yield.SharedYields.WaitForSecondsRealtime(_musicStartDelay);
+            RSLib.Audio.AudioManager.PlayMusic(_musicClip, _musicInDatas);
         }
 
         private void Start()
@@ -26,12 +31,6 @@ namespace JuiceJam
         private void OnDestroy()
         {
             _playerController.FirstMovementInput -= OnFirstMovementInput;
-        }
-
-        private System.Collections.IEnumerator StartMusicCoroutine()
-        {
-            yield return RSLib.Yield.SharedYields.WaitForSecondsRealtime(_musicStartDelay);
-            RSLib.Audio.AudioManager.PlayMusic(_musicClip, _musicInDatas);
         }
     }
 }

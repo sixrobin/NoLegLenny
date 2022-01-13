@@ -10,3 +10,5 @@
 - Run statistics are now displayed with tweens, and a small animation is played if player got all coins.
 - Fix for timer duration being slightly off and for the timer to start before the first input after using the Reset option.
 - Settings are now saved using UnityEngine.PlayerPrefs.
+- Pause menu cannot be open anymore during game end sequence and stats display.
+- Fixed a bug making the first music being player instead of the space level one when respawning in space.

@@ -48,6 +48,15 @@
 
         private static System.Collections.IEnumerator _musicFadeCoroutine;
 
+        public static bool IsMusicPlaying
+        {
+            get
+            {
+                AudioSource currentMusicSource = GetCurrentMusicSource();
+                return currentMusicSource.clip != null && currentMusicSource.isPlaying;
+            }
+        }
+
         public float BaseMusicVolume;
 
         /// <summary>

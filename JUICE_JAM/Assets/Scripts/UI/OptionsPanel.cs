@@ -19,8 +19,15 @@ namespace JuiceJam.UI
         [SerializeField] private Canvas _settingsCanvas = null;
         [SerializeField] private RSLib.Framework.GUI.EnhancedButton[] _settings = null;
 
+        private bool _moonReached;
+
         public bool PausingCoroutineRunning { get; private set; }
         public bool IsOpen { get; private set; }
+
+        private void OnMoonFinalPositionReached()
+        {
+            _moonReached = true;
+        }
 
         private void OnResumeButtonClicked()
         {
@@ -75,6 +82,9 @@ namespace JuiceJam.UI
 
         private void TogglePause()
         {
+            if (!IsOpen && _moonReached)
+                return;
+
             IsOpen = !IsOpen;
             StartCoroutine(TogglePauseCoroutine(IsOpen));
         }
@@ -118,6 +128,8 @@ namespace JuiceJam.UI
             _resetButton.onClick.AddListener(OnResetButtonClicked);
             _settingsButton.onClick.AddListener(OnSettingsButtonClicked);
             _exitButton.onClick.AddListener(OnExitButtonClicked);
+
+            Moon.MoonFinalPositionReached += OnMoonFinalPositionReached;
 
             InitNavigation();
 
