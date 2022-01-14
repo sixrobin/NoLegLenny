@@ -7,6 +7,7 @@ namespace JuiceJam
     {
         [Header("VIEW")]
         [SerializeField] private PlayerView _playerView = null;
+        [SerializeField] private Collider2D _collider2D = null;
 
         [Header("PLAYER")]
         [SerializeField, Min(0f)] private float _shootImpulseForce = 8f;
@@ -18,6 +19,7 @@ namespace JuiceJam
         [SerializeField, Range(0f, 1f)] private float _movementKeptOnShootPercentage = 0.5f;
         [SerializeField] private LayerMask _groundMask = 0;
         [SerializeField] private float _moonReachedUpwardVelocity = 10f;
+        [SerializeField] private PhysicsMaterial2D _deadPhysicsMaterial = null;
 
         [Header("WEAPON")]
         [SerializeField, Range(0f, 0.99f)] private float _joystickAimDeadZone = 0.7f;
@@ -48,6 +50,7 @@ namespace JuiceJam
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
         private GameObject _droppedWeapon;
+        private PhysicsMaterial2D _basePhysicsMaterial;
 
         private Vector2 _aimDirection;
         private Vector2 _shootImpulse;
@@ -84,6 +87,8 @@ namespace JuiceJam
 
         public bool IsClouded { get; set; }
 
+        public bool IsGravityScaleReduced => _rigidbody2D.gravityScale < _initGravityScale;
+
         private void OnMoonFinalPositionReached()
         {
             _moonReached = true;
@@ -110,6 +115,8 @@ namespace JuiceJam
                 else
                 {
                     DropWeapon();
+                    _rigidbody2D.sharedMaterial = _deadPhysicsMaterial;
+                    _collider2D.sharedMaterial = _deadPhysicsMaterial;
                     _playerView.PlayDeathAnimation();
                     TimeManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
                 }
@@ -144,6 +151,8 @@ namespace JuiceJam
             _firstMovementInputDone = false;
 
             _rigidbody2D.NullifyMovement();
+            _rigidbody2D.sharedMaterial = _basePhysicsMaterial;
+            _collider2D.sharedMaterial = _basePhysicsMaterial;
             _rigidbody2D.simulated = true;
 
             _playerView.Respawn();
@@ -310,6 +319,7 @@ namespace JuiceJam
             _initGravityScale = _rigidbody2D.gravityScale;
             _initShootForceMultiplier = _shootForceMultiplier;
             _initYVelocityMinMax = _yVelocityMinMax;
+            _basePhysicsMaterial = _rigidbody2D.sharedMaterial;
         }
 
         private void Update()

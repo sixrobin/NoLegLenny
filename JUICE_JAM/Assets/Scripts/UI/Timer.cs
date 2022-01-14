@@ -4,7 +4,7 @@ namespace JuiceJam.UI
 
     public class Timer : MonoBehaviour
     {
-        [SerializeField] private TMPro.TextMeshProUGUI _timerText = null;
+        [SerializeField] private System.Collections.Generic.List<TMPro.TextMeshProUGUI> _timerTexts = null;
         [SerializeField] private string _timerFormat = "mm':'ss'.'fff";
 
         private bool _moonReached;
@@ -26,14 +26,14 @@ namespace JuiceJam.UI
                 || DitherFade.IsFading
                 || OptionsPanel.Instance.IsOpen)
             {
-                _timerText.enabled = false;
+                _timerTexts.ForEach(o => o.enabled = false);
             }
             else
             {
-                _timerText.enabled = true;
+                _timerTexts.ForEach(o => o.enabled = true);
 
                 System.TimeSpan timerSpan = System.TimeSpan.FromSeconds(GameController.Instance.Timer);
-                _timerText.text = timerSpan.ToString(_timerFormat);
+                _timerTexts.ForEach(o => o.text = timerSpan.ToString(_timerFormat));
             }
         }
 

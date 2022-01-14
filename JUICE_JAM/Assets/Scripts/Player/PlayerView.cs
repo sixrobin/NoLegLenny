@@ -13,6 +13,7 @@ namespace JuiceJam
         [SerializeField] private Animator _weaponAnimator = null;
         [SerializeField] private SpriteRenderer _weaponSpriteRenderer = null;
         [SerializeField] private ParticleSystem[] _shootParticlesSystems = null;
+        [SerializeField] private ParticleSystem[] _lowGravityShootParticlesSystems = null;
         [SerializeField, Min(0f)] private float _shootFreezeFrameDur = 0f;
         [SerializeField, Range(0f, 1f)] private float _shootTrauma = 0.1f;
 
@@ -71,8 +72,16 @@ namespace JuiceJam
 
             if (!_playerController.IsClouded)
             {
-                for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
-                    _shootParticlesSystems[i].Play();
+                if (_playerController.IsGravityScaleReduced)
+                {
+                    for (int i = _lowGravityShootParticlesSystems.Length - 1; i >= 0; --i)
+                        _lowGravityShootParticlesSystems[i].Play();
+                }
+                else
+                {
+                    for (int i = _shootParticlesSystems.Length - 1; i >= 0; --i)
+                        _shootParticlesSystems[i].Play();
+                }
 
                 if (_playerController.GroundHit)
                 {
