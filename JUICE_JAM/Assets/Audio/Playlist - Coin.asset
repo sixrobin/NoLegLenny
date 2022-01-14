@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mixerGroup: {fileID: -3539871569477767839, guid: 1ec8c024ee2e0c844a668d2c1a533b14, type: 2}
   _clipPlayDatas:
-    _clip: {fileID: 8300000, guid: 9edf6053ac0277540a791f44fc0c3a28, type: 3}
-    _volumeRandomRange: {x: 0.25, y: 0.25}
+    _clip: {fileID: 8300000, guid: d8bb96a52d6eb2e48a657fc2faa53db6, type: 3}
+    _volumeRandomRange: {x: 0.12, y: 0.12}
     _pitchVariation: 0

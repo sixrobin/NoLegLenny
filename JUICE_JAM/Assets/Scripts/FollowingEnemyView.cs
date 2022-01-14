@@ -44,6 +44,8 @@ namespace JuiceJam
         private Vector3 _idleDirection = Vector3.right;
         private bool _useIdleFace = true;
 
+        public bool IsVisible => _faceSpriteRenderer.isVisible;
+
         public void UseIdleFace()
         {
             _useIdleFace = true;

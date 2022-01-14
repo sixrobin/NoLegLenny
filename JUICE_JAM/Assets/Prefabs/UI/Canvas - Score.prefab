@@ -256,6 +256,8 @@ MonoBehaviour:
     Curve: 30
   _pressAnyKey: {fileID: 8232471805999094824}
   _statAppearingClip: {fileID: 11400000, guid: 01c549e47726bc44aa29231d579f25bc, type: 2}
+  _statTweenEndClip: {fileID: 11400000, guid: 055ee12ca9c10d74cba39335bf6713e3, type: 2}
+  _allCoinsClip: {fileID: 11400000, guid: f79ac68ab778f5d46bbacace95ad8ce8, type: 2}
 --- !u!1 &8232471804695144379
 GameObject:
   m_ObjectHideFlags: 0

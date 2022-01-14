@@ -62,7 +62,8 @@ namespace JuiceJam
             StopAllCoroutines();
             StartCoroutine(HurtCoroutine(damageData));
 
-            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_damageClip);
+            if (_followingEnemyView.IsVisible)
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_damageClip);
         }
 
         public void Explode(ExplosionData explosionData)
@@ -93,7 +94,8 @@ namespace JuiceJam
             GameObject deathParticles = Instantiate(_deathParticles, transform.position, _deathParticles.transform.rotation);
             Destroy(deathParticles, 3f);
 
-            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_deathClip);
+            if (_followingEnemyView.IsVisible)
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_deathClip);
         }
 
         private bool IsPlayerInRange(float range)

@@ -45,6 +45,7 @@ namespace JuiceJam
         [SerializeField] private RSLib.Audio.ClipProvider _landClip = null;
         [SerializeField] private RSLib.Audio.ClipProvider _hurtClip = null;
         [SerializeField] private RSLib.Audio.ClipProvider _deathClip = null;
+        [SerializeField] private RSLib.Audio.ClipProvider _exitScreenToMoonClip = null;
 
         private Vector3 _initPosition;
         private bool _firstMovementInputDone;
@@ -95,6 +96,7 @@ namespace JuiceJam
         private void OnMoonFinalPositionReached()
         {
             _moonReached = true;
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_exitScreenToMoonClip);
         }
 
         public void TakeDamage(DamageData damageData)

@@ -41,6 +41,8 @@ namespace JuiceJam.UI
 
         [Header("AUDIO")]
         [SerializeField] private RSLib.Audio.ClipProvider _statAppearingClip = null;
+        [SerializeField] private RSLib.Audio.ClipProvider _statTweenEndClip = null;
+        [SerializeField] private RSLib.Audio.ClipProvider _allCoinsClip = null;
 
         public void DisplayScore(System.Action callback = null)
         {
@@ -72,8 +74,13 @@ namespace JuiceJam.UI
 
                     if (_coinsCollected.Value == GameController.CoinsTotal)
                     {
+                        RSLib.Audio.AudioManager.PlayNextPlaylistSound(_allCoinsClip);
                         _coinsAnimator.SetTrigger("AllCoins");
                         _coinsCountText.color = _allCoinsColor;
+                    }
+                    else
+                    {
+                        RSLib.Audio.AudioManager.PlayNextPlaylistSound(_statTweenEndClip);
                     }
                 }
             }
@@ -97,6 +104,7 @@ namespace JuiceJam.UI
                         yield return null;
                     }
 
+                    RSLib.Audio.AudioManager.PlayNextPlaylistSound(_statTweenEndClip);
                     _deathsCountText.text = $"{GameController.DeathsCount} {(GameController.DeathsCount <= 1 ? "death" : "deaths")}";
                 }
             }
@@ -118,6 +126,7 @@ namespace JuiceJam.UI
                     yield return null;
                 }
 
+                RSLib.Audio.AudioManager.PlayNextPlaylistSound(_statTweenEndClip);
                 _timeText.text = System.TimeSpan.FromSeconds(GameController.Instance.Timer).ToString("mm':'ss'.'fff");
             }
 

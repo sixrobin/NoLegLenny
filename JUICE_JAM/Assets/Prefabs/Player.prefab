@@ -214,6 +214,7 @@ MonoBehaviour:
   _landClip: {fileID: 11400000, guid: aad650fa3e3a1bd498ad8a1db400b34d, type: 2}
   _hurtClip: {fileID: 11400000, guid: 6942a0cc36ca3404d8f3d5309a28a394, type: 2}
   _deathClip: {fileID: 11400000, guid: f5acf298769cfd34d9393daf2f10b72b, type: 2}
+  _exitScreenToMoonClip: {fileID: 11400000, guid: 52b4cbbc6a6362c4eb49a1a3d6be3a03, type: 2}
 --- !u!114 &8518562701026797702
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,3 +26,8 @@
 - Added a shadow below the coins count text to help readability.
 - Some polish and more random tiles on base ground tileset, and added details to space tileset.
 - Shells particles in space are less impacted by gravity like Lenny.
+
+
+• AUDIO
+- Added a sound when displaying the game stats and player got all the coins.
+- Added a sound when Lenny leaves the screen at the end of the level.

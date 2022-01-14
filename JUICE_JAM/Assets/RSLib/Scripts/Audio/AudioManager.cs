@@ -87,6 +87,7 @@
 
         public static void PlayNextPlaylistSound(ClipProvider clipProvider)
         {
+            Debug.Log(clipProvider.name);
             PlayNextPlaylistSound(clipProvider as IClipProvider);
         }
 
