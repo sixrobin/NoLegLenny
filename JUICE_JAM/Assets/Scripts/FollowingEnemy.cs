@@ -146,7 +146,8 @@ namespace JuiceJam
             {
                 if (!chargeAudioPlayed && t > _chargeAudioPercentageDelay)
                 {
-                    RSLib.Audio.AudioManager.PlayNextPlaylistSound(_chargeClip);
+                    if (_followingEnemyView.IsVisible)
+                        RSLib.Audio.AudioManager.PlayNextPlaylistSound(_chargeClip);
                     chargeAudioPlayed = true;
                 }
 

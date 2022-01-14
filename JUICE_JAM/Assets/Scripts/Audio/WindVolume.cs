@@ -21,7 +21,6 @@ namespace JuiceJam
         [SerializeField] private Curve _fadeOutCurve = Curve.InCirc;
 
         private float _baseVolume;
-
         private bool _hasTurnedOffMusic = false;
 
         private void AdjustVolume()

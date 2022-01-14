@@ -31,3 +31,4 @@
 • AUDIO
 - Added a sound when displaying the game stats and player got all the coins.
 - Added a sound when Lenny leaves the screen at the end of the level.
+- Coins now have a lower pitched and lower volume sound.

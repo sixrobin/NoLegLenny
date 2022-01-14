@@ -87,7 +87,6 @@
 
         public static void PlayNextPlaylistSound(ClipProvider clipProvider)
         {
-            Debug.Log(clipProvider.name);
             PlayNextPlaylistSound(clipProvider as IClipProvider);
         }
 
@@ -237,6 +236,8 @@
         private void Start()
         {
             JuiceJam.Settings.SettingsManager.Volume.ValueChanged += OnVolumeChanged;
+
+            OnVolumeChanged(1f, JuiceJam.Settings.SettingsManager.Volume.Value);
         }
 
         private void OnDestroy()
