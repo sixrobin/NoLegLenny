@@ -5,6 +5,7 @@
 - Run statistics are now displayed with tweens, and a small animation is played if player got all coins.
 - Settings are now saved using UnityEngine.PlayerPrefs.
 - Added some bounciness on Lenny body when he's dead.
+- Added a small snapping on up direction when using an explosive barrel to jump up.
 
 
 • BUG FIX & IMPROVEMENTS

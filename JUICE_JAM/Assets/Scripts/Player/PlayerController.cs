@@ -37,6 +37,9 @@ namespace JuiceJam
         [SerializeField] private RSLib.Dynamics.DynamicInt _health = null;
         [SerializeField, Min(0f)] private float _invulnerabilityWindowDuration = 1f;
 
+        [Header("EXPLOSION")]
+        [SerializeField, Min(0f)] private float _upDirectionSnapMaxAngle = 10f;
+
         [Header("AUDIO")]
         [SerializeField] private RSLib.Audio.ClipProvider _shootClip = null;
         [SerializeField] private RSLib.Audio.ClipProvider _landClip = null;
@@ -140,7 +143,12 @@ namespace JuiceJam
 
         public void Explode(ExplosionData explosionData)
         {
-            _rigidbody2D.AddForce(explosionData.ComputeRelativeDirection(transform.position) * explosionData.ComputeForceAtPosition(transform.position), ForceMode2D.Impulse);
+            Vector3 direction = explosionData.ComputeRelativeDirection(transform.position);
+            if (Vector2.Angle(direction, Vector2.up) < _upDirectionSnapMaxAngle * 0.5f)
+                direction = Vector2.up;
+
+            _rigidbody2D.velocity = Vector2.zero;
+            _rigidbody2D.AddForce(direction * explosionData.ComputeForceAtPosition(transform.position), ForceMode2D.Impulse);
         }
 
         public void Respawn()
