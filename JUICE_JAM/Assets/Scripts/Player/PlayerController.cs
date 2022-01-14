@@ -96,6 +96,8 @@ namespace JuiceJam
         private void OnMoonFinalPositionReached()
         {
             _moonReached = true;
+
+            _playerView.PlayImpulseAnimation(Vector2.zero);
             RSLib.Audio.AudioManager.PlayNextPlaylistSound(_exitScreenToMoonClip);
         }
 
@@ -149,7 +151,6 @@ namespace JuiceJam
             if (Vector2.Angle(direction, Vector2.up) < _upDirectionSnapMaxAngle * 0.5f)
                 direction = Vector2.up;
 
-            _rigidbody2D.velocity = Vector2.zero;
             _rigidbody2D.AddForce(direction * explosionData.ComputeForceAtPosition(transform.position), ForceMode2D.Impulse);
         }
 

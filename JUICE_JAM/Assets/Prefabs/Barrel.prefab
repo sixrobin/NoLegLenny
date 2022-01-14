@@ -153,8 +153,8 @@ MonoBehaviour:
   _animator: {fileID: 351091162533122938}
   _explosionRadius: 6.5
   _barrelChainRadius: 4
-  _explosionForce: 30
-  _explosionForceMin: 4
+  _explosionForce: 33
+  _explosionForceMin: 5
   _explosionParticlesSystems:
   - {fileID: 351091163060224424}
   _destroyedTrauma: 0.6

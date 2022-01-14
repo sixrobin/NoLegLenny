@@ -1,34 +1,34 @@
 • FEATURES
-- Enemies in space now dies from exploding barrels when those explode at a more visually accurate range.
-- Run timer can now be displayed during the ascension. Disabled by default, can be toggled in settings.
+- Space enemies do not die from exploding barrel anymore if the explosion does not touch them.
+- Timer can now be displayed during the ascension. Disabled by default, can be toggled in settings.
 - Lava now stops right below the player position if he's standing on a checkpoint.
-- Run statistics are now displayed with tweens, and a small animation is played if player got all coins.
-- Settings are now saved using UnityEngine.PlayerPrefs.
-- Added some bounciness on Lenny body when he's dead.
-- Added a small snapping on up direction when using an explosive barrel to jump up.
-
+- Run statistics are now displayed with some animations.
+- Settings are now saved.
+- Added some bounciness on Lenny's dead body.
+- Barrels now shoot you straight up, instead of at a wonky angle.
+- Explosive barrels now apply a bit more force to Lenny.
 
 • BUG FIX & IMPROVEMENTS
-- Fixed a bug making the first music being player instead of the space level one when respawning in space.
-- Fixed lava not killing Lenny when triggering it while being invulnerable after already taking a hit.
-- Fixed timer duration being slightly off and for the timer to start before the first input after using the Reset option.
-- Fixed the character sprite flickering left and right when using the mouse and aiming up or down.
-- Moon does not slightly appear anymore before reaching its height in space (issue reproduced mostly on WebGL build when not playing in fullscreen).
+- Fixed a bug making the wrong music being played in space after respawning.
+- Fixed lava not killing Lenny while invulnerable.
+- Fixed timer being slightly off and starting too soon after using the Reset option.
+- Fixed the character sprite flickering when using the mouse and aiming vertically.
+- Moon does not appear anymore before reaching it (issue reproduced mostly on WebGL build when not playing in fullscreen).
 - Exit button in settings is now disabled in WebGL version.
-- Pause menu cannot be open anymore during game end sequence and stats display.
+- Pause menu cannot be opened anymore during end sequence and statistics display.
 - Fixed gravity not being reset when coming back from space to clouds (by disabling lava in settings).
-- Landing sound does not play anymore when landing for the first time at the start of the game.
-
+- Landing sound does not play anymore for no reason when starting the game.
 
 • ART
 - Checkpoints flags now have slightly different animation speed depending on where they are.
 - When reaching a checkpoint, previous one goes back to its waiting animation.
-- Added a shadow below the coins count text to help readability.
-- Some polish and more random tiles on base ground tileset, and added details to space tileset.
+- Added a shadow below the coins number to help readability.
+- Some polish on ground and space tilesets.
 - Shells particles in space are less impacted by gravity like Lenny.
-
+- Added a puff at Lenny position when he leaves the screen once reaching the moon.
 
 • AUDIO
-- Added a sound when displaying the game stats and player got all the coins.
-- Added a sound when Lenny leaves the screen at the end of the level.
-- Coins now have a lower pitched and lower volume sound.
+- Added a sound when displaying the game statistics, and when player got all the coins.
+- Added a sound when Lenny leaves the screen once reaching the moon.
+- Coins now have a lower pitch and volume sound.
+- Space music now slowly fades out as Lenny approaches the moon.
