@@ -12,3 +12,6 @@
 - Settings are now saved using UnityEngine.PlayerPrefs.
 - Pause menu cannot be open anymore during game end sequence and stats display.
 - Fixed a bug making the first music being player instead of the space level one when respawning in space.
+- Fixed gravity not being reset when coming back from space to clouds (by disabling lava in settings).
+- Fixed lava not killing Lenny when triggering it while being invulnerable after already taking a hit.
+- Exit button in settings is now disabled in WebGL version.

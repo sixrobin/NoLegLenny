@@ -1,6 +1,7 @@
 namespace JuiceJam.UI
 {
     using RSLib.Extensions;
+    using System.Linq;
     using UnityEngine;
 
     public class OptionsPanel : RSLib.Framework.Singleton<OptionsPanel>
@@ -65,11 +66,21 @@ namespace JuiceJam.UI
 
         private void InitNavigation()
         {
-            for (int i = 0; i < _buttons.Length; ++i)
+            bool webGL = false;
+#if UNITY_WEBGL
+            webGL = true;
+            _exitButton.gameObject.SetActive(false);
+#endif
+
+            System.Collections.Generic.List<RSLib.Framework.GUI.EnhancedButton> buttonsList = _buttons.ToList();
+            if (webGL)
+                buttonsList.Remove(_exitButton);
+
+            for (int i = 0; i < buttonsList.Count; ++i)
             {
-                _buttons[i].SetMode(UnityEngine.UI.Navigation.Mode.Explicit);
-                _buttons[i].SetSelectOnDown(_buttons[RSLib.Helpers.Mod(i + 1, _buttons.Length)]);
-                _buttons[i].SetSelectOnUp(_buttons[RSLib.Helpers.Mod(i - 1, _buttons.Length)]);
+                buttonsList[i].SetMode(UnityEngine.UI.Navigation.Mode.Explicit);
+                buttonsList[i].SetSelectOnDown(buttonsList[RSLib.Helpers.Mod(i + 1, buttonsList.Count)]);
+                buttonsList[i].SetSelectOnUp(buttonsList[RSLib.Helpers.Mod(i - 1, buttonsList.Count)]);
             }
 
             for (int i = 0; i < _settings.Length; ++i)
