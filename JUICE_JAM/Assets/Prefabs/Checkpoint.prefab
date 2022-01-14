@@ -206,7 +206,11 @@ MonoBehaviour:
   _animator: {fileID: 3123740160868916598}
   _respawnPosition: {fileID: 3123740160201016996}
   _spriteBlink: {fileID: 3123740160868916592}
+  _onRegister:
+    m_PersistentCalls:
+      m_Calls: []
   _onRespawn:
     m_PersistentCalls:
       m_Calls: []
+  _idleSpeedMultiplier: 1
   _checkClip: {fileID: 11400000, guid: 06ad759562c0466429229817c4d3ff99, type: 2}

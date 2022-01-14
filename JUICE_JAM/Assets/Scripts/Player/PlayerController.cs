@@ -57,6 +57,10 @@ namespace JuiceJam
 
         private Vector3 _lastMousePosition;
 
+        private float _initGravityScale;
+        private float _initShootForceMultiplier;
+        private Vector2 _initYVelocityMinMax;
+
         private bool _moonReached;
 
         public event System.Action FirstMovementInput;
@@ -87,14 +91,16 @@ namespace JuiceJam
 
         public void TakeDamage(DamageData damageData)
         {
-            if (IsInvulnerable || IsDead || DitherFade.IsFading)
+            bool fromLava = damageData.Source is Lava;
+
+            if ((IsInvulnerable && !fromLava) || IsDead || DitherFade.IsFading)
                 return;
 
             _health.Value = Mathf.Max(0, _health.Value - damageData.Amount);
 
             if (_health.Value == 0)
             {
-                if (damageData.Source is Lava)
+                if (fromLava)
                 {
                     _rigidbody2D.simulated = false;
                     _playerView.DisplayPlayer(false);
@@ -146,14 +152,29 @@ namespace JuiceJam
                 Destroy(_droppedWeapon);
         }
 
+        public void ResetGravityScale()
+        {
+            _rigidbody2D.gravityScale = _initGravityScale;
+        }
+
         public void SetGravityScale(float value)
         {
             _rigidbody2D.gravityScale = value;
         }
 
+        public void ResetShootForceMultiplier()
+        {
+            _shootForceMultiplier = _initShootForceMultiplier;
+        }
+
         public void SetShootForceMultiplier(float value)
         {
             _shootForceMultiplier = value;
+        }
+
+        public void ResetMaxFallVelocity()
+        {
+            _yVelocityMinMax.x = _initYVelocityMinMax.x;
         }
 
         public void SetMaxFallVelocity(float value)
@@ -285,6 +306,10 @@ namespace JuiceJam
             _weaponPivotXOffset = _weaponPivot.transform.localPosition.x;
 
             _health.Value = _maxHealth;
+
+            _initGravityScale = _rigidbody2D.gravityScale;
+            _initShootForceMultiplier = _shootForceMultiplier;
+            _initYVelocityMinMax = _yVelocityMinMax;
         }
 
         private void Update()
