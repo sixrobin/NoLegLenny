@@ -3,7 +3,6 @@
     public class SettingsManager : RSLib.Framework.Singleton<SettingsManager>
     {
         public static ConstrainCursor ConstrainCursor { get; private set; }
-        public static FullscreenMode FullscreenMode { get; private set; }
         public static PixelPerfect PixelPerfect { get; private set; }
         public static RunInBackground RunInBackground { get; private set; }
         public static AxisReverse AxisReverse { get; private set; }
@@ -15,7 +14,6 @@
         public static void Init()
         {
             ConstrainCursor = new();
-            FullscreenMode = new();
             PixelPerfect = new();
             RunInBackground = new();
             AxisReverse = new();
@@ -28,7 +26,6 @@
         public static void SaveToPlayerPrefs()
         {
             ConstrainCursor.SaveToPlayerPrefs();
-            FullscreenMode.SaveToPlayerPrefs();
             PixelPerfect.SaveToPlayerPrefs();
             RunInBackground.SaveToPlayerPrefs();
             AxisReverse.SaveToPlayerPrefs();
@@ -44,7 +41,6 @@
         public static void LoadFromPlayerPrefs()
         {
             ConstrainCursor.LoadFromPlayerPrefs();
-            FullscreenMode.LoadFromPlayerPrefs();
             PixelPerfect.LoadFromPlayerPrefs();
             RunInBackground.LoadFromPlayerPrefs();
             AxisReverse.LoadFromPlayerPrefs();
@@ -60,7 +56,6 @@
         public void DeletePlayerPrefsKeys()
         {
             ConstrainCursor.DeleteFromPlayerPrefs();
-            FullscreenMode.DeleteFromPlayerPrefs();
             PixelPerfect.DeleteFromPlayerPrefs();
             RunInBackground.DeleteFromPlayerPrefs();
             AxisReverse.DeleteFromPlayerPrefs();
