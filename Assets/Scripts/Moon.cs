@@ -5,6 +5,9 @@ namespace JuiceJam
 
     public class Moon : MonoBehaviour
     {
+        private static readonly int LAND_ANIMATOR_HASH = Animator.StringToHash("Land");
+
+        [Header("REFERENCES")]
         [SerializeField] private Animator _animator = null;
         [SerializeField] private SpriteRenderer _spriteRenderer = null;
         [SerializeField] private Transform _player = null;
@@ -13,8 +16,11 @@ namespace JuiceJam
         [SerializeField] private Transform _moonPositionA = null;
         [SerializeField] private Transform _moonPositionB = null;
 
+        [Header("SETTINGS")]
         [SerializeField] private float _landAnimationDelay = 1.5f;
         [SerializeField] private float _landedTrauma = 0.15f;
+        
+        [Header("AUDIO")]
         [SerializeField] private RSLib.Audio.ClipProvider _landClip = null;
 
         private bool _reached;
@@ -23,7 +29,7 @@ namespace JuiceJam
 
         public void OnLandedFrame()
         {
-            CameraShake.SetTrauma(_landedTrauma);
+            CameraShake.Instance.SetTrauma(_landedTrauma);
             RSLib.Audio.AudioManager.PlayNextPlaylistSound(_landClip);
         }
 
@@ -35,7 +41,7 @@ namespace JuiceJam
         private System.Collections.IEnumerator PlayLandAnimationCoroutine()
         {
             yield return RSLib.Yield.SharedYields.WaitForSeconds(_landAnimationDelay);
-            _animator.SetTrigger("Land");
+            _animator.SetTrigger(LAND_ANIMATOR_HASH);
         }
 
         private void Update()

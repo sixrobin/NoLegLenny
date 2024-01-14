@@ -4,15 +4,14 @@ namespace JuiceJam.UI
 
     public class InputsView : MonoBehaviour
     {
-        public static bool s_seenOnce;
-        public static bool s_firstInputDoneOnce;
+        private static bool s_seenOnce;
+        private static bool s_firstInputDoneOnce;
 
         [SerializeField] private PlayerController _playerController = null;
 
         private void OnPlayerFirstMovementInput()
         {
             s_firstInputDoneOnce = true;
-
             gameObject.SetActive(false);
         }
 

@@ -4,6 +4,12 @@ namespace JuiceJam
 
     public class PlayerView : MonoBehaviour
     {
+        private static readonly int RESPAWN_ANIMATOR_HASH = Animator.StringToHash("Respawn");
+        private static readonly int SHOOT_ANIMATOR_HASH = Animator.StringToHash("Shoot");
+        private static readonly int LAND_ANIMATOR_HASH = Animator.StringToHash("Land");
+        private static readonly int DEATH_ANIMATOR_HASH = Animator.StringToHash("Death");
+        private static readonly int AIRBORNE_ANIMATOR_HASH = Animator.StringToHash("Airborne");
+
         [Header("PLAYER")]
         [SerializeField] private PlayerController _playerController = null;
         [SerializeField] private Animator _playerAnimator = null;
@@ -49,7 +55,7 @@ namespace JuiceJam
         public void Respawn()
         {
             DisplayPlayer(true);
-            _playerAnimator.SetTrigger("Respawn");
+            _playerAnimator.SetTrigger(RESPAWN_ANIMATOR_HASH);
         }
 
         public void DisplayPlayer(bool show)
@@ -65,10 +71,10 @@ namespace JuiceJam
 
         public void PlayShootAnimation(Vector2 shootDirection)
         {
-            _playerAnimator.SetTrigger("Shoot");
-            _weaponAnimator.SetTrigger("Shoot");
+            _playerAnimator.SetTrigger(SHOOT_ANIMATOR_HASH);
+            _weaponAnimator.SetTrigger(SHOOT_ANIMATOR_HASH);
 
-            CameraShake.SetTrauma(_shootTrauma);
+            CameraShake.Instance.SetTrauma(_shootTrauma);
 
             if (!_playerController.IsClouded)
             {
@@ -96,7 +102,7 @@ namespace JuiceJam
             if (_playerController.IsDead)
                 return;
 
-            _playerAnimator.SetTrigger("Land");
+            _playerAnimator.SetTrigger(LAND_ANIMATOR_HASH);
 
             if (Mathf.Abs(velocity.x) > _landSidePuffMinSpeed)
             {
@@ -111,7 +117,7 @@ namespace JuiceJam
 
         public void PlayDamageAnimation(DamageData damageData)
         {
-            CameraShake.SetTrauma(_damageTrauma);
+            CameraShake.Instance.SetTrauma(_damageTrauma);
 
             for (int i = _damageParticlesSystems.Length - 1; i >= 0; --i)
                 _damageParticlesSystems[i].Play();
@@ -122,10 +128,10 @@ namespace JuiceJam
 
         public void PlayDeathAnimation()
         {
-            _playerAnimator.ResetTrigger("Respawn");
-            _playerAnimator.SetTrigger("Death");
+            _playerAnimator.ResetTrigger(RESPAWN_ANIMATOR_HASH);
+            _playerAnimator.SetTrigger(DEATH_ANIMATOR_HASH);
 
-            CameraShake.SetTrauma(_deathTrauma);
+            CameraShake.Instance.SetTrauma(_deathTrauma);
 
             for (int i = _deathParticlesSystems.Length - 1; i >= 0; --i)
                 _deathParticlesSystems[i].Play();
@@ -142,7 +148,7 @@ namespace JuiceJam
 
         private void Update()
         {
-            _playerAnimator.SetBool("Airborne", !_playerController.GroundHit);
+            _playerAnimator.SetBool(AIRBORNE_ANIMATOR_HASH, !_playerController.GroundHit);
         }
     }
 }

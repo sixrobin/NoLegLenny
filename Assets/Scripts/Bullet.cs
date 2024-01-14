@@ -37,16 +37,16 @@ namespace JuiceJam
 
         private Vector2 _direction;
         private bool _keepDirection;
+        private object _source;
 
         public static event System.Action<BulletHitEventArgs> BulletHit;
 
-        public object Source { get; private set; }
 
         public void Launch(Vector3 direction, bool keepDirection, object source)
         {
             _direction = direction.normalized;
             _keepDirection = keepDirection;
-            Source = source;
+            _source = source;
 
             transform.right = _direction;
             _rigidbody2D.velocity = transform.right * _speed;
@@ -66,6 +66,7 @@ namespace JuiceJam
             }
         }
 
+        // TODO: Factorize with OnCollisionEnter2D
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (!collider.TryGetComponent(out FollowingEnemy enemy))
@@ -100,6 +101,7 @@ namespace JuiceJam
             Destroy(gameObject);
         }
 
+        // TODO: Factorize with OnTriggerEnter2D
         private void OnCollisionEnter2D(Collision2D collision)
         {
             bool dontDestroy = false;
@@ -108,7 +110,7 @@ namespace JuiceJam
 
             if (collision.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                if (damageable == Source)
+                if (damageable == _source)
                     return;
 
                 if (damageable.CanBeDamaged)
@@ -131,9 +133,7 @@ namespace JuiceJam
             for (int i = _collisionPrefabs.Length - 1; i >= 0; --i)
             {
                 if (!_collisionPrefabs[i].Layer.HasLayer(collision.gameObject.layer))
-                {
                     continue;
-                }
 
                 for (int j = _collisionPrefabs[i].BulletPositionPrefabs.Length - 1; j >= 0; --j)
                     Instantiate(_collisionPrefabs[i].BulletPositionPrefabs[j], transform.position, _collisionPrefabs[i].BulletPositionPrefabs[j].transform.rotation);

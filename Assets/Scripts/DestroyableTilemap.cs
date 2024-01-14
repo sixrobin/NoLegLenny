@@ -12,9 +12,12 @@ namespace JuiceJam
             public Vector2 TileCenterOffset;
         }
 
+        [Header("REFERENCES")]
         [SerializeField] private UnityEngine.Tilemaps.Tilemap _tilemap = null;
         [SerializeField] private TileDestroyedFeedback[] _tileDestroyedCenterFeedback = null;
         [SerializeField] private GameObject[] _tileDestroyedContactPointFeedback = null;
+        
+        [Header("SETTINGS")]
         [SerializeField, Min(0f)] private float _tilesAboveDestroyRate = 0.1f;
         [SerializeField, Min(0f)] private float _tilesExplosionDestructionDelay = 0.1f;
         [SerializeField, Min(0f)] private float _tilesExplosionDestructionRate = 0.08f;
@@ -22,7 +25,7 @@ namespace JuiceJam
         [Header("AUDIO")]
         [SerializeField] private RSLib.Audio.ClipProvider _destroyedTileClip = null;
 
-        private System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase> _destroyedTiles = new System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase>();
+        private readonly System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase> _destroyedTiles = new System.Collections.Generic.Dictionary<Vector3Int, UnityEngine.Tilemaps.TileBase>();
 
         public bool CanBeDamaged => true;
         public bool DontDestroyDamageSource => false;

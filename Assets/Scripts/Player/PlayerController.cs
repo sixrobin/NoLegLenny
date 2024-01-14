@@ -68,6 +68,7 @@ namespace JuiceJam
         private float _initShootForceMultiplier;
         private Vector2 _initYVelocityMinMax;
 
+        public bool IsClouded;
         private bool _moonReached;
 
         public event System.Action FirstMovementInput;
@@ -88,8 +89,6 @@ namespace JuiceJam
         public bool IsInvulnerable { get; private set; }
 
         public bool IsDead => _health.Value == 0;
-
-        public bool IsClouded { get; set; }
 
         public bool IsGravityScaleReduced => _rigidbody2D.gravityScale < _initGravityScale;
 
@@ -117,7 +116,7 @@ namespace JuiceJam
                     _rigidbody2D.simulated = false;
                     _playerView.DisplayPlayer(false);
                     TimeManager.FreezeFrame(_playerView.DeathFreezeFrameDelay, _playerView.DeathFreezeFrameDuration);
-                    CameraShake.SetTrauma(_playerView.DeathTrauma);
+                    CameraShake.Instance.SetTrauma(_playerView.DeathTrauma);
                 }
                 else
                 {
@@ -156,7 +155,7 @@ namespace JuiceJam
 
         public void Respawn()
         {
-            transform.position = Checkpoint.LastCheckpoint?.RespawnPosition ?? _initPosition;
+            transform.position = Checkpoint.LastCheckpoint != null ? Checkpoint.LastCheckpoint.RespawnPosition : _initPosition;
 
             _health.Value = _maxHealth;
             _firstMovementInputDone = false;
@@ -216,13 +215,13 @@ namespace JuiceJam
                 if (_lastMousePosition == Input.mousePosition)
                     LastControllerType = ControllerType.Joystick;
 
-                    _aimDirection = joystickAimDirection;
+                _aimDirection = joystickAimDirection;
             }
             else
             {
                 if (LastControllerType != ControllerType.Joystick || Input.mousePosition != _lastMousePosition)
                 {
-                    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    Vector3 mouseWorldPosition = MainCamera.Camera.ScreenToWorldPoint(Input.mousePosition);
                     mouseWorldPosition.z = 0f;
                     _aimDirection = (mouseWorldPosition - _weaponPivot.position).normalized;
 
@@ -232,8 +231,6 @@ namespace JuiceJam
 
             if (Settings.SettingsManager.AxisReverse.Value)
                 _aimDirection *= -1;
-
-            //_weaponPivot.transform.right = _aimDirection;
 
             _weaponPivot.transform.localEulerAngles = new Vector3(0f, 0f, Vector2.SignedAngle(Vector2.right, _aimDirection));
 
@@ -251,7 +248,7 @@ namespace JuiceJam
             if (Input.GetButtonDown("Fire")
                 || (fireAxis > _fireAxisMinValue && _lastFireAxisValue < _fireAxisMinValue))
             {
-                _shootImpulse = -_aimDirection * _shootImpulseForce * _shootForceMultiplier;
+                _shootImpulse = -_aimDirection * (_shootImpulseForce * _shootForceMultiplier);
                 SpawnBullet();
 
                 if (!_firstMovementInputDone)
@@ -272,11 +269,6 @@ namespace JuiceJam
         {
             if (IsClouded)
                 return;
-
-            //Collider2D[] nearColliders = Physics2D.OverlapCircleAll(_bulletSpawnPosition.position, 0.15f);
-            //for (int i = nearColliders.Length - 1; i >= 0; --i)
-            //    if (nearColliders[i].gameObject.layer == LayerMask.NameToLayer("Ground"))
-            //        return;
 
             Bullet bullet = Instantiate(_bulletPrefab, _bulletSpawnPosition.position, Quaternion.identity);
             bullet.Launch(_weaponPivot.right, false, this);

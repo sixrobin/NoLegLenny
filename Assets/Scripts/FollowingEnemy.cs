@@ -82,8 +82,11 @@ namespace JuiceJam
             transform.position = _startPosition;
             gameObject.SetActive(true);
 
-            _followingEnemyView?.LookAt(Vector2.zero);
-            _followingEnemyView?.UseIdleFace();
+            if (_followingEnemyView != null)
+            {
+                _followingEnemyView.LookAt(Vector2.zero);
+                _followingEnemyView.UseIdleFace();
+            }
         }
 
         public void Kill()
@@ -123,7 +126,6 @@ namespace JuiceJam
                 yield break;
 
             _isCharging = true;
-
             _rigidbody2D.NullifyMovement();
 
             Vector3 chargeDirection = (_player.transform.position - transform.position).normalized;
@@ -131,8 +133,12 @@ namespace JuiceJam
             for (float t = 0f; t <= 1f; t += Time.deltaTime / _chargeDelay)
             {
                 chargeDirection = (_player.transform.position - transform.position).normalized;
-                _followingEnemyView?.SetAngryFace(chargeDirection);
-                _followingEnemyView?.LookAt(chargeDirection);
+                if (_followingEnemyView != null)
+                {
+                    _followingEnemyView.SetAngryFace(chargeDirection);
+                    _followingEnemyView.LookAt(chargeDirection);
+                }
+                
                 yield return null;
             }
 
@@ -173,15 +179,17 @@ namespace JuiceJam
         private System.Collections.IEnumerator HurtCoroutine(DamageData damageData)
         {
             _isBeingHurt = true;
-
             _rigidbody2D.NullifyMovement();
 
             Vector3 recoilDirection = damageData.HitDirection.normalized;
             Vector3 hurtStartPosition = transform.position;
             Vector3 hurtEndPosition = transform.position + recoilDirection * _hurtLength;
 
-            _followingEnemyView?.SetHurtFace();
-            _followingEnemyView?.LookAt(-recoilDirection);
+            if (_followingEnemyView != null)
+            {
+                _followingEnemyView.SetHurtFace();
+                _followingEnemyView.LookAt(-recoilDirection);
+            }
 
             for (float t = 0f; t <= 1f; t += Time.deltaTime / _hurtDuration)
             {
@@ -220,8 +228,11 @@ namespace JuiceJam
                 else
                 {
                     _rigidbody2D.velocity = (_player.transform.position - transform.position).normalized * _baseSpeed;
-                    _followingEnemyView?.SetNormalFace(_rigidbody2D.velocity);
-                    _followingEnemyView?.LookAt(_rigidbody2D.velocity);
+                    if (_followingEnemyView != null)
+                    {
+                        _followingEnemyView.SetNormalFace(_rigidbody2D.velocity);
+                        _followingEnemyView.LookAt(_rigidbody2D.velocity);
+                    }
                 }
             }
             else
@@ -229,7 +240,8 @@ namespace JuiceJam
                 if ((_startPosition - transform.position).sqrMagnitude > 0.3f * 0.3f)
                 {
                     _rigidbody2D.velocity = (_startPosition - transform.position).normalized * _baseSpeed;
-                    _followingEnemyView?.LookAt(_rigidbody2D.velocity);
+                    if (_followingEnemyView != null)
+                        _followingEnemyView.LookAt(_rigidbody2D.velocity);
                 }
                 else
                 {

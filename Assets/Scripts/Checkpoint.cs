@@ -4,10 +4,16 @@ namespace JuiceJam
 
     public class Checkpoint : MonoBehaviour, IRespawnable
     {
+        private static readonly int RAISE_ANIMATOR_HASH = Animator.StringToHash("Raise");
+        private static readonly int OFF_ANIMATOR_HASH = Animator.StringToHash("Off");
+        private static readonly int IDLE_SPEED_MULT_ANIMATOR_HASH = Animator.StringToHash("IdleSpeedMult");
+        
+        [Header("REFERENCES")]
         [SerializeField] private Animator _animator = null;
         [SerializeField] private Transform _respawnPosition = null;
         [SerializeField] private RSLib.ImageEffects.SpriteBlink _spriteBlink = null;
 
+        [Header("EVENTS")]
         [SerializeField] private UnityEngine.Events.UnityEvent _onRegister = null;
         [SerializeField] private UnityEngine.Events.UnityEvent _onRespawn = null;
 
@@ -26,19 +32,20 @@ namespace JuiceJam
         [ContextMenu("Register")]
         public void Register()
         {
-            LastCheckpoint?.Unregister();
+            if (LastCheckpoint != null)
+                LastCheckpoint.Unregister();
+            
             LastCheckpoint = this;
-
-            _spriteBlink.BlinkColor(1, () => _animator.SetTrigger("Raise"));
-            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_checkClip);
-
             _onRegister?.Invoke();
+
+            _spriteBlink.BlinkColor(1, () => _animator.SetTrigger(RAISE_ANIMATOR_HASH));
+            RSLib.Audio.AudioManager.PlayNextPlaylistSound(_checkClip);
         }
 
         [ContextMenu("Unregister")]
         public void Unregister()
         {
-            _animator.SetTrigger("Off");
+            _animator.SetTrigger(OFF_ANIMATOR_HASH);
         }
 
         public void Respawn()
@@ -50,7 +57,7 @@ namespace JuiceJam
         private void Awake()
         {
             LastCheckpoint = null;
-            _animator.SetFloat("IdleSpeedMult", _idleSpeedMultiplier);
+            _animator.SetFloat(IDLE_SPEED_MULT_ANIMATOR_HASH, _idleSpeedMultiplier);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -76,7 +83,7 @@ namespace JuiceJam
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            _animator.SetFloat("IdleSpeedMult", _idleSpeedMultiplier);
+            _animator.SetFloat(IDLE_SPEED_MULT_ANIMATOR_HASH, _idleSpeedMultiplier);
         }
 #endif
     }

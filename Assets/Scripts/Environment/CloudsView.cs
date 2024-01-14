@@ -42,7 +42,7 @@
                 float speed = RSLib.Maths.Maths.Normalize(_clouds[i].size.x, _cloudLengthMinMax.x, _cloudLengthMinMax.y, _cloudSpeedMinMax.x, _cloudSpeedMinMax.y);
                 speed *= _speedMult;
 
-                _clouds[i].transform.Translate(Vector3.right * Time.deltaTime * speed);
+                _clouds[i].transform.Translate(Vector3.right * (Time.deltaTime * speed));
                 if (_clouds[i].bounds.min.x > _maxX)
                     _clouds[i].transform.position = _clouds[i].transform.position.WithX(_minX - _clouds[i].size.x * 0.5f);
             }

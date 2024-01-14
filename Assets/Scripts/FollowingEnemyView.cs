@@ -37,8 +37,8 @@ namespace JuiceJam
         [Header("IDLE")]
         [SerializeField] private float _idleRotationSpeed = 3f;
 
-        private System.Collections.Generic.Dictionary<Vector2, Sprite> _normalFacesByDirection = new();
-        private System.Collections.Generic.Dictionary<Vector2, Sprite> _angryFacesByDirection = new();
+        private readonly System.Collections.Generic.Dictionary<Vector2, Sprite> _normalFacesByDirection = new();
+        private readonly System.Collections.Generic.Dictionary<Vector2, Sprite> _angryFacesByDirection = new();
 
         private Vector3 _faceInitLocalPosition;
         private Vector3 _idleDirection = Vector3.right;
@@ -113,8 +113,8 @@ namespace JuiceJam
 
         private void Reset()
         {
-            _normalFaces = new();
-            _angryFaces = new();
+            _normalFaces = new System.Collections.Generic.List<FaceByDirection>();
+            _angryFaces = new System.Collections.Generic.List<FaceByDirection>();
 
             for (int i = _lookAtDirections.Length - 1; i >= 0; --i)
             {

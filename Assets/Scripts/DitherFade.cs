@@ -16,7 +16,6 @@ namespace JuiceJam
         public static bool IsFading { get; private set; }
 
         public static float FadedPercentage { get; private set; }
-        public static float FadePercentageEased { get; private set; }
 
         public static void FadeIn(float duration, Curve curve, float delay = 0f, System.Action callback = null)
         {
@@ -77,7 +76,6 @@ namespace JuiceJam
         protected override void Awake()
         {
             base.Awake();
-
             _ditherSprite.enabled = false;
         }
 

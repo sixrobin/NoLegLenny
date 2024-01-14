@@ -5,6 +5,8 @@ namespace JuiceJam
 
     public class Lightning : MonoBehaviour
     {
+        private static readonly int STRIKE_ANIMATOR_HASH = Animator.StringToHash("Strike");
+
         [SerializeField] private Animator _lightningAnimator = null;
         [SerializeField] private SpriteRenderer _lightningSpriteRenderer = null;
         [SerializeField] private Vector2 _strikesDelayMinMax = new Vector2(1f, 3f);
@@ -28,22 +30,23 @@ namespace JuiceJam
 
             if (_isOn)
                 PrepareNextStrike();
-            else
-                _rain?.Stop();
+            else if (_rain != null)
+                _rain.Stop();
         }
 
         public void OnStrikeFrame()
         {
-            CameraShake.AddTrauma(_strikeTrauma);
+            CameraShake.Instance.AddTrauma(_strikeTrauma);
             RSLib.Audio.AudioManager.PlayNextPlaylistSound(_lightningStrikeClip);
 
-            _rain?.Play();
+            if (_rain != null)
+                _rain.Play();
         }
 
         private void Strike()
         {
             _lightningAnimator.transform.SetPositionX(Random.Range(-_maxXOffset, _maxXOffset));
-            _lightningAnimator.SetTrigger("Strike");
+            _lightningAnimator.SetTrigger(STRIKE_ANIMATOR_HASH);
             _lightningSpriteRenderer.flipX = RSLib.Helpers.CoinFlip();
         }
 

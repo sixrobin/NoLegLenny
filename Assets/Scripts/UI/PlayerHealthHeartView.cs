@@ -5,6 +5,8 @@ namespace JuiceJam.UI
 
     public class PlayerHealthHeartView : MonoBehaviour
     {
+        private static readonly int BREAK_ANIMATOR_HASH = Animator.StringToHash("Break");
+
         [SerializeField] private Image _heartImage = null;
         [SerializeField] private Sprite _heartOn = null;
         [SerializeField] private Sprite _heartOff = null;
@@ -20,7 +22,7 @@ namespace JuiceJam.UI
             _heartImage.enabled = on || !_hideWhenOff;
 
             if (!on)
-                _heartLossAnimator.SetTrigger("Break");
+                _heartLossAnimator.SetTrigger(BREAK_ANIMATOR_HASH);
         }
     }
 }

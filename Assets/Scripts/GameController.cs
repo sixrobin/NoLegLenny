@@ -20,19 +20,9 @@ namespace JuiceJam
         public static int DeathsCount { get; private set; }
         public float Timer { get; private set; }
 
-        [ContextMenu("1")]
-        public void SetDeathCount1() => DeathsCount = 1;
-        [ContextMenu("5")]
-        public void SetDeathCount5() => DeathsCount = 5;
-        [ContextMenu("10")]
-        public void SetDeathCount10() => DeathsCount = 10;
-        [ContextMenu("100")]
-        public void SetDeathCount100() => DeathsCount = 100;
-
         public static void Respawn()
         {
             DeathsCount++;
-
             Instance.StartCoroutine(Instance.RespawnCoroutine());
         }
 
@@ -101,9 +91,9 @@ namespace JuiceJam
             Gizmos.color = _debugColor;
 
             Checkpoint[] checkpoints = FindObjectsOfType<Checkpoint>()
-                                                         .ToList()
-                                                         .OrderBy(o => o.transform.position.y)
-                                                         .ToArray();
+                                       .ToList()
+                                       .OrderBy(o => o.transform.position.y)
+                                       .ToArray();
 
             for (int i = checkpoints.Length - 1; i >= 0; --i)
             {

@@ -4,6 +4,9 @@ namespace JuiceJam
 
     public class ExplodingBarrel : MonoBehaviour, IDamageable, IExplodable, IRespawnable
     {
+        private static readonly int EXPLODE_ANIMATOR_HASH = Animator.StringToHash("Explode");
+        private static readonly int RESPAWN_ANIMATOR_HASH = Animator.StringToHash("Respawn");
+
         [Header("REFS")]
         [SerializeField] private SpriteRenderer _spriteRenderer = null;
         [SerializeField] private Collider2D _collider2D = null;
@@ -33,7 +36,7 @@ namespace JuiceJam
         public void TakeDamage(DamageData damageData)
         {
             _collider2D.enabled = false;
-            _animator.SetTrigger("Explode");
+            _animator.SetTrigger(EXPLODE_ANIMATOR_HASH);
         }
 
         public void Explode(ExplosionData explosionData)
@@ -52,7 +55,7 @@ namespace JuiceJam
             if (!_collider2D.enabled)
             {
                 _collider2D.enabled = true;
-                _animator.SetTrigger("Respawn");
+                _animator.SetTrigger(RESPAWN_ANIMATOR_HASH);
             }
         }
 
@@ -94,7 +97,7 @@ namespace JuiceJam
             }
 
             TimeManager.FreezeFrame(_freezeFrameDelay, _freezeFrameDuration);
-            CameraShake.AddTrauma(_destroyedTrauma);
+            CameraShake.Instance.AddTrauma(_destroyedTrauma);
             RSLib.ImageEffects.RippleEffect.RippleAtWorldPosition(_ripplePosition.position);
 
             for (int i = _explosionParticlesSystems.Length - 1; i >= 0; --i)

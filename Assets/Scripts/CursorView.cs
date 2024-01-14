@@ -31,7 +31,7 @@ namespace JuiceJam
 
             if (_playerController.LastControllerType == PlayerController.ControllerType.Mouse || UI.OptionsPanel.Instance.IsOpen)
             {
-                Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 mouseWorldPosition = MainCamera.Camera.ScreenToWorldPoint(Input.mousePosition);
                 mouseWorldPosition.z = 0f;
                 transform.position = mouseWorldPosition;
             }

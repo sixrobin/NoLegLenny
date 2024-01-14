@@ -45,11 +45,7 @@ namespace JuiceJam
             else
             {
                 // Fade out.
-                float percentage = Maths.Normalize01(
-                                   _normalizationTarget.position.y,
-                                   _fadeOutPositionA.position.y,
-                                   _fadeOutPositionB.position.y);
-
+                float percentage = _normalizationTarget.position.y.Normalize01(_fadeOutPositionA.position.y, _fadeOutPositionB.position.y);
                 targetVolume = Mathf.LerpUnclamped(-80f, RSLib.Audio.AudioManager.Instance.BaseMusicVolume, 1f - percentage.Ease(_fadeOutCurve));
             }
 

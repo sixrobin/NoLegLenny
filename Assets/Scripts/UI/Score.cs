@@ -5,6 +5,8 @@ namespace JuiceJam.UI
 
     public class Score : MonoBehaviour
     {
+        private static readonly int ALL_COINS_ANIMATOR_HASH = Animator.StringToHash("AllCoins");
+
         [System.Serializable]
         public struct StatTweenData
         {
@@ -75,7 +77,7 @@ namespace JuiceJam.UI
                     if (_coinsCollected.Value == GameController.CoinsTotal)
                     {
                         RSLib.Audio.AudioManager.PlayNextPlaylistSound(_allCoinsClip);
-                        _coinsAnimator.SetTrigger("AllCoins");
+                        _coinsAnimator.SetTrigger(ALL_COINS_ANIMATOR_HASH);
                         _coinsCountText.color = _allCoinsColor;
                     }
                     else
@@ -89,7 +91,7 @@ namespace JuiceJam.UI
 
             // Deaths count.
             {
-                _deathsCountText.text = $"0 death";
+                _deathsCountText.text = "0 death";
                 _deaths.SetActive(true);
                 RSLib.Audio.AudioManager.PlayNextPlaylistSound(_statAppearingClip);
                 yield return RSLib.Yield.SharedYields.WaitForSeconds(_preTweenDelay);
@@ -118,7 +120,7 @@ namespace JuiceJam.UI
                 RSLib.Audio.AudioManager.PlayNextPlaylistSound(_statAppearingClip);
                 yield return RSLib.Yield.SharedYields.WaitForSeconds(_preTweenDelay);
 
-                float timeTweenDuration = Maths.Normalize(GameController.Instance.Timer, 0f, Mathf.Max(180f, GameController.Instance.Timer), _timeTweenData.DurationMinMax.x, _timeTweenData.DurationMinMax.y);
+                float timeTweenDuration = GameController.Instance.Timer.Normalize(0f, Mathf.Max(180f, GameController.Instance.Timer), _timeTweenData.DurationMinMax.x, _timeTweenData.DurationMinMax.y);
                 for (float t = 0f; t <= 1f; t += Time.deltaTime / timeTweenDuration)
                 {
                     float tweenValue = Mathf.Lerp(0f, GameController.Instance.Timer, t.Ease(_timeTweenData.Curve));

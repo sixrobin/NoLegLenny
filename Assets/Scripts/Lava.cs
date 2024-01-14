@@ -16,7 +16,6 @@ namespace JuiceJam
         [Header("MOVEMENT")]
         [SerializeField, Min(0.1f)] private float _speed = 1f;
         [SerializeField, Min(1f)] private float _maxHeightOffset = 15f;
-        [SerializeField, Min(1f)] private float _moonReachedSpeed = 15f;
 
         [Header("RESPAWN")]
         [SerializeField, Min(0f)] private float _respawnCheckpointOffset = 2f;
@@ -69,11 +68,7 @@ namespace JuiceJam
 
         private void AdjustLavaVolume()
         {
-            float percentage = RSLib.Maths.Maths.Normalize01(
-                                                 transform.position.y,
-                                                 _minHeightReference.position.y - _maxHeightOffset,
-                                                 _minHeightReference.position.y);
-
+            float percentage = transform.position.y.Normalize01(_minHeightReference.position.y - _maxHeightOffset, _minHeightReference.position.y);
             float volumeRanged = Mathf.LerpUnclamped(_lavaIdleVolumeRange.x, _lavaIdleVolumeRange.y, percentage.Ease(_lavaIdleVolumeCurve));
             _lavaIdleSource.volume = volumeRanged * (1f - DitherFade.FadedPercentage);
         }
@@ -102,7 +97,7 @@ namespace JuiceJam
             if (!_isOn || _playerController.IsDead || _moonReached)
                 return;
 
-            // Handle lava being reenabled by game settings.
+            // Handle lava being re-enabled by game settings.
             if (!_collider.enabled && _isEnabled && !DitherFade.IsFading && !UI.OptionsPanel.Instance.IsOpen)
             {
                 _collider.enabled = true;
@@ -128,7 +123,9 @@ namespace JuiceJam
             if (Checkpoint.LastCheckpoint == null
                 || !Checkpoint.LastCheckpoint.IsPlayerOnCheckpoint
                 || transform.position.y < Checkpoint.LastCheckpoint.RespawnPosition.y - _respawnCheckpointOffset)
+            {
                 transform.Translate(0f, _speed * Time.deltaTime, 0f, Space.World);
+            }
 
             if (_minHeightReference.position.y - transform.position.y > _maxHeightOffset)
                 transform.SetPositionY(_minHeightReference.position.y - _maxHeightOffset);

@@ -4,11 +4,16 @@ namespace JuiceJam
 
     public class Turret : MonoBehaviour, IRespawnable
     {
+        private static readonly int SHOOT_ANIMATOR_HASH = Animator.StringToHash("Shoot");
+
+        [Header("REFERENCES")]
         [SerializeField] private Animator _animator = null;
         [SerializeField] private SpriteRenderer _spriteRenderer = null;
         [SerializeField] private Bullet _bulletPrefab = null;
         [SerializeField] private Transform _bulletSpawnPosition = null;
         [SerializeField] private ParticleSystem[] _shootParticlesSystems = null;
+
+        [Header("SETTINGS")]
         [SerializeField] private float _shootRate = 1f;
         [SerializeField] private float _initDelay = 0f;
         [SerializeField] private float _minCameraOffsetToShoot = 15f;
@@ -48,7 +53,7 @@ namespace JuiceJam
             _shootTimer += Time.deltaTime;
             if (_shootTimer >= _shootRate)
             {
-                _animator.SetTrigger("Shoot");
+                _animator.SetTrigger(SHOOT_ANIMATOR_HASH);
                 _shootTimer = 0f;
             }
         }

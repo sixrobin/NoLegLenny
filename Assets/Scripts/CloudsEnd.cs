@@ -4,6 +4,7 @@ namespace JuiceJam
 
     public class CloudsEnd : MonoBehaviour
     {
+        [Header("REFERENCES")]
         [SerializeField] private SpriteRenderer[] _playerRelatedSprites = null;
         [SerializeField] private Material _cloudedMaterial = null;
         
@@ -11,7 +12,7 @@ namespace JuiceJam
         [SerializeField] private GameObject _transitionParticles = null;
         [SerializeField] private float _transitionTrauma = 0f;
 
-        private System.Collections.Generic.Dictionary<SpriteRenderer, Material> _playerBaseMaterials = new();
+        private readonly System.Collections.Generic.Dictionary<SpriteRenderer, Material> _playerBaseMaterials = new();
 
         private void SpawnTransitionParticles(Vector3 position)
         {
@@ -33,7 +34,7 @@ namespace JuiceJam
             playerController.IsClouded = true;
 
             SpawnTransitionParticles(collision.gameObject.transform.position);
-            CameraShake.AddTrauma(_transitionTrauma);
+            CameraShake.Instance.AddTrauma(_transitionTrauma);
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -48,7 +49,7 @@ namespace JuiceJam
             playerController.IsClouded = false;
 
             SpawnTransitionParticles(collision.gameObject.transform.position);
-            CameraShake.AddTrauma(_transitionTrauma);
+            CameraShake.Instance.AddTrauma(_transitionTrauma);
         }
     }
 }
